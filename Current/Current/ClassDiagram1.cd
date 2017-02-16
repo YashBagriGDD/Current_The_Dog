@@ -1,0 +1,172 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Current.GameObject">
+    <Position X="5.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAgAgAAAAAAAAAAAAAAAAAAIAAAAAAAA=</HashCode>
+      <FileName>GameObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Current.FileManager">
+    <Position X="11" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>FileManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Current.InputManager">
+    <Position X="11" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAABAQAIAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>InputManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Current.Collider">
+    <Position X="11" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAIAAAAAAAAAAAAAAAACAAIIQAAAAAAAAA=</HashCode>
+      <FileName>Collider.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Current.CollidableObject">
+    <Position X="6" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CollidableObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Current.Background">
+    <Position X="3" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAgAAAAAAAAABAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Background.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Current.Goal">
+    <Position X="5" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQQAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Goal.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Current.HUD">
+    <Position X="8.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAggAAAAAAAAAAAAAAAAAAAAAAAACAQA=</HashCode>
+      <FileName>HUD.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Current.MovingPlatform">
+    <Position X="11.25" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MovingPlatform.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Current.Pickup">
+    <Position X="7.5" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Pickup.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Current.Catfish">
+    <Position X="3" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQQAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Catfish.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Current.CheckPoint">
+    <Position X="3" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQQAAAAAAAAggAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CheckPoint.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Current.Coral">
+    <Position X="1" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQQAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Coral.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Current.DecorTile">
+    <Position X="0.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DecorTile.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Current.Enemy">
+    <Position X="3" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAAAAAABAABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Enemy.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Current.HealthPickup">
+    <Position X="7" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQQAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>HealthPickup.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Current.Landcat">
+    <Position X="5" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQQAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Landcat.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Current.Platform" Collapsed="true">
+    <Position X="10.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQQAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Platform.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Current.Player">
+    <Position X="9.5" Y="11.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>gAUQCAAAAgAAAgEgAAAAABQAAABAAAAAAABAAAAAggA=</HashCode>
+      <FileName>Player.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Current.ScorePickup">
+    <Position X="9" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ScorePickup.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Current.Tile">
+    <Position X="13.25" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQQAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Tile.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Current.Volume">
+    <Position X="13.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAA=</HashCode>
+      <FileName>Volume.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Current.Water">
+    <Position X="12.5" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQQAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Water.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Current.WaterCurrent">
+    <Position X="15" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQQAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>WaterCurrent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
