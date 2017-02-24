@@ -15,19 +15,22 @@ namespace Current
     {
         public Vector2 Position { get; set; }
         public Texture2D Texture { get; set; }
+        public string Name { get; set; }
         /// <summary>
         /// Initializes a GameObject
         /// </summary>
-        public GameObject()
+        public GameObject(string name)
         {
+            Name = name;
             Texture = null;
         }
         /// <summary>
         /// Initializes a GameObject
         /// </summary>
         /// <param name="texture">The texture to use for this Gameobject</param>
-        public GameObject(Texture2D texture)
+        public GameObject(string name, Texture2D texture)
         {
+            Name = name;
             Texture = texture;
         }
 

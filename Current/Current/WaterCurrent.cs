@@ -10,7 +10,7 @@ namespace Current
 {
     class WaterCurrent : Volume
     {
-        public WaterCurrent(Texture2D tex, Vector2 force) : base(tex, force)
+        public WaterCurrent(string name, Texture2D tex, Vector2 force) : base(name, tex, force)
         {
             throw new NotImplementedException();
         }

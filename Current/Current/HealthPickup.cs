@@ -10,6 +10,10 @@ namespace Current
 {
     class HealthPickup : Pickup
     {
+        public HealthPickup(string name, Texture2D texture) : base(name, texture)
+        {
+        }
+
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             throw new NotImplementedException();

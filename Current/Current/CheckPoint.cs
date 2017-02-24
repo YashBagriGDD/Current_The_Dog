@@ -19,7 +19,7 @@ namespace Current
         /// Makes a checkpoint AND generates a unique ID
         /// </summary>
         /// <param name="tex"></param>
-        public CheckPoint(Texture2D tex) : base(tex)
+        public CheckPoint(string name, Texture2D tex) : base(name, tex)
         {
 
         }

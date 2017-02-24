@@ -10,7 +10,7 @@ namespace Current
 {
     class Coral : Enemy
     {
-        public Coral(Texture2D tex) : base(tex)
+        public Coral(string name, Texture2D tex) : base(name, tex)
         {
             throw new NotImplementedException();
         }

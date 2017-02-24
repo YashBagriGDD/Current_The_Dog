@@ -11,13 +11,15 @@ namespace Current
 {
     abstract class CollidableObject : GameObject
     {
+        private Texture2D tex;
+
         public Collider Coll { get; set; }
 
         /// <summary>
         /// Make a new Collidable Object and instantiate a collider
         /// </summary>
         /// <param name="texture"></param>
-        public CollidableObject() : base()
+        public CollidableObject(string name) : base(name)
         {
             throw new NotImplementedException();
 
@@ -27,9 +29,10 @@ namespace Current
         /// Make a new Collidable Object and instantiate a collider
         /// </summary>
         /// <param name="texture"></param>
-        public CollidableObject(Texture2D texture) : base(texture)
+        public CollidableObject(string name, Texture2D texture) : base(name, texture)
         {
         }
+
 
         /// <summary>
         /// What should this object do on a collision?

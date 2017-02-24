@@ -10,12 +10,21 @@ namespace Current
 {
     class ScorePickup : Pickup
     {
+        public ScorePickup(string name, Texture2D texture) : base(name, texture)
+        {
+        }
+
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             throw new NotImplementedException();
         }
 
         public override void Update(GameTime gameTime)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void HandleCollision(object sender, EventArgs e)
         {
             throw new NotImplementedException();
         }

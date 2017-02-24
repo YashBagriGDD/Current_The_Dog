@@ -10,7 +10,7 @@ namespace Current
 {
     class Tile : CollidableObject
     {
-        public Tile(Texture2D texture) : base(texture)
+        public Tile(string name, Texture2D texture) : base(name, texture)
         {
 
         }

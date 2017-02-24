@@ -6,22 +6,28 @@ using System.Threading.Tasks;
 
 namespace Current
 {
+
+    /// <summary>
+    /// Handles saving and loading of data. Use BSON format. 
+    /// </summary>
     static class FileManager
     {
         /// <summary>
-        /// Reads in some object, T, and returns its value
+        /// Loads in all data from the specified path AND stores it in necessary objects
         /// </summary>
-        /// <typeparam name="T">type of value</typeparam>
-        /// <param name="val">value</param>
-        /// <returns>the value</returns>
-        public static T Read<T>(T val, string file)
+        /// <param name="path">path of file load </param>
+        public static void Load(string path)
         {
-            throw new NotImplementedException();
-        }
 
-        public static void Write<T>(T val, string file)
+        }
+        
+        /// <summary>
+        /// Fetches data from necessary objects and writes it to the file
+        /// </summary>
+        /// <param name="path">path of file save to</param>
+        public static void Save(string path)
         {
-            throw new NotImplementedException();
+
         }
     }
 }

@@ -10,9 +10,10 @@ namespace Current
 {
     class Platform : CollidableObject
     {
-        public Platform(Texture2D tex) : base(tex)
+        public Platform(string name, Texture2D tex) : base(name, tex)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)

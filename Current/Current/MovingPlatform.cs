@@ -9,7 +9,7 @@ namespace Current
 {
     class MovingPlatform : Platform
     {
-        public MovingPlatform(Texture2D tex) : base(tex)
+        public MovingPlatform(string name, Texture2D tex) : base(name, tex)
         {
             throw new NotImplementedException();
         }

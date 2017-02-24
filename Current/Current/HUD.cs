@@ -13,11 +13,10 @@ namespace Current
     /// </summary>
     class HUD : GameObject
     {
-        public int Score { get; set; }
-        public float Time { get; set; }
+
         public SpriteFont Font{ get; set; }
 
-        public HUD(SpriteFont font) : base()
+        public HUD(string name, SpriteFont font) : base(name)
         {
             Font = font;
         }

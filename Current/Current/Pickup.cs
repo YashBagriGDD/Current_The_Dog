@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework.Graphics;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,10 @@ namespace Current
     /// </summary>
     abstract class Pickup : CollidableObject
     {
-        public int Value { get; set; }        
+        public int Value { get; set; }
+
+        public Pickup(string name, Texture2D texture) : base(name, texture)
+        {
+        }
     }
 }

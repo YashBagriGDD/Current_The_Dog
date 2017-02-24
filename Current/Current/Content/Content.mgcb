@@ -25,3 +25,9 @@
 /processorParam:TextureFormat=Color
 /build:test.jpg
 
+#begin font
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:TextureFormat=Compressed
+/build:font
+

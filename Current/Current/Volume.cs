@@ -12,7 +12,7 @@ namespace Current
     {
         public Vector2 Force { get; set; }
 
-        public Volume(Texture2D tex, Vector2 force) : base(tex)
+        public Volume(string name, Texture2D tex, Vector2 force) : base(name, tex)
         {
             throw new NotImplementedException();
         }

@@ -13,14 +13,13 @@ namespace Current
 
         public int Health { get; set; }
         public Vector2 JumpForce { get; set; }
-        public string Name { get; set; }
         public bool OnLand { get; set; }
         public float SpeedInWater { get; set; }
         public float SpeedOnLand { get; set; }
         public int Strength { get; set; }
 
 
-        public Player(Texture2D tex) : base(tex)
+        public Player(string name, Texture2D tex) : base(name, tex)
         {
             throw new NotImplementedException();
         }

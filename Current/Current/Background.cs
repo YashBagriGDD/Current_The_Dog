@@ -15,6 +15,11 @@ namespace Current
         /// </summary>
         public float Speed { get; set; }
 
+        public Background(string name, Texture2D tex) : base(name, tex)
+        {
+
+        } 
+
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             throw new NotImplementedException();

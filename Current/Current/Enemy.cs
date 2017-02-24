@@ -13,7 +13,7 @@ namespace Current
         public float Speed { get; set; }
         public int Strength { get; set; }
 
-        public Enemy(Texture2D tex) : base(tex)
+        public Enemy(string name, Texture2D tex) : base(name, tex)
         {
             throw new NotImplementedException();
         }

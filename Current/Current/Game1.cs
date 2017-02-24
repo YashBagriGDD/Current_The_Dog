@@ -13,11 +13,12 @@ namespace Current
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+        SpriteFont font;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            
         }
 
         /// <summary>
@@ -29,7 +30,6 @@ namespace Current
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            
             base.Initialize();
         }
 
@@ -42,6 +42,8 @@ namespace Current
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            Texture2D t = Content.Load<Texture2D>("test");
+            font = Content.Load<SpriteFont>("font");
             // TODO: use this.Content to load your game content here
         }
 
@@ -78,6 +80,10 @@ namespace Current
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
+            spriteBatch.Begin();
+
+            spriteBatch.End();
+
 
             base.Draw(gameTime);
         }

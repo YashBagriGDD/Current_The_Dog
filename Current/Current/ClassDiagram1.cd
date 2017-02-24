@@ -3,14 +3,14 @@
   <Class Name="Current.GameObject">
     <Position X="5.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQAAAAAAAAAAgAgAAAAAAAAAAAAAAAAAAIAAAAAAAA=</HashCode>
+      <HashCode>AAQAAAAAAAAAAgAgAAAAAAQAAAAAAAAAAAIAAAAAAAA=</HashCode>
       <FileName>GameObject.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Current.FileManager">
     <Position X="11" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <HashCode>AAAAgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>FileManager.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -31,7 +31,7 @@
   <Class Name="Current.CollidableObject">
     <Position X="6" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAQAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAQAAAAAAAAAAAAAIAAEAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>CollidableObject.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -52,12 +52,12 @@
   <Class Name="Current.HUD">
     <Position X="8.5" Y="3.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQAAAAAAAAAAggAAAAAAAAAAAAAAAAAAAAAAAACAQA=</HashCode>
+      <HashCode>AAQAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAACAAA=</HashCode>
       <FileName>HUD.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Current.MovingPlatform">
-    <Position X="11.25" Y="9" Width="1.5" />
+    <Position X="10.75" Y="10" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>MovingPlatform.cs</FileName>
@@ -119,7 +119,7 @@
       <FileName>Landcat.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Current.Platform" Collapsed="true">
+  <Class Name="Current.Platform">
     <Position X="10.5" Y="7.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQQAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
@@ -127,16 +127,16 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Current.Player">
-    <Position X="9.5" Y="11.25" Width="2.5" />
+    <Position X="9.5" Y="11.5" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>gAUQCAAAAgAAAgEgAAAAABQAAABAAAAAAABAAAAAggA=</HashCode>
+      <HashCode>gAUQCAAAAgAAAgEgAAAAABAAAABAAAAAAABAAAAAggA=</HashCode>
       <FileName>Player.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Current.ScorePickup">
     <Position X="9" Y="9.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAQQAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>ScorePickup.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -166,6 +166,13 @@
     <TypeIdentifier>
       <HashCode>AAQQAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>WaterCurrent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Current.GameManager">
+    <Position X="12.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAQA=</HashCode>
+      <FileName>GameManager.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />
