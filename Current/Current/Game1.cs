@@ -15,6 +15,7 @@ namespace Current
 
         SpriteFont font;
 
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -44,6 +45,10 @@ namespace Current
 
             Texture2D t = Content.Load<Texture2D>("test");
             font = Content.Load<SpriteFont>("font");
+
+            GameObject g = new Platform("joe", t);
+            GameManager.Objects.Add(g.Name, g);
+
             // TODO: use this.Content to load your game content here
         }
 
@@ -63,11 +68,12 @@ namespace Current
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-
             // TODO: Add your update logic here
 
+            
             base.Update(gameTime);
         }
 

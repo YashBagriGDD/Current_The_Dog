@@ -15,13 +15,14 @@ namespace Current
 
         public static bool GetKey(string key)
         {
+            
             throw new NotImplementedException();
         }
 
         public static bool GetKeyDown(string key)
         {
             throw new NotImplementedException();
-        }
+        }   
 
     }
 }

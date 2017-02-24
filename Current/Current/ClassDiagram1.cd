@@ -24,14 +24,14 @@
   <Class Name="Current.Collider">
     <Position X="11" Y="4" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAIAIAAAAAAAAAAAAAAAACAAIIQAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAQAAIAIAAAAAAAAAAAAAAAACAAIIQAAAAAAAAA=</HashCode>
       <FileName>Collider.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Current.CollidableObject">
     <Position X="6" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAQAAAAAAAAAAAAAIAAEAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAQQAAAAAAAAAAAAAIAAEAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>CollidableObject.cs</FileName>
     </TypeIdentifier>
   </Class>

@@ -31,6 +31,13 @@ namespace Current
         /// <param name="texture"></param>
         public CollidableObject(string name, Texture2D texture) : base(name, texture)
         {
+            Collider collider = new Collider(this);
+            Coll = collider;
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+
         }
 
 

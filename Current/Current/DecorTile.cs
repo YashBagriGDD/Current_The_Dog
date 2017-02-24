@@ -10,9 +10,10 @@ namespace Current
 {
     class DecorTile : GameObject
     {
+        
         public DecorTile(string name, Texture2D texture) : base(name, texture)
         {
-
+            
         }
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {

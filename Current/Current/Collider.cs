@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,6 +18,8 @@ namespace Current
 
         public bool Solid { get; set; }
 
+        public Rectangle hitbox { get; } 
+
         /// <summary>
         /// Type of Collider. 
         /// This should probably its own data type
@@ -33,6 +36,9 @@ namespace Current
         public Collider(GameObject host)
         {
             Host = host;
+          
+            hitbox = new Rectangle((int)Host.Position.X, (int)Host.Position.Y, Host.Texture.Width, Host.Texture.Height);
+            
         }
 
         /// <summary>
