@@ -47,8 +47,7 @@ namespace Current
             font = Content.Load<SpriteFont>("font");
 
             GameObject g = new Platform("joe", t);
-            GameManager.Objects.Add(g.Name, g);
-
+            GameObject g2 = new Platform("joe2", t);
             // TODO: use this.Content to load your game content here
         }
 
@@ -73,6 +72,11 @@ namespace Current
                 Exit();
             // TODO: Add your update logic here
 
+            foreach (GameObject g in GameManager.GetAll().Values)
+            {
+                g.Update(gameTime);
+            }
+
             
             base.Update(gameTime);
         }
@@ -87,7 +91,10 @@ namespace Current
 
             // TODO: Add your drawing code here
             spriteBatch.Begin();
-
+            foreach (GameObject g in GameManager.GetAll().Values)
+            {
+                g.Draw(gameTime, spriteBatch);
+            }
             spriteBatch.End();
 
 

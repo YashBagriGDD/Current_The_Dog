@@ -23,6 +23,7 @@ namespace Current
         {
             Name = name;
             Texture = null;
+            GameManager.Add(Name, this);
         }
         /// <summary>
         /// Initializes a GameObject
@@ -32,6 +33,8 @@ namespace Current
         {
             Name = name;
             Texture = texture;
+            GameManager.Add(Name, this);
+
         }
 
         /// <summary>

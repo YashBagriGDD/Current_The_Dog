@@ -21,8 +21,7 @@ namespace Current
         /// <param name="texture"></param>
         public CollidableObject(string name) : base(name)
         {
-            throw new NotImplementedException();
-
+            Coll.Collision += HandleCollision;
         }
 
         /// <summary>
@@ -31,12 +30,9 @@ namespace Current
         /// <param name="texture"></param>
         public CollidableObject(string name, Texture2D texture) : base(name, texture)
         {
-            Collider collider = new Collider(this);
+            Collider collider = new Collider("C_" + Name, this);
             Coll = collider;
-        }
-
-        public override void Update(GameTime gameTime)
-        {
+            Coll.Collision += HandleCollision;
 
         }
 

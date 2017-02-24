@@ -10,6 +10,7 @@ namespace Current
 {
     class Platform : CollidableObject
     {
+        bool collided = false;
         public Platform(string name, Texture2D tex) : base(name, tex)
         {
             //throw new NotImplementedException();
@@ -18,17 +19,20 @@ namespace Current
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            throw new NotImplementedException();
+            spriteBatch.Draw(Texture, new Rectangle(5, 5, 100, 100), Color.White);
+            if (collided)
+                spriteBatch.Draw(Texture, new Rectangle(100, 5, 100, 100), Color.White);
+
         }
 
         public override void Update(GameTime gameTime)
         {
-            throw new NotImplementedException();
+            
         }
 
         protected override void HandleCollision(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            collided = true;
         }
     }
 }
