@@ -17,17 +17,22 @@ namespace Current
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            throw new NotImplementedException();
+
         }
 
         public override void Update(GameTime gameTime)
         {
-            throw new NotImplementedException();
+            base.Update(gameTime);
         }
 
-        protected override void HandleCollision(object sender, EventArgs e)
+        protected override void HandleCollisionEnter(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+
+        }
+
+        protected override void HandleCollisionExit(object sender, EventArgs e)
+        {
+
         }
     }
 }

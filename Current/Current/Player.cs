@@ -34,7 +34,7 @@ namespace Current
             throw new NotImplementedException();
         }
 
-        protected override void HandleCollision(object sender, EventArgs e)
+        protected override void HandleCollisionEnter(object sender, EventArgs e)
         {
             throw new NotImplementedException();
         }
@@ -59,6 +59,11 @@ namespace Current
         }
 
         public void MoveOnLand()
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void HandleCollisionExit(object sender, EventArgs e)
         {
             throw new NotImplementedException();
         }

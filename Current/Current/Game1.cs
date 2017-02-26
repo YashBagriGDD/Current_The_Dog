@@ -20,6 +20,8 @@ namespace Current
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            //Uncomment line below for fullscreen
+            //graphics.IsFullScreen = true;
         }
 
         /// <summary>
@@ -43,11 +45,10 @@ namespace Current
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            Texture2D t = Content.Load<Texture2D>("test");
-            font = Content.Load<SpriteFont>("font");
+            Texture2D t = Content.Load<Texture2D>("Textures/Clogo");
+            font = Content.Load<SpriteFont>("Fonts/Font");
 
             GameObject g = new Platform("joe", t);
-            GameObject g2 = new Platform("joe2", t);
             // TODO: use this.Content to load your game content here
         }
 
@@ -77,7 +78,6 @@ namespace Current
                 g.Update(gameTime);
             }
 
-            
             base.Update(gameTime);
         }
 
@@ -95,6 +95,7 @@ namespace Current
             {
                 g.Draw(gameTime, spriteBatch);
             }
+
             spriteBatch.End();
 
 

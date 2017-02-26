@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Current
 {
-    class Collider : GameObject
+    class Collider
     {
         /// <summary>
         /// GameObject this is attached to
@@ -28,48 +28,116 @@ namespace Current
         public string Type { get; set; }
 
         /// <summary>
-        /// The Collision EventHandler.
-        /// Call OnCollision when there is a collision, and the event will fire!
+        /// The CollisionEnter event.
+        /// Fires the moment a collision occurs
         /// </summary>
-        public event EventHandler Collision;
+        public event EventHandler CollisionEnter;
+
+        /// <summary>
+        /// The CollisionExit event.
+        /// Fires the moment a collision stops occurring 
+        /// </summary>
+        public event EventHandler CollisionExit;
+
+        /// <summary>
+        /// A set of the current collisions
+        /// </summary>
+        public HashSet<Collider> CurrentCollisions { get; private set; }
 
 
-        public Collider(string name, GameObject host) : base(name)
+
+        public Collider(GameObject host) 
         {
             Host = host;
-            Hitbox = new Rectangle((int)Host.Position.X, (int)Host.Position.Y, Host.Texture.Width, Host.Texture.Height);
+            CurrentCollisions = new HashSet<Collider>();
+            UpdateHitbox();
+        }
 
+        /// <summary>
+        /// Resets the Hitbox to the Host's position
+        /// </summary>
+        private void UpdateHitbox()
+        {
+            Hitbox = new Rectangle((int)Host.Position.X, (int)Host.Position.Y, (int)(Host.Texture.Width * Host.Scale.X), (int)(Host.Texture.Height * Host.Scale.Y));
         }
 
         /// <summary>
         /// Calls the Collision event
         /// </summary>
+        /// <param name="source">Who am I colliding with?</param>
         public void OnCollision(Collider source)
         {
-            if (Collision != null)
+            if (CollisionEnter != null)
             {
-                Collision(source, EventArgs.Empty);
+                CollisionEnter(source, EventArgs.Empty);
                 
             }
         }
 
-        public override void Update(GameTime gameTime)
+        /// <summary>
+        /// Calls the CollisionExit event
+        /// </summary>
+        /// <param name="source">Who was I colliding with?</param>
+        public void OnCollisionExit(Collider source)
         {
-            Hitbox = new Rectangle((int)Host.Position.X, (int)Host.Position.Y, Host.Texture.Width, Host.Texture.Height);
+            if (CollisionExit != null)
+            {
+                CollisionExit(source, EventArgs.Empty);
+            }
+        }
+
+        /// <summary>
+        /// Am I currently colliding with the other CollidableObject? 
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
+        public bool CollidingWith(CollidableObject other)
+        {
+            return CurrentCollisions.Contains(other.Coll);
+        }
+
+        /// <summary>
+        /// Am I colliding with anything?
+        /// </summary>
+        /// <returns></returns>
+        public bool CollidingWithAnything()
+        {
+            return (CurrentCollisions.Count > 0);
+        }
+
+        /// <summary>
+        /// Called every frame by the CollidableObject, which is called every frame the Game1 class.
+        /// Creates a Rectangle at the location of the Host GameObject each frame. 
+        /// </summary>
+        /// <param name="gameTime"></param>
+        public void Update(GameTime gameTime)
+        {
+            UpdateHitbox();
             foreach (CollidableObject c in GameManager.CollidableObjects)
             {
+                //Don't check collisions with yourself!
                 if (c.Name == Host.Name)
                     continue;
-                if (Hitbox.Intersects(c.Coll.Hitbox))
+                //If we intersect with a new object
+                if (Hitbox.Intersects(c.Coll.Hitbox) && !CurrentCollisions.Contains(c.Coll))
                 {
                     OnCollision(c.Coll);
+                    CurrentCollisions.Add(c.Coll);
+                }
+                //If stop intersecting with an object we just were intersecting with
+                if (!Hitbox.Intersects(c.Coll.Hitbox) && CurrentCollisions.Contains(c.Coll))
+                {
+                    OnCollisionExit(c.Coll);
+                    CurrentCollisions.Remove(c.Coll);
                 }
             }
             
 
         }
 
-        public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+
+
+        public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
            
         }

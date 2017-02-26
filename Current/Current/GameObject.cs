@@ -14,6 +14,10 @@ namespace Current
     abstract class GameObject
     {
         public Vector2 Position { get; set; }
+        /// <summary>
+        /// Scale for the size of the image to draw
+        /// </summary>
+        public Vector2 Scale{ get; set; }
         public Texture2D Texture { get; set; }
         public string Name { get; set; }
         /// <summary>

@@ -19,30 +19,39 @@ namespace Current
         /// Make a new Collidable Object and instantiate a collider
         /// </summary>
         /// <param name="texture"></param>
-        public CollidableObject(string name) : base(name)
-        {
-            Coll.Collision += HandleCollision;
-        }
-
-        /// <summary>
-        /// Make a new Collidable Object and instantiate a collider
-        /// </summary>
-        /// <param name="texture"></param>
         public CollidableObject(string name, Texture2D texture) : base(name, texture)
         {
-            Collider collider = new Collider("C_" + Name, this);
+            Collider collider = new Collider(this);
             Coll = collider;
-            Coll.Collision += HandleCollision;
+            Coll.CollisionEnter += HandleCollisionEnter;
+            Coll.CollisionExit += HandleCollisionExit;
 
+        }
+
+        /// <summary>
+        /// Update method implementation. 
+        /// For any derived objects, make sure to also call base.Update(gameTime) so the collider is also updated!
+        /// </summary>
+        /// <param name="gameTime"></param>
+        public override void Update(GameTime gameTime)
+        {
+            Coll.Update(gameTime);
         }
 
 
         /// <summary>
-        /// What should this object do on a collision?
+        /// What should this object the moment of a collision?
         /// </summary>
         /// <param name="sender">Who sent this collision?</param>
         /// <param name="e"></param>
-        protected abstract void HandleCollision(object sender, EventArgs e);
+        protected abstract void HandleCollisionEnter(object sender, EventArgs e);
+
+        /// <summary>
+        /// What should this object the moment a collision ends?
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected abstract void HandleCollisionExit(object sender, EventArgs e);
 
 
     }

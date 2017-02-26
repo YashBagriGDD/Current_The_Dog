@@ -22,6 +22,11 @@ namespace Current
         public static float Time { get; set; }
 
 
+        /// <summary>
+        /// Adds a GameObject reference to the Objects dictionary
+        /// </summary>
+        /// <param name="name">GameObject name</param>
+        /// <param name="g">GameObject reference</param>
         public static void Add(string name, GameObject g)
         {
             Objects.Add(name, g);
@@ -32,12 +37,19 @@ namespace Current
             }
                 
         }
-
+        /// <summary>
+        /// Get a GameObject named name
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         public static GameObject Get(string name)
         {
             return Objects[name];
         }
-
+        /// <summary>
+        /// Get all of the known GameObjects in the game as a Dictionary
+        /// </summary>
+        /// <returns></returns>
         public static Dictionary<string, GameObject> GetAll()
         {
             return Objects;
