@@ -19,7 +19,7 @@ namespace Current
 
         public bool Solid { get; set; }
 
-        public Rectangle Hitbox { get; set; }
+        public Rectangle Hitbox;
 
         /// <summary>
         /// Type of Collider. 
@@ -50,6 +50,7 @@ namespace Current
         {
             Host = host;
             CurrentCollisions = new HashSet<Collider>();
+            Hitbox = new Rectangle(Host.Location.X, Host.Location.Y, Host.Location.Width, Host.Location.Height);
             UpdateHitbox();
         }
 
@@ -58,7 +59,8 @@ namespace Current
         /// </summary>
         private void UpdateHitbox()
         {
-            Hitbox = new Rectangle((int)Host.Position.X, (int)Host.Position.Y, (int)(Host.Texture.Width * Host.Scale.X), (int)(Host.Texture.Height * Host.Scale.Y));
+            Hitbox.X = Host.Location.X;
+            Hitbox.Y = Host.Location.Y;
         }
 
         /// <summary>

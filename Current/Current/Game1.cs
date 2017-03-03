@@ -14,6 +14,8 @@ namespace Current
         SpriteBatch spriteBatch;
 
         SpriteFont font;
+        bool draw = false;
+
 
 
         public Game1()
@@ -33,6 +35,7 @@ namespace Current
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            InputManager.Init();
             base.Initialize();
         }
 
@@ -49,6 +52,7 @@ namespace Current
             font = Content.Load<SpriteFont>("Fonts/Font");
 
             GameObject g = new Platform("joe", t);
+            Player p = new Player("Current", t, 5) { Location = new Rectangle(50, 300, 100, 100) };
             // TODO: use this.Content to load your game content here
         }
 
@@ -77,6 +81,7 @@ namespace Current
             {
                 g.Update(gameTime);
             }
+            InputManager.Update(gameTime);
 
             base.Update(gameTime);
         }

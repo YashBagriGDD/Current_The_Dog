@@ -13,12 +13,10 @@ namespace Current
 
         public Platform(string name, Texture2D tex) : base(name, tex)
         {
-            Scale = new Vector2(.2f);
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(Texture, position: Position, scale: Scale);
         }
 
         public override void Update(GameTime gameTime)
