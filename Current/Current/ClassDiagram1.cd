@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="Current.GameObject">
-    <Position X="5.5" Y="0.5" Width="1.5" />
+    <Position X="5.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQAAAAAAAAAAgAgAAAAAAQAAAAAAAAAAAIAAAAAAAA=</HashCode>
+      <HashCode>AgQAAAAAAAAAAgAAAAIAAAQAAAAAAAAAAAIEAAAEAAA=</HashCode>
       <FileName>GameObject.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -17,21 +17,21 @@
   <Class Name="Current.InputManager">
     <Position X="11" Y="2" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAABAQAIAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>gAQAAAAAAAAAAAAAAAAABAAAAAAAAAgAAABCAAAAQAA=</HashCode>
       <FileName>InputManager.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Current.Collider">
     <Position X="11" Y="4" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAQAAIAIAAAAAAAAAAAAAAAACAAIIQAAAAAAAAA=</HashCode>
+      <HashCode>AAQAAAAgAAAMAgAAgAACAAAAAAAADAEMIQAAQAAAAAA=</HashCode>
       <FileName>Collider.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Current.CollidableObject">
     <Position X="6" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQQAAAAAAAAAAAAAIAAEAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAEAAAAAgAAAAAAAAAAAEAAAA=</HashCode>
       <FileName>CollidableObject.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -45,7 +45,7 @@
   <Class Name="Current.Goal">
     <Position X="5" Y="6" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQQAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAQAAAAAAAAAAgAAAAAAAAAAAAgAAAAAAAAAAAEAAAA=</HashCode>
       <FileName>Goal.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -73,21 +73,21 @@
   <Class Name="Current.Catfish">
     <Position X="3" Y="11.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQQAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAQAAAAAAAAAAgAAAAAAAAAAAAgAAAAAAAAAAAEAAAA=</HashCode>
       <FileName>Catfish.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Current.CheckPoint">
     <Position X="3" Y="5.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQQAAAAAAAAggAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAQAAAAAAAAAggAAAAAAAAAAAAgAAAAAAAAAAAEAAAA=</HashCode>
       <FileName>CheckPoint.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Current.Coral">
     <Position X="1" Y="11.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQQAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAQAAAAAAAAAAgAAAAAAAAAAAAgAAAAAAAAAAAEAAAA=</HashCode>
       <FileName>Coral.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -108,42 +108,42 @@
   <Class Name="Current.HealthPickup">
     <Position X="7" Y="9.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQQAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAQAAAAAAAAAAgAAAAAAAAAAAAgAAAAAAAAAAAEAAAA=</HashCode>
       <FileName>HealthPickup.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Current.Landcat">
     <Position X="5" Y="11.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQQAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAQAAAAAAAAAAgAAAAAAAAAAAAgAAAAAAAAAAAEAAAA=</HashCode>
       <FileName>Landcat.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Current.Platform">
     <Position X="10.5" Y="7.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQQAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAQAAAAAAAAAAgAAAAAAAAAAAAgAAAAAAAAAAAEAAAA=</HashCode>
       <FileName>Platform.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Current.Player">
     <Position X="9.5" Y="11.5" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>gAUQCAAAAgAAAgEgAAAAABAAAABAAAAAAABAAAAAggA=</HashCode>
+      <HashCode>AAQACAAAAoAAIhggAAgAAAAAAAhAAAAEEAAAAAEAgAA=</HashCode>
       <FileName>Player.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Current.ScorePickup">
     <Position X="9" Y="9.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQQAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAQAAAAAAAAAAgAAAAAAAAAAAAgAAAAAAAAAAAEAAAA=</HashCode>
       <FileName>ScorePickup.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Current.Tile">
     <Position X="13.25" Y="6" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQQAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAQAAAAAAAAAAgAAAAAAAAAAAAgAAAAAAAAAAAEAAAA=</HashCode>
       <FileName>Tile.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -157,21 +157,21 @@
   <Class Name="Current.Water">
     <Position X="12.5" Y="10.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQQAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAQAAAAAAAAAAgAAAAAAAAAAAAgAAAAAAAAAAAEAAAA=</HashCode>
       <FileName>Water.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Current.WaterCurrent">
     <Position X="15" Y="10.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQQAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAQAAAAAAAAAAgAAAAAAAAAAAAgAAAAAAAAAAAEAAAA=</HashCode>
       <FileName>WaterCurrent.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Current.GameManager">
     <Position X="12.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAQA=</HashCode>
+      <HashCode>AAIAAAAAAAEAAAhAAAAAAAAAAAAAAAEAAgAAAAAAAQA=</HashCode>
       <FileName>GameManager.cs</FileName>
     </TypeIdentifier>
   </Class>

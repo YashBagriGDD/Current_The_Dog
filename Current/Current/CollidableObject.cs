@@ -11,18 +11,20 @@ namespace Current
 {
     abstract class CollidableObject : GameObject
     {
-        private Texture2D tex;
-
+        //The Collider associated with this object
         public Collider Coll { get; set; }
+
 
         /// <summary>
         /// Make a new Collidable Object and instantiate a collider
         /// </summary>
         /// <param name="texture"></param>
-        public CollidableObject(string name, Texture2D texture) : base(name, texture)
+        public CollidableObject(string name, Texture2D texture, Rectangle location) : base(name, texture, location)
         {
             Collider collider = new Collider(this);
             Coll = collider;
+
+            //Subscribe to events
             Coll.CollisionEnter += HandleCollisionEnter;
             Coll.CollisionExit += HandleCollisionExit;
 
@@ -36,8 +38,8 @@ namespace Current
         public override void Update(GameTime gameTime)
         {
             Coll.Update(gameTime);
+            base.Update(gameTime);
         }
-
 
         /// <summary>
         /// What should this object the moment of a collision?
@@ -47,7 +49,7 @@ namespace Current
         protected abstract void HandleCollisionEnter(object sender, EventArgs e);
 
         /// <summary>
-        /// What should this object the moment a collision ends?
+        /// What should this object do the moment a collision ends?
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

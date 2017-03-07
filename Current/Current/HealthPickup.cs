@@ -10,7 +10,7 @@ namespace Current
 {
     class HealthPickup : Pickup
     {
-        public HealthPickup(string name, Texture2D texture) : base(name, texture)
+        public HealthPickup(string name, Texture2D texture, Rectangle location) : base(name, texture, location)
         {
         }
 

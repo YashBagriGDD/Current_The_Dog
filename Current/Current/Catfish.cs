@@ -10,7 +10,7 @@ namespace Current
 {
     class Catfish : Enemy
     {
-        public Catfish(string name, Texture2D tex) : base(name, tex)
+        public Catfish(string name, Texture2D tex, Rectangle location) : base(name, tex, location)
         {
             throw new NotImplementedException();
         }

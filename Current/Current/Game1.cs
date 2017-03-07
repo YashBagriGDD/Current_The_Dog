@@ -14,7 +14,6 @@ namespace Current
         SpriteBatch spriteBatch;
 
         SpriteFont font;
-        bool draw = false;
 
 
 
@@ -49,11 +48,12 @@ namespace Current
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             Texture2D t = Content.Load<Texture2D>("Textures/Clogo");
+            Texture2D b = Content.Load<Texture2D>("Textures/WhiteBlock");
             font = Content.Load<SpriteFont>("Fonts/Font");
 
-            GameObject g = new Platform("joe", t);
-            Player p = new Player("Current", t, 5) { Location = new Rectangle(50, 300, 100, 100) };
-            // TODO: use this.Content to load your game content here
+            //Load in some demo objects
+            Platform plat = new Platform("Platform", b, new Rectangle(0, 400, 100, 100));
+            Player p = new Player("Current", t, new Rectangle(50, 250, 100, 100), 5);
         }
 
         /// <summary>

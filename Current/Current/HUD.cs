@@ -16,7 +16,7 @@ namespace Current
 
         public SpriteFont Font{ get; set; }
 
-        public HUD(string name, SpriteFont font) : base(name)
+        public HUD(string name, Rectangle location, SpriteFont font) : base(name, location)
         {
             Font = font;
         }

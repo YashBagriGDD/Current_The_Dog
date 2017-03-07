@@ -33,21 +33,28 @@ namespace Current
     class Player : CollidableObject
     {
 
+        //Player Health
         public int Health { get; set; }
+        //Rate at which player will move
         public int MoveSpeed { get; set; }
+        //How strong is the player??
         public int Strength { get; set; }
 
-        public Vector2 Velocity;
-        public Vector2 Acceleration;
 
+
+        //General state enum
         public PlayerState state { get; set; }
+        //Specialized enum for direction
         public Direction direction { get; set; }
 
+        //The current time
         private GameTime gameTime;
-        private double storedJumpTime;
 
+
+        //The initial velocity for jumping
         private Vector2 jumpVelocity = new Vector2(0, -20);
-        private Vector2 landAcceleration = new Vector2(0, 1);
+        //The acceleration used in the air
+        private Vector2 airAcceleration = new Vector2(0, 1);
 
 
         
@@ -57,18 +64,26 @@ namespace Current
         /// <param name="name"></param>
         /// <param name="tex"></param>
         /// <param name="speed"></param>
-        public Player(string name, Texture2D tex, int speed) : base(name, tex)
+        public Player(string name, Texture2D tex, Rectangle location, int speed) : base(name, tex, location)
         {
+            //Setup various states and attributes
             MoveSpeed = speed;
             state = PlayerState.OnLand;
             direction = Direction.Idle;
+
+            //For the sake of physics
             Acceleration = new Vector2(0, 0f);
             Velocity = new Vector2(0, 0);
         }
         
+        /// <summary>
+        /// Draws the Player
+        /// </summary>
+        /// <param name="gameTime"></param>
+        /// <param name="spriteBatch"></param>
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(Texture, Location, Color.White);
+            base.Draw(gameTime, spriteBatch);
         }
 
         /// <summary>
@@ -78,6 +93,8 @@ namespace Current
         public override void Update(GameTime gameTime)
         {
             this.gameTime = gameTime;
+
+            //The main finite state machine. 
             switch (state)
             {
                 case PlayerState.OnLand:
@@ -94,14 +111,7 @@ namespace Current
                 default:
                     break;
             }
-
-            //Change the velocity by acceleration
-            Velocity.X += Acceleration.X;
-            Velocity.Y += Acceleration.Y;
-
-            //Then change the displacement by velocity
-            Location.X += (int)Velocity.X;
-            Location.Y += (int)Velocity.Y;
+            base.Update(gameTime);
         }
 
 
@@ -135,21 +145,33 @@ namespace Current
             {
                 Velocity.X = 0;
             }
+            //Handle jumping, but ONLY on land
             if (InputManager.GetButtonDown("Jump") && state == PlayerState.OnLand)
             {
                 state = PlayerState.IsJumping;
-                Acceleration = landAcceleration;
+                //Start pulling the player down
+                Acceleration = airAcceleration;
+                //But give them an initial upward velocity
                 Velocity = jumpVelocity;
-                storedJumpTime = gameTime.TotalGameTime.TotalSeconds;
             }
         }
 
-
+        //What to do for collisions
         protected override void HandleCollisionEnter(object sender, EventArgs e)
         {
+            //Cast to a Collider
+            Collider c = (Collider)sender;
+            
+            if (c.Host is Platform)
+            {
+                Acceleration = Vector2.Zero;
+                Velocity = Vector2.Zero;
+                state = PlayerState.OnLand;
+            }
         }
         protected override void HandleCollisionExit(object sender, EventArgs e)
         {
+
         }
     }
 }

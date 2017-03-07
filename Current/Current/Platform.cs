@@ -11,12 +11,14 @@ namespace Current
     class Platform : CollidableObject
     {
 
-        public Platform(string name, Texture2D tex) : base(name, tex)
+        public Platform(string name, Texture2D tex, Rectangle location) : base(name, tex, location)
         {
+
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
+            base.Draw(gameTime, spriteBatch);
         }
 
         public override void Update(GameTime gameTime)
@@ -26,7 +28,7 @@ namespace Current
 
         protected override void HandleCollisionEnter(object sender, EventArgs e)
         {
-
+            Console.WriteLine("test");
         }
 
         protected override void HandleCollisionExit(object sender, EventArgs e)

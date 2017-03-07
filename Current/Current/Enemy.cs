@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace Current
         public float Speed { get; set; }
         public int Strength { get; set; }
 
-        public Enemy(string name, Texture2D tex) : base(name, tex)
+        public Enemy(string name, Texture2D tex, Rectangle location) : base(name, tex, location)
         {
             throw new NotImplementedException();
         }
