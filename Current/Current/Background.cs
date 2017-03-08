@@ -15,7 +15,7 @@ namespace Current
         /// </summary>
         public float Speed { get; set; }
 
-        public Background(string name, Texture2D tex) : base(name, tex)
+        public Background(string name, Texture2D tex, Rectangle location) : base(name, tex, location)
         {
 
         } 

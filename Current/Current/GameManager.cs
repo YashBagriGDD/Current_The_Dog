@@ -11,19 +11,22 @@ namespace Current
     /// </summary>
     static class GameManager
     {
-        /// <summary>
-        /// This should hold ALL GameObjects in the game. 
-        /// </summary>
+        //This should hold ALL GameObjects in the game. 
         private static Dictionary<string, GameObject> Objects { get; }
             = new Dictionary<string, GameObject>();
+
+        //This should hold ALL CollidableObjects in the game
         public static List<CollidableObject> CollidableObjects { get; }
             = new List<CollidableObject>();
+        //The current score of the game
         public static int Score { get; set; }
+        //Time of the game. (Not gameTime, just for like score and stuff)
         public static float Time { get; set; }
 
 
         /// <summary>
         /// Adds a GameObject reference to the Objects dictionary
+        /// If a CollidableObject is passed, it is also added to the CollidableObjects List
         /// </summary>
         /// <param name="name">GameObject name</param>
         /// <param name="g">GameObject reference</param>
@@ -38,7 +41,7 @@ namespace Current
                 
         }
         /// <summary>
-        /// Get a GameObject named name
+        /// Get a GameObject named name from the Objects dictionary
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>

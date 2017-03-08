@@ -10,7 +10,7 @@ namespace Current
 {
     class Goal : CollidableObject
     {
-        public Goal(string name, Texture2D tex) : base(name, tex)
+        public Goal(string name, Texture2D tex, Rectangle location) : base(name, tex, location)
         {
             throw new NotImplementedException();
         }

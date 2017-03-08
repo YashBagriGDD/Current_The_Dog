@@ -10,7 +10,7 @@ namespace Current
 {
     class ScorePickup : Pickup
     {
-        public ScorePickup(string name, Texture2D texture) : base(name, texture)
+        public ScorePickup(string name, Texture2D texture, Rectangle location) : base(name, texture, location)
         {
         }
 

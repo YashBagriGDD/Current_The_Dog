@@ -10,7 +10,7 @@ namespace Current
 {
     class Landcat : Enemy
     {
-        public Landcat(string name, Texture2D tex) : base(name, tex)
+        public Landcat(string name, Texture2D tex, Rectangle location) : base(name, tex, location)
         {
             throw new NotImplementedException();
         }

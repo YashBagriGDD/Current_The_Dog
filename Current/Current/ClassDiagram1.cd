@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="Current.GameObject">
-    <Position X="5.5" Y="0.5" Width="1.5" />
+    <Position X="5.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQAAAAAAAAAAgAAAAIAAAQAAAAAAAAAAAIAAAAAAAA=</HashCode>
+      <HashCode>AgQAAAAAAAAAAgAAAAIAAAQAAAAAAAAAAAIEAAAEAAA=</HashCode>
       <FileName>GameObject.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -31,7 +31,7 @@
   <Class Name="Current.CollidableObject">
     <Position X="6" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQAAAAAAAAAAAAAAIAAEAAAAAgAAAAAAAAAAAEAAAA=</HashCode>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAEAAAAAgAAAAAAAAAAAEAAAA=</HashCode>
       <FileName>CollidableObject.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -129,7 +129,7 @@
   <Class Name="Current.Player">
     <Position X="9.5" Y="11.5" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>AAQACAAAAoAAIhggAAgAAAgAAAhAAAAEAAAEAAEFgAA=</HashCode>
+      <HashCode>AAQACAAAAoAAIhggAAgAAAAAAAhAAAAEEAAAAAEAgAA=</HashCode>
       <FileName>Player.cs</FileName>
     </TypeIdentifier>
   </Class>
