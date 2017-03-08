@@ -13,7 +13,12 @@ namespace Current
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+
         SpriteFont font;
+
+        //Window sizes
+        public const int WINDOW_WIDTH = 1920;
+        public const int WINDOW_HEIGHT = 1080;
 
 
 
@@ -21,6 +26,11 @@ namespace Current
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+
+            //Set window size
+            graphics.PreferredBackBufferWidth = WINDOW_WIDTH;
+            graphics.PreferredBackBufferHeight = WINDOW_HEIGHT;
+            graphics.ApplyChanges();
             //Uncomment line below for fullscreen
             //graphics.IsFullScreen = true;
         }
@@ -35,6 +45,8 @@ namespace Current
         {
             // TODO: Add your initialization logic here
             InputManager.Init();
+
+
             base.Initialize();
         }
 
@@ -47,13 +59,14 @@ namespace Current
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            Texture2D t = Content.Load<Texture2D>("Textures/Clogo");
-            Texture2D b = Content.Load<Texture2D>("Textures/WhiteBlock");
+            Texture2D texPlayer = Content.Load<Texture2D>("Textures/dogTemp");
+            Texture2D texBlock = Content.Load<Texture2D>("Textures/WhiteBlock");
             font = Content.Load<SpriteFont>("Fonts/Font");
 
             //Load in some demo objects
-            Platform plat = new Platform("Platform", b, new Rectangle(0, 400, 100, 100));
-            Player p = new Player("Current", t, new Rectangle(50, 250, 100, 100), 5);
+            Platform plat = new Platform("Platform", texBlock, new Rectangle(0, 1000, 600, 500));
+            Platform plat2 = new Platform("Platform2", texBlock, new Rectangle(0, 750, 100, 300));
+            Player player = new Player("Current", texPlayer, new Rectangle(100, 250, 100, 100), 10);
         }
 
         /// <summary>
@@ -77,6 +90,7 @@ namespace Current
                 Exit();
             // TODO: Add your update logic here
 
+            //Update all the objects
             foreach (GameObject g in GameManager.GetAll().Values)
             {
                 g.Update(gameTime);
@@ -94,8 +108,9 @@ namespace Current
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // TODO: Add your drawing code here
+
             spriteBatch.Begin();
+            //Draw all the objects
             foreach (GameObject g in GameManager.GetAll().Values)
             {
                 g.Draw(gameTime, spriteBatch);

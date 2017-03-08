@@ -27,6 +27,9 @@ namespace Current
         //What color to draw this object
         public Color DrawColor { get; set; }
             = Color.White;
+        //Should this sprite be flipped in any direction?
+        public SpriteEffects SpriteFX { get; set; }
+            = SpriteEffects.None;
 
 
         //Represents the change in displacement per update
@@ -80,7 +83,7 @@ namespace Current
         /// <param name="spriteBatch">Active spriteBatch</param>
         public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(Texture, Location, DrawColor);
+            spriteBatch.Draw(Texture, destinationRectangle: Location, color: DrawColor, effects: SpriteFX);
         }
     }
 }

@@ -43,6 +43,7 @@
     <Compile Include="CheckPoint.cs" />
     <Compile Include="CollidableObject.cs" />
     <Compile Include="Collider.cs" />
+    <Compile Include="ComplexCollidableObject.cs" />
     <Compile Include="Coral.cs" />
     <Compile Include="DecorTile.cs" />
     <Compile Include="Enemy.cs" />

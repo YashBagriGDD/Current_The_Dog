@@ -11,7 +11,7 @@ namespace Current
     enum PlayerState
     {
         OnLand,
-        IsJumping,
+        InAir,
         InWater,
         IsDead
     }
@@ -30,7 +30,7 @@ namespace Current
     }
 
 
-    class Player : CollidableObject
+    class Player : ComplexCollidableObject
     {
 
         //Player Health
@@ -52,7 +52,7 @@ namespace Current
 
 
         //The initial velocity for jumping
-        private Vector2 jumpVelocity = new Vector2(0, -20);
+        private Vector2 jumpVelocity = new Vector2(0, -30);
         //The acceleration used in the air
         private Vector2 airAcceleration = new Vector2(0, 1);
 
@@ -68,12 +68,15 @@ namespace Current
         {
             //Setup various states and attributes
             MoveSpeed = speed;
-            state = PlayerState.OnLand;
+            //Assume in air to begin with
+            state = PlayerState.InAir;
             direction = Direction.Idle;
 
             //For the sake of physics
-            Acceleration = new Vector2(0, 0f);
+            Acceleration = airAcceleration;
             Velocity = new Vector2(0, 0);
+            
+            
         }
         
         /// <summary>
@@ -100,7 +103,8 @@ namespace Current
                 case PlayerState.OnLand:
                     Move(MoveSpeed);
                     break;
-                case PlayerState.IsJumping:
+                case PlayerState.InAir:
+                    //Move at reduced speed
                     Move(3*MoveSpeed/4);
                     Jump();
                     break;
@@ -133,13 +137,18 @@ namespace Current
         /// <param name="speed"></param>
         public void Move(int speed)
         {
-            if (InputManager.GetButton("Right"))
+            if (InputManager.GetButton("Right") && !CollRight.CollidingWith<Platform>())
             {
                 Velocity.X = speed;
+                SpriteFX = SpriteEffects.None;
+                direction = Direction.Right;
             }
-            else if (InputManager.GetButton("Left"))
+            else if (InputManager.GetButton("Left") && !CollLeft.CollidingWith<Platform>())
             {
                 Velocity.X = -speed;
+                SpriteFX = SpriteEffects.FlipHorizontally;
+                direction = Direction.Left;
+
             }
             else
             {
@@ -148,7 +157,7 @@ namespace Current
             //Handle jumping, but ONLY on land
             if (InputManager.GetButtonDown("Jump") && state == PlayerState.OnLand)
             {
-                state = PlayerState.IsJumping;
+                state = PlayerState.InAir;
                 //Start pulling the player down
                 Acceleration = airAcceleration;
                 //But give them an initial upward velocity
@@ -156,22 +165,89 @@ namespace Current
             }
         }
 
-        //What to do for collisions
+        /// <summary>
+        /// What do for collisions
+        /// </summary>
+        /// <param name="sender">Who am I colliding with?</param>
+        /// <param name="e">Ignore this</param>
+        /// If you need more details, use CollAbove, CollLeft, etc. 
+        /// Alternatively, here are some useful comparisions: 
+        /// <example>
+        /// if (Location.Y < c.Host.Location.Y) Is true when colliding with something below
+        /// if (Location.Y > c.Host.Location.Y) Is true when colliding with something above
+        /// if (Location.X < c.Host.Location.X) Is true when colliding with something on the right
+        /// if (Location.X > c.Host.Location.X) Is true when colliding with something on the left
+        /// </example>
         protected override void HandleCollisionEnter(object sender, EventArgs e)
         {
             //Cast to a Collider
-            Collider c = (Collider)sender;
-            
-            if (c.Host is Platform)
+            Collider other = (Collider)sender;
+
+            switch (state)
             {
-                Acceleration = Vector2.Zero;
-                Velocity = Vector2.Zero;
-                state = PlayerState.OnLand;
+                case PlayerState.OnLand:
+                    break;
+                case PlayerState.InAir:
+                    //Stop on a platform
+                    if (other.Host is Platform)
+                    {
+                        //When colliding below, stop
+                        if (CollBelow.CollidingWith(other.Host))
+                        {
+                            Acceleration = Vector2.Zero;
+                            Velocity.Y = 0;
+                            state = PlayerState.OnLand;
+                        }
+                        //When colliding above, reset y velocity
+                        else if (CollAbove.CollidingWith(other.Host))
+                        {
+                            Velocity.Y = 0;
+                        }
+                        
+                    }
+                    break;
+                case PlayerState.InWater:
+                    break;
+                case PlayerState.IsDead:
+                    break;
+                default:
+                    break;
             }
+
+
         }
+        /// <summary>
+        /// What do when a collision ends
+        /// </summary>
+        /// <param name="sender">Who WAS I colliding with?</param>
+        /// <param name="e">Ignore this</param>
         protected override void HandleCollisionExit(object sender, EventArgs e)
         {
+            //Cast to a Collider
+            Collider other = (Collider)sender;
 
+            switch (state)
+            {
+                case PlayerState.OnLand:
+                    //Stop on a platform
+                    if (other.Host is Platform)
+                    {
+                        if (!CollBelow.CollidingWith(other.Host))
+                        {
+                            Acceleration = airAcceleration;
+                            state = PlayerState.InAir;
+                        }
+                    }
+                    break;
+                case PlayerState.InAir:
+                    break;
+                case PlayerState.InWater:
+                    break;
+                case PlayerState.IsDead:
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }

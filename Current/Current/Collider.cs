@@ -13,13 +13,18 @@ namespace Current
         /// <summary>
         /// GameObject this is attached to
         /// </summary>
-        public GameObject Host { get; set; }
+        public CollidableObject Host { get; set; }
 
         public float Gravity { get; set; }
 
         public bool Solid { get; set; }
 
+        //The actual rectangle for collisions
         public Rectangle Hitbox;
+        //The rectangle containing offset values
+        private Rectangle hitboxOffset;
+        //Should this collider broadcast events?
+        private bool sendEvents;
 
         /// <summary>
         /// Type of Collider. 
@@ -45,22 +50,46 @@ namespace Current
         public HashSet<Collider> CurrentCollisions { get; private set; }
 
 
-
-        public Collider(GameObject host) 
+        /// <summary>
+        /// Create a standard collider attached to the host GameObject
+        /// </summary>
+        public Collider(CollidableObject host) 
         {
             Host = host;
             CurrentCollisions = new HashSet<Collider>();
             Hitbox = new Rectangle(Host.Location.X, Host.Location.Y, Host.Location.Width, Host.Location.Height);
-            UpdateHitbox();
+            hitboxOffset = new Rectangle(0, 0, 1, 1); // no offset
+            sendEvents = true;
+        }
+
+
+        /// <summary>
+        /// Create a collider offset from the host.
+        /// This will not broadcast events to avoid redundant events being sent out
+        /// </summary>
+        /// <param name="host">The Host GameObject</param>
+        /// <param name="offset">A rectangle representing the x-offset, y-offset, width, height </param>
+        public Collider(CollidableObject host, Rectangle offset)
+        {
+            Host = host;
+            CurrentCollisions = new HashSet<Collider>();
+
+            //Apply the offset
+            hitboxOffset = offset;
+            Hitbox = new Rectangle(Host.Location.X + offset.X, Host.Location.Y + offset.Y,
+                offset.Width, offset.Height);
+            sendEvents = false;
+
         }
 
         /// <summary>
-        /// Resets the Hitbox to the Host's position
+        /// Resets the Hitbox to the Host's position plus an offset
+        /// Note: the offset x and y can be zero.
         /// </summary>
         private void UpdateHitbox()
         {
-            Hitbox.X = Host.Location.X;
-            Hitbox.Y = Host.Location.Y;
+            Hitbox.X = Host.Location.X + hitboxOffset.X;
+            Hitbox.Y = Host.Location.Y + hitboxOffset.Y;
         }
 
         /// <summary>
@@ -69,6 +98,8 @@ namespace Current
         /// <param name="source">Who am I colliding with?</param>
         public void OnCollision(Collider source)
         {
+            if (!sendEvents)
+                return;
             if (CollisionEnter != null)
             {
                 CollisionEnter(source, EventArgs.Empty);
@@ -82,6 +113,8 @@ namespace Current
         /// <param name="source">Who was I colliding with?</param>
         public void OnCollisionExit(Collider source)
         {
+            if (!sendEvents)
+                return;
             if (CollisionExit != null)
             {
                 CollisionExit(source, EventArgs.Empty);
@@ -99,17 +132,28 @@ namespace Current
         }
 
         /// <summary>
+        /// Am I colliding with type T of object? 
+        /// </summary>
+        /// <typeparam name="T">The Type to check</typeparam>
+        public bool CollidingWith<T>()
+        {
+            foreach (Collider c in CurrentCollisions)
+                if (c.Host is T)
+                    return true;
+            return false;
+        }
+
+        /// <summary>
         /// Am I colliding with anything?
         /// </summary>
-        /// <returns></returns>
         public bool CollidingWithAnything()
         {
             return (CurrentCollisions.Count > 0);
         }
 
         /// <summary>
-        /// Called every frame by the CollidableObject, which is called every frame the Game1 class.
-        /// Creates a Rectangle at the location of the Host GameObject each frame. 
+        /// Called every frame by the CollidableObject, which is called every frame by the Game1 class.
+        /// Updates a Rectangle at the location of the Host GameObject each frame. 
         /// </summary>
         /// <param name="gameTime"></param>
         public void Update(GameTime gameTime)
@@ -123,8 +167,8 @@ namespace Current
                 //If we intersect with a new object
                 if (Hitbox.Intersects(c.Coll.Hitbox) && !CurrentCollisions.Contains(c.Coll))
                 {
-                    OnCollision(c.Coll);
                     CurrentCollisions.Add(c.Coll);
+                    OnCollision(c.Coll);
                 }
                 //If stop intersecting with an object we just were intersecting with
                 if (!Hitbox.Intersects(c.Coll.Hitbox) && CurrentCollisions.Contains(c.Coll))
