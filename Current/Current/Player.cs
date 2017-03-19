@@ -46,13 +46,13 @@ namespace Current
         public PlayerState state { get; set; }
         //Specialized enum for direction
         public Direction direction { get; set; }
-
+        public bool IsAlive { get; set; }
         //The current time
         private GameTime gameTime;
 
 
         //The initial velocity for jumping
-        private Vector2 jumpVelocity = new Vector2(0, -30);
+        private Vector2 jumpVelocity = new Vector2(0, -25);
         //The acceleration used in the air
         private Vector2 airAcceleration = new Vector2(0, 1);
 
@@ -64,10 +64,10 @@ namespace Current
         /// <param name="name"></param>
         /// <param name="tex"></param>
         /// <param name="speed"></param>
-        public Player(string name, Texture2D tex, Rectangle location, int speed) : base(name, tex, location)
+        public Player(string name, Texture2D tex, Rectangle location) : base(name, tex, location)
         {
             //Setup various states and attributes
-            MoveSpeed = speed;
+            MoveSpeed = 8;
             //Assume in air to begin with
             state = PlayerState.InAir;
             direction = Direction.Idle;
@@ -109,6 +109,7 @@ namespace Current
                     Jump();
                     break;
                 case PlayerState.InWater:
+                    Swim(MoveSpeed);
                     break;
                 case PlayerState.IsDead:
                     break;
@@ -166,6 +167,59 @@ namespace Current
         }
 
         /// <summary>
+        /// Swim Update 
+        /// </summary>
+        public void Swim(int speed)
+        {
+            if (InputManager.GetButtonDown("Right") )
+            {
+                Velocity = new Vector2(speed, 0);
+                SpriteFX = SpriteEffects.None;
+                direction = Direction.Right;
+            }
+            if (InputManager.GetButtonDown("Left"))
+            {
+                Velocity = new Vector2(-speed, 0);
+                SpriteFX = SpriteEffects.FlipHorizontally;
+                direction = Direction.Left;
+            }
+            if (InputManager.GetButtonDown("Up"))
+            {
+                Velocity = new Vector2(0, -speed);
+                direction = Direction.Up;
+            }
+            if (InputManager.GetButtonDown("Down"))
+            {
+                Velocity = new Vector2(0, speed);
+                direction = Direction.Down;
+            }
+            
+        }
+
+        /// <summary>
+        /// Check for a collision with water, and switch to the appropriate state
+        /// </summary>
+        /// <param name="other">Collider to check with</param>
+        /// <param name="entry">Are we checking for a collision entry? True if so, exit  if false</param>
+        private void CheckForWater(Collider other, bool entry)
+        {
+            if (other.Host is Water)
+            {
+                if (entry)
+                {
+                    state = PlayerState.InWater;
+                    Velocity = Vector2.Normalize(Velocity) * MoveSpeed;
+                    Acceleration = Vector2.Zero;
+                }
+                else
+                {
+                    state = PlayerState.InAir;
+                    Acceleration = airAcceleration;
+                }
+            }
+        }
+
+        /// <summary>
         /// What do for collisions
         /// </summary>
         /// <param name="sender">Who am I colliding with?</param>
@@ -186,8 +240,10 @@ namespace Current
             switch (state)
             {
                 case PlayerState.OnLand:
+                    CheckForWater(other, true);
                     break;
                 case PlayerState.InAir:
+
                     //Stop on a platform
                     if (other.Host is Platform)
                     {
@@ -197,6 +253,8 @@ namespace Current
                             Acceleration = Vector2.Zero;
                             Velocity.Y = 0;
                             state = PlayerState.OnLand;
+                            //Snap to the top of the platform we just landed on
+                            Location.Y = (int)(other.Host.Location.Y- (.95f*Location.Height));
                         }
                         //When colliding above, reset y velocity
                         else if (CollAbove.CollidingWith(other.Host))
@@ -205,14 +263,20 @@ namespace Current
                         }
                         
                     }
+                    CheckForWater(other, true);
                     break;
                 case PlayerState.InWater:
+                    if (other.Host is Platform)
+                    {
+                        Velocity = Vector2.Zero;
+                    }
                     break;
                 case PlayerState.IsDead:
                     break;
                 default:
                     break;
             }
+
 
 
         }
@@ -229,10 +293,10 @@ namespace Current
             switch (state)
             {
                 case PlayerState.OnLand:
-                    //Stop on a platform
+                    //If you walk off a platform, you should fall if you're no longer colliding below with anything
                     if (other.Host is Platform)
                     {
-                        if (!CollBelow.CollidingWith(other.Host))
+                        if (!CollBelow.CollidingWith<Platform>())
                         {
                             Acceleration = airAcceleration;
                             state = PlayerState.InAir;
@@ -242,6 +306,7 @@ namespace Current
                 case PlayerState.InAir:
                     break;
                 case PlayerState.InWater:
+                    CheckForWater(other, false);
                     break;
                 case PlayerState.IsDead:
                     break;

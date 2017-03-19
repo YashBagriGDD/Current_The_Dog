@@ -70,8 +70,7 @@ namespace Current
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(Texture, CollBelow.Hitbox, Color.Black);
-            base.Draw(gameTime, spriteBatch);
+           base.Draw(gameTime, spriteBatch);
         }
     }
 }

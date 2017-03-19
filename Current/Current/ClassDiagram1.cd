@@ -3,7 +3,7 @@
   <Class Name="Current.GameObject">
     <Position X="5.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AgQAAAAAAAAAAgAAAAIAAAQAAAAAAAAAAAIEAAAEAAA=</HashCode>
+      <HashCode>AgQAAAAAAAAABgAAAIIAAAQAAAAAAAAAAAIEAAAEAAA=</HashCode>
       <FileName>GameObject.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -15,7 +15,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Current.InputManager">
-    <Position X="11" Y="2" Width="1.5" />
+    <Position X="15.5" Y="2.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>gAQAAAAAAAAAAAAAAAAABAAAAAAAAAgAAABCAAAAQAA=</HashCode>
       <FileName>InputManager.cs</FileName>
@@ -24,7 +24,7 @@
   <Class Name="Current.Collider">
     <Position X="11" Y="4" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQAAAAgAAAMAgAAgAACAAAAAAAADAEMIQAAQAAAAAA=</HashCode>
+      <HashCode>AAQAAAAgAAAMAgAAgAACAAAAAAAADAEMISAASAAAAAA=</HashCode>
       <FileName>Collider.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -120,7 +120,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Current.Platform">
-    <Position X="10.5" Y="7.75" Width="1.5" />
+    <Position X="9.25" Y="7.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAAAAAAgAAAAAAAAAAAAgAAAAAAAAAAAEAAAA=</HashCode>
       <FileName>Platform.cs</FileName>
@@ -169,9 +169,9 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Current.GameManager">
-    <Position X="12.75" Y="0.5" Width="1.5" />
+    <Position X="14" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAIAAAAAAAEAAAhAAAAAAAAAAAAAAAEAAgAAAAAAAQA=</HashCode>
+      <HashCode>AAIAAAAEAAEAAAhAAAAAAAAgAAAAAAEAAgAgAAAAAQA=</HashCode>
       <FileName>GameManager.cs</FileName>
     </TypeIdentifier>
   </Class>

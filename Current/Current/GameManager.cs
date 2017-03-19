@@ -6,6 +6,33 @@ using System.Threading.Tasks;
 
 namespace Current
 {
+
+    /// <summary>
+    /// Very general state of the game
+    /// </summary>
+    enum GameState
+    {
+        Game,
+        MainMenu,
+        GameOver
+    }
+    /// <summary>
+    /// States for the main menu
+    /// </summary>
+    enum MainMenuState
+    {
+        MainMenu,
+        Options
+    }
+
+    /// <summary>
+    /// General states for actual gameplay
+    /// </summary>
+    enum GameplayState
+    {
+        Normal,
+        Paused
+    }
     /// <summary>
     /// Manages the game.
     /// </summary>
@@ -23,6 +50,10 @@ namespace Current
         //Time of the game. (Not gameTime, just for like score and stuff)
         public static float Time { get; set; }
 
+        //Various states for the game
+        public static GameState gameState = GameState.Game;
+        public static MainMenuState mainMenuState = MainMenuState.MainMenu;
+        public static GameplayState gameplayState = GameplayState.Normal;
 
         /// <summary>
         /// Adds a GameObject reference to the Objects dictionary

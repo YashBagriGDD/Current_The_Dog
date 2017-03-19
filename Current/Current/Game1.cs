@@ -20,6 +20,8 @@ namespace Current
         public const int WINDOW_WIDTH = 1920;
         public const int WINDOW_HEIGHT = 1080;
 
+        //Debugging variables
+        private double fps = 0;
 
 
         public Game1()
@@ -66,7 +68,12 @@ namespace Current
             //Load in some demo objects
             Platform plat = new Platform("Platform", texBlock, new Rectangle(0, 1000, 600, 500));
             Platform plat2 = new Platform("Platform2", texBlock, new Rectangle(0, 750, 100, 300));
-            Player player = new Player("Current", texPlayer, new Rectangle(100, 250, 100, 100), 10);
+            Platform plat3 = new Platform("Platform3", texBlock, new Rectangle(1000, 1000, 500, 100));
+
+            Water water = new Water("WaterTest", texBlock, new Rectangle(600, 200, 1000, 600), Vector2.Zero);
+
+            Player player = new Player("Current", texPlayer, new Rectangle(100, 250, 100, 100));
+
         }
 
         /// <summary>
@@ -88,14 +95,16 @@ namespace Current
 
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-            // TODO: Add your update logic here
 
             //Update all the objects
             foreach (GameObject g in GameManager.GetAll().Values)
             {
                 g.Update(gameTime);
             }
+            //InputManager requires its own Update
             InputManager.Update(gameTime);
+
+            fps = 1.0f / gameTime.ElapsedGameTime.TotalSeconds;
 
             base.Update(gameTime);
         }
@@ -110,12 +119,14 @@ namespace Current
 
 
             spriteBatch.Begin();
+
             //Draw all the objects
             foreach (GameObject g in GameManager.GetAll().Values)
             {
                 g.Draw(gameTime, spriteBatch);
             }
-
+            //Uncomment line below to show FPS
+            //spriteBatch.DrawString(font, fps.ToString(), new Vector2(0, 0), Color.White);
             spriteBatch.End();
 
 

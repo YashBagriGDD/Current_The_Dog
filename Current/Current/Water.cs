@@ -12,27 +12,22 @@ namespace Current
     {
         public Water(string name, Texture2D tex, Rectangle location, Vector2 force) : base(name, tex, location, force)
         {
-            throw new NotImplementedException();
-        }
-
-        public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
-        {
-            throw new NotImplementedException();
+            DrawColor = Color.Blue;
         }
 
         public override void Update(GameTime gameTime)
         {
-            throw new NotImplementedException();
+            base.Update(gameTime);
         }
+
+
 
         protected override void HandleCollisionEnter(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
         }
 
         protected override void HandleCollisionExit(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
         }
     }
 }

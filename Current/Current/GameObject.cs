@@ -31,6 +31,10 @@ namespace Current
         public SpriteEffects SpriteFX { get; set; }
             = SpriteEffects.None;
 
+        //The state in which this object is drawn and updated
+        public GameState ActiveState { get; set; }
+            = GameState.Game;
+
 
         //Represents the change in displacement per update
         public Vector2 Velocity;
@@ -67,13 +71,16 @@ namespace Current
         /// <param name="gameTime">gameTime</param>
         public virtual void Update(GameTime gameTime)
         {
+            if (GameManager.gameState != ActiveState)
+                return;
+
             //Change the velocity by acceleration
             Velocity.X += Acceleration.X;
             Velocity.Y += Acceleration.Y;
 
             //Then change the displacement by velocity
-            Location.X += (int)Velocity.X;
-            Location.Y += (int)Velocity.Y;
+            Location.X += (int)(Velocity.X * gameTime.ElapsedGameTime.TotalSeconds * 100);
+            Location.Y += (int)(Velocity.Y * gameTime.ElapsedGameTime.TotalSeconds * 100);
         }
 
         /// <summary>
@@ -83,6 +90,9 @@ namespace Current
         /// <param name="spriteBatch">Active spriteBatch</param>
         public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
+            if (GameManager.gameState != ActiveState)
+                return;
+
             spriteBatch.Draw(Texture, destinationRectangle: Location, color: DrawColor, effects: SpriteFX);
         }
     }

@@ -26,7 +26,9 @@ namespace Current
             {
                 {"Right", new Keys[] {Keys.D, Keys.Right } },
                 {"Left", new Keys[] {Keys.A, Keys.Left} },
-                {"Jump", new Keys[] {Keys.Space, Keys.Up, Keys.W} }
+                {"Jump", new Keys[] {Keys.Space} },
+                {"Up", new Keys[] {Keys.W, Keys.Up} },
+                {"Down", new Keys[] {Keys.D, Keys.Down} }
             };
 
             prev = Keyboard.GetState();
