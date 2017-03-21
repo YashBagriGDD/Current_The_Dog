@@ -164,6 +164,8 @@ namespace Current
                 //But give them an initial upward velocity
                 Velocity = jumpVelocity;
             }
+
+            
         }
 
         /// <summary>
@@ -209,7 +211,7 @@ namespace Current
                 {
                     state = PlayerState.InWater;
                     Velocity = Vector2.Normalize(Velocity) * MoveSpeed;
-                    Acceleration = Vector2.Zero;
+                    Acceleration = .001f * airAcceleration;
                 }
                 else
                 {
