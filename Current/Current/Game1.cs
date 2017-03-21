@@ -17,8 +17,8 @@ namespace Current
         SpriteFont font;
 
         //Window sizes
-        public const int WINDOW_WIDTH = 1920;
-        public const int WINDOW_HEIGHT = 1080;
+        public static int WindowWidth = 1920;
+        public static int WindowHeight = 1080;
 
         //Debugging variables
         private double fps = 0;
@@ -30,8 +30,8 @@ namespace Current
             Content.RootDirectory = "Content";
 
             //Set window size
-            graphics.PreferredBackBufferWidth = WINDOW_WIDTH;
-            graphics.PreferredBackBufferHeight = WINDOW_HEIGHT;
+            graphics.PreferredBackBufferWidth = WindowWidth;
+            graphics.PreferredBackBufferHeight = WindowHeight;
             graphics.ApplyChanges();
             //Uncomment line below for fullscreen
             //graphics.IsFullScreen = true;
@@ -48,7 +48,7 @@ namespace Current
             // TODO: Add your initialization logic here
             InputManager.Init();
 
-
+            IsMouseVisible = true;
             base.Initialize();
         }
 
@@ -73,6 +73,13 @@ namespace Current
             Water water = new Water("WaterTest", texBlock, new Rectangle(600, 200, 1000, 600), Vector2.Zero);
 
             Player player = new Player("Current", texPlayer, new Rectangle(100, 250, 100, 100));
+
+            UIText t = new UIText("", "Test", font, Anchor.CenterLeft, SortingMode.Above, GameState.Game, Point.Zero);
+
+            t.Click = () =>
+            {
+                System.Console.WriteLine("test");
+            };
 
         }
 

@@ -211,7 +211,7 @@ namespace Current
                 {
                     state = PlayerState.InWater;
                     Velocity = Vector2.Normalize(Velocity) * MoveSpeed;
-                    Acceleration = .001f * airAcceleration;
+                    Acceleration = .05f * airAcceleration;
                 }
                 else
                 {

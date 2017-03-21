@@ -15,7 +15,23 @@ namespace Current
     {
         public static Dictionary<string, Keys[]> KeysDictionary { get; private set; }
 
+        //This private field is here so the Point doesn't have to be recreated many times per second.
+        private static Point mousePos = Point.Zero;
+        /// <summary>
+        /// Get the current Mouse position as a Point
+        /// </summary>
+        public static Point MousePos {
+            get
+            {
+                mousePos.X = Mouse.GetState().X;
+                mousePos.Y = Mouse.GetState().Y;
+                return mousePos;
+            }
+        }
+
         private static KeyboardState prev;
+        private static MouseState prevMouse;
+
 
         /// <summary>
         /// Setup the InputManager
@@ -28,10 +44,12 @@ namespace Current
                 {"Left", new Keys[] {Keys.A, Keys.Left} },
                 {"Jump", new Keys[] {Keys.Space} },
                 {"Up", new Keys[] {Keys.W, Keys.Up} },
-                {"Down", new Keys[] {Keys.D, Keys.Down} }
+                {"Down", new Keys[] {Keys.S, Keys.Down} }
             };
 
+
             prev = Keyboard.GetState();
+            prevMouse = Mouse.GetState();
 
         }
         
@@ -74,12 +92,25 @@ namespace Current
         {
             throw new NotImplementedException();
         } 
+
+        /// <summary>
+        /// Returns true the first frame LMB down
+        /// </summary>
+        /// <returns></returns>
+        public static bool MouseClickedDown()
+        {
+            var ms = Mouse.GetState();
+            if (ms.LeftButton == ButtonState.Pressed && prevMouse.LeftButton == ButtonState.Released)
+            {
+                return true;
+            }
+            return false;
+        }
         
         public static void Update(GameTime gameTime)
         {
-            var ks = Keyboard.GetState();
-
             prev = Keyboard.GetState();
+            prevMouse = Mouse.GetState();
         }
 
     }
