@@ -64,6 +64,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ScorePickup.cs" />
     <Compile Include="Tile.cs" />
+    <Compile Include="UIButton.cs" />
+    <Compile Include="UIImage.cs" />
     <Compile Include="UIManager.cs" />
     <Compile Include="UIObject.cs" />
     <Compile Include="UIText.cs" />

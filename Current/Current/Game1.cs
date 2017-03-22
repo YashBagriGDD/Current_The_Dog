@@ -74,12 +74,24 @@ namespace Current
 
             Player player = new Player("Current", texPlayer, new Rectangle(100, 250, 100, 100));
 
-            UIText t = new UIText("", "Test", font, Anchor.CenterLeft, SortingMode.Above, GameState.Game, Point.Zero);
+            /*Example UIText Objects.
+            UIText t = new UIText("demoFont", "Test", font, Anchor.UpperLeft, SortingMode.Below, GameState.Game, Point.Zero, Color.Red);
+            UIText t2 = new UIText("demoFont2", "Test", font, Anchor.UpperRight, SortingMode.Below, GameState.Game, Point.Zero, Color.White);
+            UIText t3 = new UIText("demoFont3", "Test", font, Anchor.UpperMiddle, SortingMode.Below, GameState.Game, Point.Zero, Color.Black);
 
-            t.Click = () =>
+            //This is how you set up actions for UI Objects
+            t.HoverBegin += () =>
             {
-                System.Console.WriteLine("test");
+                t.Text = "Dogs";
+            };*/
+
+            UIButton button = new UIButton("button", "Menu", font, texBlock, Anchor.UpperLeft, SortingMode.Below, GameState.Game, Point.Zero, Color.White, Color.Black);
+
+            button.Click += () =>{
+                GameManager.gameState = GameState.MainMenu;
             };
+
+            UIText text = new UIText("menu", "There's nothing here right now...Check back later", font, Anchor.CenterMiddle, SortingMode.Below, GameState.MainMenu, Point.Zero, Color.White);
 
         }
 

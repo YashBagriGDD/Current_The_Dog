@@ -37,9 +37,7 @@ namespace Current
         /// </summary>
         public SortingMode sortingMode { get; protected set; }
 
-
-        private MouseState prevMouseState, curMouseState;
-
+        protected bool cursorWasInRect = false;
 
         /// <summary>
         /// Construct and draw a new UIObject
@@ -59,9 +57,19 @@ namespace Current
 
         public override void Update(GameTime gameTime)
         {
-            //Check for mouse events
-            if (InputManager.MouseClickedDown())
+            //Check if clicked on
+            if (InputManager.MouseClickedDown() && Location.Contains(InputManager.MousePos))
                 OnClick();
+            //Check if Hover began
+            if (Location.Contains(InputManager.MousePos) && !cursorWasInRect)
+                OnHoverBegin();
+            //Check if Hover ended
+            if (!Location.Contains(InputManager.MousePos) && cursorWasInRect)
+                OnHoverEnd();
+            
+
+
+            cursorWasInRect = Location.Contains(InputManager.MousePos);
             base.Update(gameTime);
         }
 

@@ -67,6 +67,9 @@ namespace Current
         {
             SetPosition(obj, anchor);
             AdjustPositionBySortingMode(obj, (int)anchor, sortingMode);
+            //Add offset
+            obj.Location.X += offset.X;
+            obj.Location.Y += offset.Y;
             //Add to list to keep track of anchored objects
             if (sortingMode != SortingMode.None)
                 AnchoredObjects[(int)anchor].Add(obj);
@@ -129,19 +132,23 @@ namespace Current
                     break;
                 case SortingMode.Left:
                     foreach (UIObject ui in AnchoredObjects[anchorIndex])
-                        obj.Location.X -= ui.Location.Width;
+                        if (ui.ActiveState == obj.ActiveState)
+                            obj.Location.X -= ui.Location.Width;
                     break;
                 case SortingMode.Right:
                     foreach (UIObject ui in AnchoredObjects[anchorIndex])
-                        obj.Location.X += ui.Location.Width;
+                        if (ui.ActiveState == obj.ActiveState)
+                            obj.Location.X += ui.Location.Width;
                     break;
                 case SortingMode.Above:
                     foreach (UIObject ui in AnchoredObjects[anchorIndex])
-                        obj.Location.Y -= ui.Location.Height;
+                        if (ui.ActiveState == obj.ActiveState)
+                            obj.Location.Y -= ui.Location.Height;
                     break;
                 case SortingMode.Below:
                     foreach (UIObject ui in AnchoredObjects[anchorIndex])
-                        obj.Location.Y += ui.Location.Height;
+                        if (ui.ActiveState == obj.ActiveState)
+                            obj.Location.Y += ui.Location.Height;
                     break;
                 default:
                     break;
