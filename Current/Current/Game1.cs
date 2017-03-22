@@ -85,13 +85,13 @@ namespace Current
                 t.Text = "Dogs";
             };*/
 
-            UIButton button = new UIButton("button", "Menu", font, texBlock, Anchor.UpperLeft, SortingMode.Below, GameState.Game, Point.Zero, Color.White, Color.Black);
+            /* UIButton button = new UIButton("button", "Menu", font, texBlock, Anchor.UpperLeft, SortingMode.Below, GameState.Game, Point.Zero, Color.White, Color.Black);
 
-            button.Click += () =>{
-                GameManager.gameState = GameState.MainMenu;
-            };
+             button.Click += () =>{
+                 GameManager.gameState = GameState.MainMenu;
+             };
 
-            UIText text = new UIText("menu", "There's nothing here right now...Check back later", font, Anchor.CenterMiddle, SortingMode.Below, GameState.MainMenu, Point.Zero, Color.White);
+             UIText text = new UIText("menu", "There's nothing here right now...Check back later", font, Anchor.CenterMiddle, SortingMode.Below, GameState.MainMenu, Point.Zero, Color.White);*/
 
         }
 

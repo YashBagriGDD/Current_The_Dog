@@ -1,179 +1,263 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="Current.GameObject">
-    <Position X="5.25" Y="0.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AgQAAAAAAAAABgAAAIIAAAQAAAAAAAAAAAIEAAAEAAA=</HashCode>
-      <FileName>GameObject.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Current.FileManager">
-    <Position X="11" Y="0.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>FileManager.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Current.InputManager">
-    <Position X="15.5" Y="2.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>gAQAAAAAAAAAAAAAAAAABAAAAAAAAAgAAABCAAAAQAA=</HashCode>
-      <FileName>InputManager.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Current.Collider">
-    <Position X="11" Y="4" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAQAAAAgAAAMAgAAgAACAAAAAAAADAEMISAASAAAAAA=</HashCode>
-      <FileName>Collider.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Current.CollidableObject">
-    <Position X="6" Y="3.25" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAQAAAAAAAAAAAAAAAAAEAAAAAgAAAAAAAAAAAEAAAA=</HashCode>
-      <FileName>CollidableObject.cs</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="Current.Background">
-    <Position X="3" Y="3.25" Width="1.5" />
+    <Position X="16.75" Y="7.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAAAAAAgAAAAAAAAABAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Background.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Current.Goal">
-    <Position X="5" Y="6" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAQAAAAAAAAAAgAAAAAAAAAAAAgAAAAAAAAAAAEAAAA=</HashCode>
-      <FileName>Goal.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Current.HUD">
-    <Position X="8.5" Y="3.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAQAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAACAAA=</HashCode>
-      <FileName>HUD.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Current.MovingPlatform">
-    <Position X="10.75" Y="10" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>MovingPlatform.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Current.Pickup">
-    <Position X="7.5" Y="7.25" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
-      <FileName>Pickup.cs</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="Current.Catfish">
-    <Position X="3" Y="11.5" Width="1.5" />
+    <Position X="34.5" Y="7" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAAAAAAgAAAAAAAAAAAAgAAAAAAAAAAAEAAAA=</HashCode>
       <FileName>Catfish.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Current.CheckPoint">
-    <Position X="3" Y="5.5" Width="1.5" />
+    <Position X="25.5" Y="3.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAAAAAggAAAAAAAAAAAAgAAAAAAAAAAAEAAAA=</HashCode>
       <FileName>CheckPoint.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="Current.CollidableObject">
+    <Position X="33.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAEAAAAAgAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>CollidableObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Current.Collider">
+    <Position X="56.5" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAgAAAMAgAAgAACAAAAAAAADAEMISAASAAAAAA=</HashCode>
+      <FileName>Collider.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Current.ComplexCollidableObject">
+    <Position X="45.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAgAAAAgAAAAQAAAAAAAQIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ComplexCollidableObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
   <Class Name="Current.Coral">
-    <Position X="1" Y="11.5" Width="1.5" />
+    <Position X="36.75" Y="9.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAAAAAAgAAAAAAAAAAAAgAAAAAAAAAAAEAAAA=</HashCode>
       <FileName>Coral.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Current.DecorTile">
-    <Position X="0.75" Y="1.5" Width="1.5" />
+    <Position X="19" Y="7.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>DecorTile.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Current.Enemy">
-    <Position X="3" Y="8.25" Width="1.5" />
+    <Position X="36.75" Y="7" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAACAAAAAAAAAAAAAAAAAABAABAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Enemy.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="Current.FileManager">
+    <Position X="59.5" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>FileManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Current.Game1">
+    <Position X="58.25" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAYAkEAAAAACAwAAAAAAAAAAAAAAAAgAABAAAAAAAAQ=</HashCode>
+      <FileName>Game1.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Current.GameManager">
+    <Position X="57.75" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAEAAEAAAhAAAAAAAAgAAAAAAEAAgAgAAAAAQA=</HashCode>
+      <FileName>GameManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Current.GameObject">
+    <Position X="35.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AoQAAAAAAAAABgAAAIIAAAQAAAAAAAAAAAIEAAAEAAA=</HashCode>
+      <FileName>GameObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Current.Goal">
+    <Position X="27.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAgAAAAAAAAAAAAgAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>Goal.cs</FileName>
+    </TypeIdentifier>
+  </Class>
   <Class Name="Current.HealthPickup">
-    <Position X="7" Y="9.5" Width="1.5" />
+    <Position X="32.25" Y="6.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAAAAAAgAAAAAAAAAAAAgAAAAAAAAAAAEAAAA=</HashCode>
       <FileName>HealthPickup.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="Current.HUD">
+    <Position X="48" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAACAAA=</HashCode>
+      <FileName>HUD.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Current.InputManager">
+    <Position X="56" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAQAAAAAAAAAAAAAAAAABAAAAAAAAAgAAQBCAAkARAA=</HashCode>
+      <FileName>InputManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
   <Class Name="Current.Landcat">
-    <Position X="5" Y="11.5" Width="1.5" />
+    <Position X="39.5" Y="7.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAAAAAAgAAAAAAAAAAAAgAAAAAAAAAAAEAAAA=</HashCode>
       <FileName>Landcat.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="Current.MovingPlatform">
+    <Position X="44" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MovingPlatform.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Current.Pickup">
+    <Position X="31.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Pickup.cs</FileName>
+    </TypeIdentifier>
+  </Class>
   <Class Name="Current.Platform">
-    <Position X="9.25" Y="7.5" Width="1.5" />
+    <Position X="43.75" Y="6.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAAAAAAgAAAAAAAAAAAAgAAAAAAAAAAAEAAAA=</HashCode>
       <FileName>Platform.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Current.Player">
-    <Position X="9.5" Y="11.5" Width="2.5" />
+    <Position X="50.75" Y="7.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQACAAAAoAAIhggAAgAAAAAAAhAAAAEEAAAAAEAgAA=</HashCode>
+      <HashCode>AQQACAAAAoIAIhggAAgAAAAAAAhAACAEEAAAAAEAgAA=</HashCode>
       <FileName>Player.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Current.ScorePickup">
-    <Position X="9" Y="9.5" Width="1.5" />
+    <Position X="30" Y="6.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAAAAAAgAAAAAAAAAAAAgAAAAAAAAAAAEAAAA=</HashCode>
       <FileName>ScorePickup.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Current.Tile">
-    <Position X="13.25" Y="6" Width="1.5" />
+    <Position X="38.5" Y="5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAAAAAAgAAAAAAAAAAAAgAAAAAAAAAAAEAAAA=</HashCode>
       <FileName>Tile.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="Current.UIButton">
+    <Position X="53.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UIButton.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Current.UIImage">
+    <Position X="54.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UIImage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Current.UIManager">
+    <Position X="59.5" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAEAgAAQAgAEAAAAAA=</HashCode>
+      <FileName>UIManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Current.UIObject">
+    <Position X="52.5" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQQAAAAAAAAAACAAAEAAQQACCAAAAAAAAAAAAAQAAgA=</HashCode>
+      <FileName>UIObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Current.UIText">
+    <Position X="50.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAACAACAAA=</HashCode>
+      <FileName>UIText.cs</FileName>
+    </TypeIdentifier>
+  </Class>
   <Class Name="Current.Volume">
-    <Position X="13.5" Y="8.5" Width="1.5" />
+    <Position X="22.25" Y="3.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAA=</HashCode>
       <FileName>Volume.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Current.Water">
-    <Position X="12.5" Y="10.75" Width="1.5" />
+    <Position X="21.75" Y="7.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQAAAAAAAAAAgAAAAAAAAAAAAgAAAAAAAAAAAEAAAA=</HashCode>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAEAAAA=</HashCode>
       <FileName>Water.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Current.WaterCurrent">
-    <Position X="15" Y="10.75" Width="1.5" />
+    <Position X="23.75" Y="7.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAAAAAAgAAAAAAAAAAAAgAAAAAAAAAAAEAAAA=</HashCode>
       <FileName>WaterCurrent.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Current.GameManager">
-    <Position X="14" Y="0.5" Width="1.5" />
+  <Enum Name="Current.GameplayState">
+    <Position X="61.75" Y="10.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAIAAAAEAAEAAAhAAAAAAAAgAAAAAAEAAgAgAAAAAQA=</HashCode>
+      <HashCode>AAAgAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA=</HashCode>
       <FileName>GameManager.cs</FileName>
     </TypeIdentifier>
-  </Class>
+  </Enum>
+  <Enum Name="Current.GameState">
+    <Position X="61.75" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAAAAAAAAAAAAAQAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GameManager.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Current.MainMenuState">
+    <Position X="61.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>GameManager.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Current.PlayerState">
+    <Position X="61.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAAAAAAAAAAAAAEBAAAABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Player.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Current.SortingMode">
+    <Position X="61.75" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAAAAAAAAAAAAAAAAABAAAAAACACAAAEAAAA=</HashCode>
+      <FileName>UIManager.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>
