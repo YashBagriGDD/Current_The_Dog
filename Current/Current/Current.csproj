@@ -38,6 +38,7 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Animate.cs" />
     <Compile Include="Background.cs" />
     <Compile Include="Catfish.cs" />
     <Compile Include="CheckPoint.cs" />
