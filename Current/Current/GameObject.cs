@@ -35,6 +35,12 @@ namespace Current
         public GameState ActiveState { get; set; }
             = GameState.Game;
 
+        /// <summary>
+        /// Dictionary of all animations, referenced by texture name
+        /// </summary>
+        protected Dictionary<string, Animate> AnimationData { get; set; }
+
+        protected string currentAnimation { get; set; }
 
         //Represents the change in displacement per update
         public Vector2 Velocity;
@@ -63,6 +69,39 @@ namespace Current
             GameManager.Add(Name, this);
             Location = location;
 
+            //Setup Animation
+            Animate defaultAnim = new Animate(Texture, 1, 1, (int)( (1/60.0f) * 1000), this);
+            AnimationData = new Dictionary<string, Animate>();
+            AnimationData.Add(texture.Name, defaultAnim);
+            currentAnimation = texture.Name;
+        }
+
+        /// <summary>
+        /// Change to a new animation and play it.
+        /// The Animation MUST have been added before you try to play it by name!
+        /// </summary>
+        /// <param name="animationName">Name of the new animation</param>
+        public void ChangeAnimation(string animationName)
+        {
+            if (!AnimationData.ContainsKey(animationName))
+            {
+                Console.WriteLine("Animation not found!");
+            }
+            else
+            {
+                currentAnimation = animationName;
+                AnimationData[currentAnimation].Reset();
+            }
+        }
+        
+
+        /// <summary>
+        /// Add a new animation that will be able to be played by name
+        /// </summary>
+        /// <param name="newAnimation"></param>
+        public void AddAnimation(Animate newAnimation)
+        {
+            AnimationData.Add(newAnimation.Name, newAnimation);
         }
 
         /// <summary>
@@ -81,6 +120,9 @@ namespace Current
             //Then change the displacement by velocity
             Location.X += (int)(Velocity.X * gameTime.ElapsedGameTime.TotalSeconds * 100);
             Location.Y += (int)(Velocity.Y * gameTime.ElapsedGameTime.TotalSeconds * 100);
+
+            if (AnimationData.ContainsKey(currentAnimation))
+                AnimationData[currentAnimation].Update(gameTime);
         }
 
         /// <summary>
@@ -93,7 +135,10 @@ namespace Current
             if (GameManager.gameState != ActiveState)
                 return;
 
-            spriteBatch.Draw(Texture, destinationRectangle: Location, color: DrawColor, effects: SpriteFX);
+            if (!AnimationData.ContainsKey(currentAnimation))
+                spriteBatch.Draw(Texture, destinationRectangle: Location, color: DrawColor, effects: SpriteFX);
+            else
+                AnimationData[currentAnimation].Draw(spriteBatch);
         }
     }
 }

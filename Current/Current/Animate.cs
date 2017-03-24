@@ -18,14 +18,20 @@ namespace Current
 
         public int MillisecondsPerFrame { get; set; }
 
+        public GameObject Parent { get; set; }
+        
+        public string Name { get; set; }
+
         private int currentFrame;
 
         private int totalFrames;
 
         private int timeSinceLastFrame = 0;
 
+        private bool isRunning = false;
 
-        public Animate(Texture2D texture, int rows, int columns, int millisecondsPerFrame)
+
+        public Animate(Texture2D texture, int rows, int columns, int millisecondsPerFrame, GameObject parent)
         {
             Texture = texture;
             Rows = rows;
@@ -33,10 +39,43 @@ namespace Current
             currentFrame = 0;
             MillisecondsPerFrame = millisecondsPerFrame;
             totalFrames = Rows * Columns;
+            Parent = parent;
+            Name = texture.Name;
+            isRunning = true;
+        }
+        
+        /// <summary>
+        /// Resets the current time of the animation
+        /// </summary>
+        public void Reset()
+        {
+            currentFrame = 0;
+            timeSinceLastFrame = 0;
+
+        }
+
+        /// <summary>
+        /// Pause the animation
+        /// </summary>
+        public void Pause()
+        {
+            Reset();
+            isRunning = false;
+        }
+
+        /// <summary>
+        /// Resume the animation
+        /// </summary>
+        public void Resume()
+        {
+            Reset();
+            isRunning = true;
         }
 
         public void Update(GameTime gameTime)
         {
+            if (!isRunning)
+                return;
             timeSinceLastFrame += gameTime.ElapsedGameTime.Milliseconds;
             if(timeSinceLastFrame > MillisecondsPerFrame)
             {
@@ -49,7 +88,7 @@ namespace Current
             }
         }
 
-        public void Draw(SpriteBatch spritebatch, Vector2 location)
+        public void Draw(SpriteBatch spriteBatch)
         {
             int width = Texture.Width / Columns;
             int height = Texture.Height / Rows;
@@ -60,9 +99,14 @@ namespace Current
             Rectangle sourceRectangle = new Rectangle(width * column, height * row, width, height);
 
             // where the character is beng displayed in-game
-            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, width, height);
+            Rectangle destinationRectangle = new Rectangle(Parent.Location.X, Parent.Location.Y, Parent.Location.Width, Parent.Location.Height);
+            
+            //spriteBatch.Draw(Texture, destinationRectangle, sourceRectangle, Color.White);
 
-            spritebatch.Draw(Texture, destinationRectangle, sourceRectangle, Color.White);
+
+            spriteBatch.Draw(Texture, destinationRectangle: destinationRectangle, sourceRectangle: sourceRectangle, color: Parent.DrawColor, effects: Parent.SpriteFX);
+
+
         }
     }
 }
