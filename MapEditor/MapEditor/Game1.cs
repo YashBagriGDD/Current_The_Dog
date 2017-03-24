@@ -5,8 +5,10 @@ using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 
 namespace MapEditor {
+    //TO DO MAKE EASY ACCESS VARIABLES FOR THE SIZES
 
     class Tile {
         public float X { get; set; }
@@ -41,6 +43,7 @@ namespace MapEditor {
         Texture2D shore;
         Texture2D grassSand;
         Texture2D grass;
+        Texture2D sand;
 
         public Game1() {
             graphics = new GraphicsDeviceManager(this);
@@ -77,6 +80,8 @@ namespace MapEditor {
             textures.Add(upWater);
             shore = Content.Load<Texture2D>("shore tile");
             textures.Add(shore);
+            sand = Content.Load<Texture2D>("sand tile");
+            textures.Add(sand);
             grassSand = Content.Load<Texture2D>("grass to sand tile");
             textures.Add(grassSand);
             grass = Content.Load<Texture2D>("grass tile");
@@ -99,35 +104,36 @@ namespace MapEditor {
         /// checking for collisions, gathering input, and playing audio.
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
+        KeyboardState prev = Keyboard.GetState(); //for saving keyboard state to stop infinite scrolling
         protected override void Update(GameTime gameTime) {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
             // TODO: Add your update logic here
-            if (Keyboard.GetState().IsKeyDown(Keys.D)) {
+            if (Keyboard.GetState().IsKeyDown(Keys.D) && prev.IsKeyUp(Keys.D)) {
                 listPosition++;
                 if (listPosition >= textures.Count) {
                     listPosition = 0;
                 }
                 currentTexture = textures[listPosition];
             }
-            if (Keyboard.GetState().IsKeyDown(Keys.S)) {
+            if (Keyboard.GetState().IsKeyDown(Keys.S) && prev.IsKeyUp(Keys.S)) {
                 listPosition--;
                 if (listPosition < 0) {
                     listPosition = textures.Count - 1;
                 }
                 currentTexture = textures[listPosition];
             }
-            if (Keyboard.GetState().IsKeyDown(Keys.N)) {
+            if (Keyboard.GetState().IsKeyDown(Keys.N) ) {
                 Process.Start("notepad.exe");
             }
-            if (Keyboard.GetState().IsKeyDown(Keys.Right)) {
-                currentX += 2;
-                lvlX += 2;
+            if (Keyboard.GetState().IsKeyDown(Keys.Right) && prev.IsKeyUp(Keys.Right)) {
+                currentX += 100;
+                lvlX += 100;
             }
-            if (Keyboard.GetState().IsKeyDown(Keys.Left)) {
-                currentX -= 2;
-                lvlX -= 2;
+            if (Keyboard.GetState().IsKeyDown(Keys.Left) && prev.IsKeyUp(Keys.Left)) {
+                currentX -= 100;
+                lvlX -= 100;
             }
             if (currentX < 0)
                 currentX = 0;
@@ -136,8 +142,8 @@ namespace MapEditor {
             if (Mouse.GetState().LeftButton == ButtonState.Pressed) {
                 platforms.Add(new Tile() {
                     //For snapping, change the number to equal the Tile Size
-                    X = (Mouse.GetState().X / 100 * 100) - lvlX,
-                    Y = Mouse.GetState().Y / 100 * 100,
+                    X = (Mouse.GetState().X / 100 * 100) + lvlX,  //Current BUG, positioning messes up after moving screen
+                    Y = Mouse.GetState().Y /100 *100,
                     text = currentTexture
                 });
             }
@@ -153,7 +159,12 @@ namespace MapEditor {
                 File.WriteAllText(@"level.txt", json);
             }
 
+            //Remove the most recent tile in platforms array
+            if (Keyboard.GetState().IsKeyDown(Keys.Back) && prev.IsKeyUp(Keys.Back)) {
+                platforms.Remove(platforms.Last());
+            }
 
+            prev = Keyboard.GetState();
             base.Update(gameTime);
         }
 
