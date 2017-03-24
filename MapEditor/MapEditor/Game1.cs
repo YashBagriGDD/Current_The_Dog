@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 
 namespace MapEditor {
     //TO DO MAKE EASY ACCESS VARIABLES FOR THE SIZES
@@ -157,9 +158,9 @@ namespace MapEditor {
             }
 
             //Remove the most recent tile in platforms array
-           /* if (Keyboard.GetState().IsKeyDown(Keys.Back) || prev.IsKeyUp(Keys.Back)) {
-                platforms.RemoveAt(platforms.Count);
-            }*/
+            if (Keyboard.GetState().IsKeyDown(Keys.Back) && prev.IsKeyUp(Keys.Back)) {
+                platforms.Remove(platforms.Last());
+            }
 
             prev = Keyboard.GetState();
             base.Update(gameTime);
