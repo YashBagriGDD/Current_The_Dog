@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -88,6 +90,23 @@ namespace Current
         {
             return Objects;
         }
-   
+
+        /// <summary>
+        /// Parses the given JSON file into a list of SaveTiles
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        public static List<SaveTile> ParseLevel(string path)
+        {
+            List<SaveTile> tiles;
+            using (StreamReader reader = new StreamReader(path))
+            {
+                string rData = reader.ReadToEnd();
+                tiles = JsonConvert.DeserializeObject<List<SaveTile>>(rData);
+            }
+
+            return tiles;
+        }
+        
     }
 }

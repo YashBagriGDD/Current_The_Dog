@@ -55,7 +55,9 @@ namespace MapEditor {
         /// </summary>
         protected override void Initialize() {
             // TODO: Add your initialization logic here
-
+            StreamWriter w = new StreamWriter("dogs.txt");
+            w.Write("Dogs are cool");
+            w.Close();
             base.Initialize();
         }
 

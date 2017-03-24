@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace Current
@@ -52,6 +53,7 @@ namespace Current
             base.Initialize();
         }
 
+
         /// <summary>
         /// LoadContent will be called once per game and is the place to load
         /// all of your content.
@@ -65,7 +67,16 @@ namespace Current
             Texture2D texBlock = Content.Load<Texture2D>("Textures/WhiteBlock");
             font = Content.Load<SpriteFont>("Fonts/Font");
 
-            //Load in some demo objects
+            //Load in a level
+            List<SaveTile> tiles = GameManager.ParseLevel("Text/level.txt");
+
+            //TODO: Parse files
+            /*foreach (SaveTile tile in tiles)
+            {
+                
+            }*/
+
+            /*Load in some demo objects*/
             Platform plat = new Platform("Platform", texBlock, new Rectangle(0, 1000, 600, 500));
             Platform plat2 = new Platform("Platform2", texBlock, new Rectangle(0, 750, 100, 300));
             Platform plat3 = new Platform("Platform3", texBlock, new Rectangle(1000, 1000, 500, 100));
