@@ -28,6 +28,7 @@ namespace MapEditor {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Texture2D currentTexture;
+        Texture2D bg;
         int currentX = 0;
         int lvlX = 0;
         int listPosition;
@@ -35,7 +36,11 @@ namespace MapEditor {
         List<SaveTile> save = new List<SaveTile>();
         List<Texture2D> textures = new List<Texture2D>(); //Add textures into this list for scrolling through them in editor
         //Instantiate all textures here
-
+        Texture2D deepWater;
+        Texture2D upWater;
+        Texture2D shore;
+        Texture2D grassSand;
+        Texture2D grass;
 
         public Game1() {
             graphics = new GraphicsDeviceManager(this);
@@ -61,10 +66,19 @@ namespace MapEditor {
         protected override void LoadContent() {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
+            bg = Content.Load<Texture2D>("background");
             listPosition = 0; //int for keeping track of place in list
             //Load Textures here and add them to the list
-
+            deepWater = Content.Load<Texture2D>("deep water tile");
+            textures.Add(deepWater);
+            upWater = Content.Load<Texture2D>("upper water tile");
+            textures.Add(upWater);
+            shore = Content.Load<Texture2D>("shore tile");
+            textures.Add(shore);
+            grassSand = Content.Load<Texture2D>("grass to sand tile");
+            textures.Add(grassSand);
+            grass = Content.Load<Texture2D>("grass tile");
+            textures.Add(grass);
 
             currentTexture = textures[listPosition];
             // TODO: use this.Content to load your game content here
