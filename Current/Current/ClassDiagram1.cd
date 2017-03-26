@@ -73,21 +73,21 @@
   <Class Name="Current.Game1">
     <Position X="58.25" Y="1" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAYAkEAAAAACAwAAAAAAAAAAAAAAAAgAABAAAAAAAAQ=</HashCode>
+      <HashCode>AAYAkkAAAAACAwAAAAAAACAAAAAAAAgAABAAAQAAAIQ=</HashCode>
       <FileName>Game1.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Current.GameManager">
     <Position X="57.75" Y="8" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAIAAAAEAAEAAAhAAAAAAAAgAAAAAAEAAgAgAAAAAQA=</HashCode>
+      <HashCode>AAIAAAAEAAEAAAhAAAIAAAAgAAAAAAEAAgAgAAAAAUA=</HashCode>
       <FileName>GameManager.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Current.GameObject">
     <Position X="35.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AoQAAAAAAAAABgAAAIIAAAQAAAAAAAAAAAIEAAAEAAA=</HashCode>
+      <HashCode>AoQAgIAAAABABgAAAIIAAAQAAAAAAAAAAAIEIAAEAAA=</HashCode>
       <FileName>GameObject.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -150,7 +150,7 @@
   <Class Name="Current.Player">
     <Position X="50.75" Y="7.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AQQACAAAAoIAIhggAAgAAAAAAAhAACAEEAAAAAEAgAA=</HashCode>
+      <HashCode>AQQACAAAAoAAIhggAAgAAAAAAghAACAEEAAAAAEAgAA=</HashCode>
       <FileName>Player.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -224,15 +224,29 @@
       <FileName>WaterCurrent.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="Current.Animate">
+    <Position X="16.75" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQgAAAAgAAABkBAAAgAQAQAABAAAAAAAAICAAgAAAA=</HashCode>
+      <FileName>Animate.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Current.SaveTile">
+    <Position X="18.75" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAYAA=</HashCode>
+      <FileName>SaveTile.cs</FileName>
+    </TypeIdentifier>
+  </Class>
   <Enum Name="Current.GameplayState">
-    <Position X="61.75" Y="10.5" Width="1.5" />
+    <Position X="61.75" Y="10.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAgAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA=</HashCode>
       <FileName>GameManager.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="Current.GameState">
-    <Position X="61.75" Y="5" Width="1.5" />
+    <Position X="61.75" Y="4.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAgAAAAAAAAAAAAAAAAAAQAAgAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>GameManager.cs</FileName>
@@ -246,14 +260,14 @@
     </TypeIdentifier>
   </Enum>
   <Enum Name="Current.PlayerState">
-    <Position X="61.75" Y="6.25" Width="1.5" />
+    <Position X="61.75" Y="6" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAQAAAAAAAAAAAAAEBAAAABAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Player.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="Current.SortingMode">
-    <Position X="61.75" Y="8.75" Width="1.5" />
+    <Position X="61.75" Y="9" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAACAAAAAAAAAAAAAAAAAAABAAAAAACACAAAEAAAA=</HashCode>
       <FileName>UIManager.cs</FileName>
