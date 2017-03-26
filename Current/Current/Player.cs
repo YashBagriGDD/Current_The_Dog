@@ -210,11 +210,12 @@ namespace Current
             //Exit swimming state when not colliding with any water objects
             //Done here rather than in HandleCollision events because there 
             //will be a lot of water tiles near each other.
-            if (!Coll.CollidingWith<Water>())
+            if ((CollBelow.CollidingWith<Platform>() && !CollAbove.CollidingWith<Water>()) 
+                || !Coll.CollidingWith<Water>())
             {
                 state = PlayerState.InAir;
                 Acceleration = airAcceleration;
-                Velocity = .5f*jumpVelocity;
+                Velocity = .5f * jumpVelocity;
             }
         }
 
@@ -224,7 +225,8 @@ namespace Current
         /// <param name="other">Collider to check with</param>
         private void CheckForWaterWhenNotSwimming(Collider other)
         {
-            if (other.Host is Water && !Coll.CollidingWith<Platform>())
+            if (other.Host is Water &&
+                (!CollBelow.CollidingWith<Platform>() || CollAbove.CollidingWith<Water>()))
             {
                 state = PlayerState.InWater;
                 Velocity = Vector2.Normalize(Velocity) * MoveSpeed;
