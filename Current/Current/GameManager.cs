@@ -57,6 +57,19 @@ namespace Current
         public static MainMenuState mainMenuState = MainMenuState.MainMenu;
         public static GameplayState gameplayState = GameplayState.Normal;
 
+
+        //Dictionary of texture names to cooresponding class names
+        public static readonly Dictionary<string, string> TextureMapping
+            = new Dictionary<string, string>
+            {
+                {"deep water tile", "Water" },
+                {"grass tile", "Platform" },
+                {"grass to sand tile", "Platform" },
+                {"sand tile",  "Platform" },
+                {"shore tile" , "Platform" },
+                {"upper water tile", "Platform" }
+            };
+
         /// <summary>
         /// Adds a GameObject reference to the Objects dictionary
         /// If a CollidableObject is passed, it is also added to the CollidableObjects List
@@ -94,8 +107,8 @@ namespace Current
         /// <summary>
         /// Parses the given JSON file into a list of SaveTiles
         /// </summary>
-        /// <param name="path"></param>
-        /// <returns></returns>
+        /// <param name="path">Path to the level text file</param>
+        /// <returns>A list of SaveTiles</returns>
         public static List<SaveTile> ParseLevel(string path)
         {
             List<SaveTile> tiles;

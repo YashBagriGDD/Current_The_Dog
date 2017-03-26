@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
@@ -18,11 +19,15 @@ namespace Current
         SpriteFont font;
 
         //Window sizes
-        public static int WindowWidth = 1920;
-        public static int WindowHeight = 1080;
+        public static int WindowWidth = 1280, WindowHeight = 720;
+
+        //Sizes for level import
+        private static int TileWidth = 100, TileHeight = 100;
+        private static int ImportWidth = 800, ImportHeight = 480;
 
         //Debugging variables
         private double fps = 0;
+
 
 
         public Game1()
@@ -67,23 +72,34 @@ namespace Current
             Texture2D texBlock = Content.Load<Texture2D>("Textures/WhiteBlock");
             font = Content.Load<SpriteFont>("Fonts/Font");
 
-            //Load in a level
+            //Parse the level file
             List<SaveTile> tiles = GameManager.ParseLevel("Text/level.txt");
 
-            //TODO: Parse files
-            /*foreach (SaveTile tile in tiles)
+            float xRatio = (float)WindowWidth / ImportWidth;
+            float YRatio = (float)WindowHeight/ ImportHeight;
+
+
+            //Load in the level tiles
+            int numWater = 0, numPlatforms = 0; 
+            foreach (SaveTile tile in tiles)
             {
-                
-            }*/
+                string type = GameManager.TextureMapping[tile.TextureName];
+                Texture2D tex = Content.Load<Texture2D>("textures/tiles/" + tile.TextureName);
+                Rectangle loc = new Rectangle((int)(tile.X * xRatio), (int)(tile.Y * YRatio), (int)(TileWidth * xRatio), (int)(TileHeight * YRatio));
+                switch (type)
+                {
+                    case "Water":
+                        Water w = new Water("Water" + numWater, tex, loc, Vector2.Zero);
+                        numWater++;
+                        break;
+                    case "Platform":
+                        Platform p = new Platform("Platform" + numPlatforms, tex, loc);
+                        numPlatforms++;
+                        break;
+                }
+            }
 
-            /*Load in some demo objects*/
-            Platform plat = new Platform("Platform", texBlock, new Rectangle(0, 1000, 600, 500));
-            Platform plat2 = new Platform("Platform2", texBlock, new Rectangle(0, 750, 100, 300));
-            Platform plat3 = new Platform("Platform3", texBlock, new Rectangle(1000, 1000, 500, 100));
-
-            Water water = new Water("WaterTest", texBlock, new Rectangle(600, 200, 1000, 600), Vector2.Zero);
-
-            Player player = new Player("Current", texPlayer, new Rectangle(100, 250, 100, 100));
+            Player player = new Player("Current", texPlayer, new Rectangle(100, 0, 100, 100));
 
             /*Example UIText Objects.
             UIText t = new UIText("demoFont", "Test", font, Anchor.UpperLeft, SortingMode.Below, GameState.Game, Point.Zero, Color.Red);

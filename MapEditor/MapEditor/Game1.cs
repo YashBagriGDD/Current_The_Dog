@@ -166,6 +166,7 @@ namespace MapEditor {
 
             prev = Keyboard.GetState();
             base.Update(gameTime);
+
         }
 
         /// <summary>

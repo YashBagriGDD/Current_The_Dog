@@ -195,31 +195,44 @@ namespace Current
                 Velocity = new Vector2(0, speed);
                 direction = Direction.Down;
             }
-            
+
+            //Check for collisions and stop appropriate component of velocity while swimming
+            if (CollLeft.CollidingWith<Platform>() && Velocity.X < 0)
+                Velocity.X = 0;
+            if (CollRight.CollidingWith<Platform>() && Velocity.X > 0)
+                Velocity.X = 0;
+            if (CollAbove.CollidingWith<Platform>() && !CollLeft.CollidingWith<Water>() && !CollRight.CollidingWith<Water>() && Velocity.Y < 0)
+                Velocity.Y = 0;
+            if (CollBelow.CollidingWith<Platform>() && !CollLeft.CollidingWith<Water>() && !CollRight.CollidingWith<Water>() && Velocity.Y < 0)
+                Velocity.Y = 0;
+
+
+            //Exit swimming state when not colliding with any water objects
+            //Done here rather than in HandleCollision events because there 
+            //will be a lot of water tiles near each other.
+            if (!Coll.CollidingWith<Water>())
+            {
+                state = PlayerState.InAir;
+                Acceleration = airAcceleration;
+                Velocity = .5f*jumpVelocity;
+            }
         }
 
         /// <summary>
-        /// Check for a collision with water, and switch to the appropriate state
+        /// Check for a collision with water when we're not swimming
         /// </summary>
         /// <param name="other">Collider to check with</param>
-        /// <param name="entry">Are we checking for a collision entry? True if so, exit  if false</param>
-        private void CheckForWater(Collider other, bool entry)
+        private void CheckForWaterWhenNotSwimming(Collider other)
         {
-            if (other.Host is Water)
+            if (other.Host is Water && !Coll.CollidingWith<Platform>())
             {
-                if (entry)
-                {
-                    state = PlayerState.InWater;
-                    Velocity = Vector2.Normalize(Velocity) * MoveSpeed;
-                    Acceleration = .05f * airAcceleration;
-                }
-                else
-                {
-                    state = PlayerState.InAir;
-                    Acceleration = airAcceleration;
-                }
+                state = PlayerState.InWater;
+                Velocity = Vector2.Normalize(Velocity) * MoveSpeed;
+                Acceleration = .05f * airAcceleration;
             }
+
         }
+
 
         /// <summary>
         /// What do for collisions
@@ -242,7 +255,7 @@ namespace Current
             switch (state)
             {
                 case PlayerState.OnLand:
-                    CheckForWater(other, true);
+                    CheckForWaterWhenNotSwimming(other);
                     break;
                 case PlayerState.InAir:
 
@@ -250,7 +263,7 @@ namespace Current
                     if (other.Host is Platform)
                     {
                         //When colliding below, stop
-                        if (CollBelow.CollidingWith(other.Host))
+                        if (CollBelow.CollidingWith(other.Host) )
                         {
                             Acceleration = Vector2.Zero;
                             Velocity.Y = 0;
@@ -265,13 +278,9 @@ namespace Current
                         }
                         
                     }
-                    CheckForWater(other, true);
+                    CheckForWaterWhenNotSwimming(other);
                     break;
                 case PlayerState.InWater:
-                    if (other.Host is Platform)
-                    {
-                        Velocity = Vector2.Zero;
-                    }
                     break;
                 case PlayerState.IsDead:
                     break;
@@ -305,10 +314,9 @@ namespace Current
                         }
                     }
                     break;
-                case PlayerState.InAir:
+                case PlayerState.InAir:     
                     break;
                 case PlayerState.InWater:
-                    CheckForWater(other, false);
                     break;
                 case PlayerState.IsDead:
                     break;
