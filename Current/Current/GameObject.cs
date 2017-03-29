@@ -70,7 +70,7 @@ namespace Current
             Location = location;
 
             //Setup Animation
-            Animate defaultAnim = new Animate(Texture, 1, 1, (int)( (1/60.0f) * 1000), this);
+            Animate defaultAnim = new Animate(Texture, 1, 1, Animate.ONESIXTIETHSECPERFRAME, this);
             AnimationData = new Dictionary<string, Animate>();
             AnimationData.Add(texture.Name, defaultAnim);
             currentAnimation = texture.Name;
@@ -101,7 +101,10 @@ namespace Current
         /// <param name="newAnimation"></param>
         public void AddAnimation(Animate newAnimation)
         {
-            AnimationData.Add(newAnimation.Name, newAnimation);
+            if (AnimationData.ContainsKey(newAnimation.Name))
+                AnimationData[newAnimation.Name] = newAnimation;
+            else
+                AnimationData.Add(newAnimation.Name, newAnimation);
         }
 
         /// <summary>

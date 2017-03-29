@@ -30,6 +30,9 @@ namespace Current
 
         private bool isRunning = false;
 
+        public static int ONESIXTIETHSECPERFRAME = (int)( (1/60.0f) * 1000);
+
+
 
         public Animate(Texture2D texture, int rows, int columns, int millisecondsPerFrame, GameObject parent)
         {

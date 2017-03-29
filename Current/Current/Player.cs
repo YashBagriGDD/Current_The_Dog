@@ -72,6 +72,8 @@ namespace Current
             state = PlayerState.InAir;
             direction = Direction.Idle;
 
+            SpriteFX = SpriteEffects.FlipHorizontally;
+
             //For the sake of physics
             Acceleration = airAcceleration;
             Velocity = new Vector2(0, 0);
@@ -141,13 +143,13 @@ namespace Current
             if (InputManager.GetButton("Right") && !CollRight.CollidingWith<Platform>())
             {
                 Velocity.X = speed;
-                SpriteFX = SpriteEffects.None;
+                SpriteFX = SpriteEffects.FlipHorizontally;
                 direction = Direction.Right;
             }
             else if (InputManager.GetButton("Left") && !CollLeft.CollidingWith<Platform>())
             {
                 Velocity.X = -speed;
-                SpriteFX = SpriteEffects.FlipHorizontally;
+                SpriteFX = SpriteEffects.None;
                 direction = Direction.Left;
 
             }
@@ -176,13 +178,13 @@ namespace Current
             if (InputManager.GetButtonDown("Right") )
             {
                 Velocity = new Vector2(speed, 0);
-                SpriteFX = SpriteEffects.None;
+                SpriteFX = SpriteEffects.FlipHorizontally;
                 direction = Direction.Right;
             }
             if (InputManager.GetButtonDown("Left"))
             {
                 Velocity = new Vector2(-speed, 0);
-                SpriteFX = SpriteEffects.FlipHorizontally;
+                SpriteFX = SpriteEffects.None;
                 direction = Direction.Left;
             }
             if (InputManager.GetButtonDown("Up"))

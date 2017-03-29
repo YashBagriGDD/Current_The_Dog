@@ -13,7 +13,7 @@ namespace Current
         /// <summary>
         /// Speed of the background. (For paralax) 
         /// </summary>
-        public float Speed { get; set; }
+        public float Speed { get; set; } 
 
         public Background(string name, Texture2D tex, Rectangle location) : base(name, tex, location)
         {

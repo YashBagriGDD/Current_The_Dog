@@ -68,7 +68,8 @@ namespace Current
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            Texture2D texPlayer = Content.Load<Texture2D>("Textures/dogTemp");
+            //Load textures
+            Texture2D texCurSwim = Content.Load<Texture2D>("Textures/Current/CurrentSwim");
             Texture2D texBlock = Content.Load<Texture2D>("Textures/WhiteBlock");
             font = Content.Load<SpriteFont>("Fonts/Font");
 
@@ -99,7 +100,16 @@ namespace Current
                 }
             }
 
-            Player player = new Player("Current", texPlayer, new Rectangle(100, 0, 100, 100));
+
+            //Setup more complicated objects
+            Player player = new Player("Current", texCurSwim, new Rectangle(100, 0, 100, 100));
+            Animate playerSwim = new Animate(texCurSwim, 3, 3, Animate.ONESIXTIETHSECPERFRAME*10, player);
+            player.AddAnimation(playerSwim);
+            //player.ChangeAnimation(playerSwim.Name);
+
+
+
+
 
             /*Example UIText Objects.
             UIText t = new UIText("demoFont", "Test", font, Anchor.UpperLeft, SortingMode.Below, GameState.Game, Point.Zero, Color.Red);
