@@ -16,7 +16,7 @@ namespace Current
         SpriteBatch spriteBatch;
 
 
-        SpriteFont font;
+        SpriteFont font, titleFont;
 
         //Window sizes
         public static int WindowWidth = 1280, WindowHeight = 720;
@@ -71,7 +71,11 @@ namespace Current
             //Load textures
             Texture2D texCurSwim = Content.Load<Texture2D>("Textures/Current/CurrentSwim");
             Texture2D texBlock = Content.Load<Texture2D>("Textures/WhiteBlock");
+            Texture2D texBG1 = Content.Load<Texture2D>("Textures/Backgrounds/Background");
+
+            //Load fonts
             font = Content.Load<SpriteFont>("Fonts/Font");
+            titleFont = Content.Load<SpriteFont>("Fonts/TitleFont");
 
             //Parse the level file
             List<SaveTile> tiles = GameManager.ParseLevel("Text/level.txt");
@@ -80,13 +84,17 @@ namespace Current
             float YRatio = (float)WindowHeight/ ImportHeight;
 
 
+
+            //Load in the Background
+            Background b = new Background("bg1", texBG1, new Rectangle(0, 0, WindowWidth, WindowWidth));
+
             //Load in the level tiles
             int numWater = 0, numPlatforms = 0; 
             foreach (SaveTile tile in tiles)
             {
                 string type = GameManager.TextureMapping[tile.TextureName];
-                Texture2D tex = Content.Load<Texture2D>("textures/tiles/" + tile.TextureName);
-                Rectangle loc = new Rectangle((int)(tile.X * xRatio), (int)(tile.Y * YRatio), (int)(TileWidth * xRatio), (int)(TileHeight * YRatio));
+                Texture2D tex = Content.Load<Texture2D>("textures/tiles/" + tile.TextureName);                                      //Some height lost here, so multiply it 
+                Rectangle loc = new Rectangle((int)(tile.X * xRatio), (int)(tile.Y * YRatio), (int)(TileWidth * xRatio), (int)(TileHeight * YRatio * 1.2f));
                 switch (type)
                 {
                     case "Water":
@@ -105,9 +113,46 @@ namespace Current
             Player player = new Player("Current", texCurSwim, new Rectangle(100, 0, 100, 100));
             Animate playerSwim = new Animate(texCurSwim, 3, 3, Animate.ONESIXTIETHSECPERFRAME*10, player);
             player.AddAnimation(playerSwim);
-            //player.ChangeAnimation(playerSwim.Name);
 
 
+            Color buttonBackColor = new Color(50, 80, 130);
+            int bWidth = 400, bHeight = 100;
+
+
+            //Create the Main Menu
+            Background bMainMenu = new Background("bgMainMenu", texBG1, new Rectangle(0, 0, WindowWidth, WindowWidth));
+            bMainMenu.ActiveState = GameState.MainMenu;
+
+            //Main Menu Substate
+            UIText title = new UIText("Title", "Current", titleFont, Anchor.UpperMiddle, SortingMode.None, GameState.MainMenu, Point.Zero, Color.White);
+            UIButton play = new UIButton("PlayB", "Play", font, texBlock, Anchor.CenterMiddle, SortingMode.Below, GameState.MainMenu, Point.Zero, Color.White, buttonBackColor, bWidth, bHeight);
+            UIButton options = new UIButton("OptionsB", "Options", font, texBlock, Anchor.CenterMiddle, SortingMode.Below, GameState.MainMenu, new Point(0,50), Color.White, buttonBackColor, bWidth, bHeight);
+            UIButton quit = new UIButton("QuitB", "Quit", font, texBlock, Anchor.CenterMiddle, SortingMode.Below, GameState.MainMenu, new Point(0, 100), Color.White, buttonBackColor, bWidth, bHeight);
+
+            //Setup delegates
+            play.Click += () =>
+            {
+                GameManager.gameState = GameState.Game;
+            };
+
+            options.Click += () =>
+            {
+                GameManager.mainMenuState = MainMenuState.Options;
+            };
+
+            quit.Click += () =>
+            {
+                Exit();
+            };
+
+
+
+            //Options substate
+            UIText titleOptions = new UIText("Options", "Options", titleFont, Anchor.UpperMiddle, SortingMode.None, GameState.MainMenu, Point.Zero, Color.White);
+                titleOptions.ActiveMainMenuState = MainMenuState.Options;
+           // UIButton play = new UIButton("PlayB", "Play", font, texBlock, Anchor.CenterMiddle, SortingMode.Below, GameState.MainMenu, Point.Zero, Color.White, buttonBackColor, bWidth, bHeight);
+           // UIButton options = new UIButton("OptionsB", "Options", font, texBlock, Anchor.CenterMiddle, SortingMode.Below, GameState.MainMenu, new Point(0, 50), Color.White, buttonBackColor, bWidth, bHeight);
+           // UIButton quit = new UIButton("QuitB", "Quit", font, texBlock, Anchor.CenterMiddle, SortingMode.Below, GameState.MainMenu, new Point(0, 100), Color.White, buttonBackColor, bWidth, bHeight);
 
 
 

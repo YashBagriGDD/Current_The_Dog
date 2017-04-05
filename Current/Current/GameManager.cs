@@ -53,7 +53,7 @@ namespace Current
         public static float Time { get; set; }
 
         //Various states for the game
-        public static GameState gameState = GameState.Game;
+        public static GameState gameState = GameState.MainMenu;
         public static MainMenuState mainMenuState = MainMenuState.MainMenu;
         public static GameplayState gameplayState = GameplayState.Normal;
 

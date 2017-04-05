@@ -28,7 +28,7 @@ namespace Current
 
         protected override void HandleCollisionEnter(object sender, EventArgs e)
         {
-            Console.WriteLine("test");
+            
         }
 
         protected override void HandleCollisionExit(object sender, EventArgs e)

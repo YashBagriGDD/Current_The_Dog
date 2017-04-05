@@ -151,3 +151,9 @@
 /processorParam:TextureFormat=Color
 /build:Textures/Current/CurrentSwim.png
 
+#begin Fonts/TitleFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:TextureFormat=Compressed
+/build:Fonts/TitleFont.spritefont
+

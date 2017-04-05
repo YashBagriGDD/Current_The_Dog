@@ -19,7 +19,7 @@ namespace Current
         public UIText TextComponent { get; protected set; }
 
 
-        public UIButton(string name, string text, SpriteFont font, Texture2D background, Anchor anchor, SortingMode sortingMode, GameState activeState, Point offset, Color textColor, Color bgColor) : base(name, anchor, sortingMode, activeState, offset)
+        public UIButton(string name, string text, SpriteFont font, Texture2D background, Anchor anchor, SortingMode sortingMode, GameState activeState, Point offset, Color textColor, Color bgColor, int fixedWidth=0, int fixedHeight=0) : base(name, anchor, sortingMode, activeState, offset)
         {
             //Store info
             Texture = background;
@@ -28,8 +28,12 @@ namespace Current
             //Construct the UIText object
             TextComponent = new UIText("Text_" + name, text, font, anchor, sortingMode, activeState, offset, textColor);
 
-            //Calculate image size and location, based on the text
-            Point imgSize = new Point((int)(TextComponent.Location.Width * 1.25f), (int)(TextComponent.Location.Height * 1.25f));
+            //Calculate image size and location, based on the text, so long as optional width and heights aren't provided
+            Point imgSize;
+            if (fixedWidth == 0 || fixedHeight == 0)
+                imgSize = new Point((int)(TextComponent.Location.Width * 1.25f), (int)(TextComponent.Location.Height * 1.25f));
+            else
+                imgSize = new Point(fixedWidth, fixedHeight);
 
             //Center the background
             Point imgLoc = new Point(TextComponent.Location.X - (imgSize.X - TextComponent.Location.Width)/2, 
@@ -57,7 +61,7 @@ namespace Current
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            if (GameManager.gameState != ActiveState)
+            if (!InTheRightState)
                 return;
 
             //Only need to draw background, UIText does the text

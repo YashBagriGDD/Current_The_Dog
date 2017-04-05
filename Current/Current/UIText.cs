@@ -36,7 +36,7 @@ namespace Current
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            if (GameManager.gameState != ActiveState)
+            if (!InTheRightState)
                 return;
 
             spriteBatch.DrawString(Font, Text, new Vector2(Location.X, Location.Y), DrawColor);

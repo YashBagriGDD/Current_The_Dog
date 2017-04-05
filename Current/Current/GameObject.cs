@@ -35,6 +35,41 @@ namespace Current
         public GameState ActiveState { get; set; }
             = GameState.Game;
 
+        public MainMenuState ActiveMainMenuState { get; set; }
+            = MainMenuState.MainMenu;
+
+        public GameplayState ActiveGameplayState { get; set; }
+            = GameplayState.Normal;
+
+
+        /// <summary>
+        /// Used to determine if this is the state to draw and update everything
+        /// </summary>
+        protected bool InTheRightState
+        {
+            get
+            {
+                if (ActiveState != GameManager.gameState)
+                    return false;
+                switch (ActiveState)
+                {
+                    case GameState.Game:
+                        if (ActiveGameplayState != GameManager.gameplayState)
+                            return false;
+                        break;
+                    case GameState.MainMenu:
+                        if (ActiveMainMenuState != GameManager.mainMenuState)
+                            return false;
+                        break;
+                    case GameState.GameOver:
+                        break;
+                    default:
+                        break;
+                }
+                return true;
+            }
+        }
+
         /// <summary>
         /// Dictionary of all animations, referenced by texture name
         /// </summary>
@@ -113,7 +148,7 @@ namespace Current
         /// <param name="gameTime">gameTime</param>
         public virtual void Update(GameTime gameTime)
         {
-            if (GameManager.gameState != ActiveState)
+            if (!InTheRightState)
                 return;
 
             //Change the velocity by acceleration
@@ -124,6 +159,9 @@ namespace Current
             Location.X += (int)(Velocity.X * gameTime.ElapsedGameTime.TotalSeconds * 100);
             Location.Y += (int)(Velocity.Y * gameTime.ElapsedGameTime.TotalSeconds * 100);
 
+            //Make sure this can be animated 
+            if (AnimationData == null)
+                return;
             if (AnimationData.ContainsKey(currentAnimation))
                 AnimationData[currentAnimation].Update(gameTime);
         }
@@ -135,13 +173,14 @@ namespace Current
         /// <param name="spriteBatch">Active spriteBatch</param>
         public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            if (GameManager.gameState != ActiveState)
+            if (!InTheRightState)
                 return;
 
-            if (!AnimationData.ContainsKey(currentAnimation))
+            if (AnimationData == null || !AnimationData.ContainsKey(currentAnimation))
                 spriteBatch.Draw(Texture, destinationRectangle: Location, color: DrawColor, effects: SpriteFX);
             else
                 AnimationData[currentAnimation].Draw(spriteBatch);
         }
+
     }
 }
