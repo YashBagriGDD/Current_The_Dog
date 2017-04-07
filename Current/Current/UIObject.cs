@@ -57,6 +57,10 @@ namespace Current
 
         public override void Update(GameTime gameTime)
         {
+
+            if (!InTheRightState)
+                return;
+
             //Check if clicked on
             if (InputManager.MouseClickedDown() && Location.Contains(InputManager.MousePos))
                 OnClick();
