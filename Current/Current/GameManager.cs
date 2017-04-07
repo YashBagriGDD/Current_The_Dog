@@ -50,6 +50,7 @@ namespace Current
             = new List<CollidableObject>();
         //The current score of the game
         public static int Score { get; set; }
+            = 0;
         //Time of the game. (Not gameTime, just for like score and stuff)
         public static float Time { get; set; }
 

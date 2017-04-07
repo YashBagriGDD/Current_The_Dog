@@ -8,25 +8,23 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Current
 {
+    /// <summary>
+    /// Represents a pickup that restores Current's health
+    /// </summary>
     class HealthPickup : Pickup
     {
-        public HealthPickup(string name, Texture2D texture, Rectangle location) : base(name, texture, location)
+        public HealthPickup(string name, Texture2D texture, Rectangle location, int value) : base(name, texture, location, value)
         {
-        }
-
-        public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override void Update(GameTime gameTime)
-        {
-            throw new NotImplementedException();
         }
 
         protected override void HandleCollisionEnter(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            Collider other = (Collider)sender;
+
+            if (other.Host is Player)
+            {
+                //TODO 
+            }
         }
 
         protected override void HandleCollisionExit(object sender, EventArgs e)

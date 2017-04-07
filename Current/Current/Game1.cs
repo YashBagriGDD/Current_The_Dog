@@ -16,7 +16,7 @@ namespace Current
         SpriteBatch spriteBatch;
 
 
-        SpriteFont font, titleFont;
+        SpriteFont font, titleFont, hudFont;
 
         //Window sizes
         public static int WindowWidth = 1280, WindowHeight = 720;
@@ -77,6 +77,7 @@ namespace Current
             //Load fonts
             font = Content.Load<SpriteFont>("Fonts/Font");
             titleFont = Content.Load<SpriteFont>("Fonts/TitleFont");
+            hudFont = Content.Load<SpriteFont>("Fonts/HudFont");
 
             //Parse the level file
             List<SaveTile> tiles = GameManager.ParseLevel("Text/level.txt");
@@ -142,7 +143,7 @@ namespace Current
 
             //Setup HUD
             HealthBar bar = new HealthBar("HealthBar", texHealth, new Point(100,66));
-            
+            Score score = new Score("Score", hudFont, Anchor.UpperRight, SortingMode.None, GameState.Game, Point.Zero, Color.White);
 
             /*Example UIText Objects.
             UIText t = new UIText("demoFont", "Test", font, Anchor.UpperLeft, SortingMode.Below, GameState.Game, Point.Zero, Color.Red);

@@ -15,8 +15,9 @@ namespace Current
     {
         public int Value { get; set; }
 
-        public Pickup(string name, Texture2D texture, Rectangle location) : base(name, texture, location)
+        public Pickup(string name, Texture2D texture, Rectangle location, int value) : base(name, texture, location)
         {
+            Value = value;
         }
     }
 }
