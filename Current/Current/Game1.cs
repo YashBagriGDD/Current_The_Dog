@@ -72,6 +72,7 @@ namespace Current
             Texture2D texCurSwim = Content.Load<Texture2D>("Textures/Current/CurrentSwim");
             Texture2D texBlock = Content.Load<Texture2D>("Textures/WhiteBlock");
             Texture2D texBG1 = Content.Load<Texture2D>("Textures/Backgrounds/Background");
+            Texture2D texHealth = Content.Load<Texture2D>("Textures/HUD/Crossbone");
 
             //Load fonts
             font = Content.Load<SpriteFont>("Fonts/Font");
@@ -126,18 +127,12 @@ namespace Current
             //Main Menu Substate
             UIText title = new UIText("Title", "Current", titleFont, Anchor.UpperMiddle, SortingMode.None, GameState.MainMenu, Point.Zero, Color.White);
             UIButton play = new UIButton("PlayB", "Play", font, texBlock, Anchor.CenterMiddle, SortingMode.Below, GameState.MainMenu, Point.Zero, Color.White, buttonBackColor, bWidth, bHeight);
-            UIButton options = new UIButton("OptionsB", "Options", font, texBlock, Anchor.CenterMiddle, SortingMode.Below, GameState.MainMenu, new Point(0,50), Color.White, buttonBackColor, bWidth, bHeight);
-            UIButton quit = new UIButton("QuitB", "Quit", font, texBlock, Anchor.CenterMiddle, SortingMode.Below, GameState.MainMenu, new Point(0, 100), Color.White, buttonBackColor, bWidth, bHeight);
+            UIButton quit = new UIButton("QuitB", "Quit", font, texBlock, Anchor.CenterMiddle, SortingMode.Below, GameState.MainMenu, new Point(0,50), Color.White, buttonBackColor, bWidth, bHeight);
 
-            //Setup delegates
+            //Setup button delegates
             play.Click += () =>
             {
                 GameManager.gameState = GameState.Game;
-            };
-
-            options.Click += () =>
-            {
-                GameManager.mainMenuState = MainMenuState.Options;
             };
 
             quit.Click += () =>
@@ -145,16 +140,9 @@ namespace Current
                 Exit();
             };
 
-
-
-            //Options substate
-            UIText titleOptions = new UIText("Options", "Options", titleFont, Anchor.UpperMiddle, SortingMode.None, GameState.MainMenu, Point.Zero, Color.White);
-                titleOptions.ActiveMainMenuState = MainMenuState.Options;
-           // UIButton play = new UIButton("PlayB", "Play", font, texBlock, Anchor.CenterMiddle, SortingMode.Below, GameState.MainMenu, Point.Zero, Color.White, buttonBackColor, bWidth, bHeight);
-           // UIButton options = new UIButton("OptionsB", "Options", font, texBlock, Anchor.CenterMiddle, SortingMode.Below, GameState.MainMenu, new Point(0, 50), Color.White, buttonBackColor, bWidth, bHeight);
-           // UIButton quit = new UIButton("QuitB", "Quit", font, texBlock, Anchor.CenterMiddle, SortingMode.Below, GameState.MainMenu, new Point(0, 100), Color.White, buttonBackColor, bWidth, bHeight);
-
-
+            //Setup HUD
+            HealthBar bar = new HealthBar("HealthBar", texHealth, new Point(100,66));
+            
 
             /*Example UIText Objects.
             UIText t = new UIText("demoFont", "Test", font, Anchor.UpperLeft, SortingMode.Below, GameState.Game, Point.Zero, Color.Red);

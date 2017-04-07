@@ -74,6 +74,8 @@ namespace Current
 
             SpriteFX = SpriteEffects.FlipHorizontally;
 
+            Health = 3;
+
             //For the sake of physics
             Acceleration = airAcceleration;
             Velocity = new Vector2(0, 0);

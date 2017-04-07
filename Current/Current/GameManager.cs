@@ -16,7 +16,8 @@ namespace Current
     {
         Game,
         MainMenu,
-        GameOver
+        GameOver,
+        None //Anything in this state will not be drawn
     }
     /// <summary>
     /// States for the main menu

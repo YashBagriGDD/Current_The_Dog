@@ -53,6 +53,7 @@
     <Compile Include="GameManager.cs" />
     <Compile Include="GameObject.cs" />
     <Compile Include="Goal.cs" />
+    <Compile Include="HealthBar.cs" />
     <Compile Include="HealthPickup.cs" />
     <Compile Include="HUD.cs" />
     <Compile Include="InputManager.cs" />
