@@ -33,7 +33,10 @@ namespace MapEditor {
         Texture2D bg;
         int currentX = 0;
         int lvlX = 0;
+        int currentY = 0;
+        int lvlY = 0;
         int listPosition;
+        int tileSize; //int for storing the tile size in one place for easy editing
         List<Tile> platforms = new List<Tile>();
         List<SaveTile> save = new List<SaveTile>();
         List<Texture2D> textures = new List<Texture2D>(); //Add textures into this list for scrolling through them in editor
@@ -58,9 +61,7 @@ namespace MapEditor {
         /// </summary>
         protected override void Initialize() {
             // TODO: Add your initialization logic here
-            StreamWriter w = new StreamWriter("dogs.txt");
-            w.Write("Dogs are cool");
-            w.Close();
+            tileSize = 100; //the tile size
             base.Initialize();
         }
 
@@ -104,6 +105,7 @@ namespace MapEditor {
         /// checking for collisions, gathering input, and playing audio.
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
+        ButtonState prevButton = Mouse.GetState().LeftButton; //for saving the button state to bottleneck placing tiles when holding down the button
         KeyboardState prev = Keyboard.GetState(); //for saving keyboard state to stop infinite scrolling
         protected override void Update(GameTime gameTime) {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
@@ -128,22 +130,32 @@ namespace MapEditor {
                 Process.Start("notepad.exe");
             }
             if (Keyboard.GetState().IsKeyDown(Keys.Right) && prev.IsKeyUp(Keys.Right)) {
-                currentX += 100;
-                lvlX += 100;
+                currentX += tileSize;
+                lvlX += tileSize;
             }
             if (Keyboard.GetState().IsKeyDown(Keys.Left) && prev.IsKeyUp(Keys.Left)) {
-                currentX -= 100;
-                lvlX -= 100;
+                currentX -= tileSize;
+                lvlX -= tileSize;
             }
+            if (Keyboard.GetState().IsKeyDown(Keys.Down) && prev.IsKeyUp(Keys.Down)) {
+                currentY += tileSize;
+                lvlY += tileSize;
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.Up) && prev.IsKeyUp(Keys.Up)) {
+                currentY -= tileSize;
+                lvlY -= tileSize;
+            }
+
+
             if (currentX < 0)
                 currentX = 0;
             currentX %= GraphicsDevice.Viewport.Bounds.Width * 2;
 
-            if (Mouse.GetState().LeftButton == ButtonState.Pressed) {
+            if (Mouse.GetState().LeftButton == ButtonState.Pressed && prevButton != ButtonState.Pressed) {
                 platforms.Add(new Tile() {
                     //For snapping, change the number to equal the Tile Size
-                    X = (Mouse.GetState().X / 100 * 100) + lvlX,  //Current BUG, positioning messes up after moving screen
-                    Y = Mouse.GetState().Y /100 *100,
+                    X = (Mouse.GetState().X / tileSize * tileSize) + lvlX,
+                    Y = (Mouse.GetState().Y /tileSize *tileSize) + lvlY,
                     text = currentTexture
                 });
             }
@@ -165,6 +177,7 @@ namespace MapEditor {
             }
 
             prev = Keyboard.GetState();
+            prevButton = Mouse.GetState().LeftButton;
             base.Update(gameTime);
 
         }
@@ -182,9 +195,9 @@ namespace MapEditor {
             spriteBatch.Draw(bg, destinationRectangle: new Rectangle(GraphicsDevice.Viewport.Width - currentX, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), effects: SpriteEffects.FlipHorizontally);
             spriteBatch.Draw(bg, new Rectangle(2 * GraphicsDevice.Viewport.Width - currentX, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), Color.White);
 
-            spriteBatch.Draw(currentTexture, new Rectangle(Mouse.GetState().X, Mouse.GetState().Y, 100, 100), Color.White);
+            spriteBatch.Draw(currentTexture, new Rectangle(Mouse.GetState().X, Mouse.GetState().Y, tileSize, tileSize), Color.White);
             foreach (var item in platforms) {
-                spriteBatch.Draw(item.text, new Rectangle((int)item.X - lvlX, (int)item.Y, 100, 100), Color.White);
+                spriteBatch.Draw(item.text, new Rectangle((int)item.X - lvlX, (int)item.Y - lvlY, tileSize, tileSize), Color.White);
             }
 
             spriteBatch.End();
