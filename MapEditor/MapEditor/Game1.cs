@@ -36,6 +36,7 @@ namespace MapEditor {
         int currentY = 0;
         int lvlY = 0;
         int listPosition;
+        int tileSize; //int for storing the tile size in one place for easy editing
         List<Tile> platforms = new List<Tile>();
         List<SaveTile> save = new List<SaveTile>();
         List<Texture2D> textures = new List<Texture2D>(); //Add textures into this list for scrolling through them in editor
@@ -60,6 +61,7 @@ namespace MapEditor {
         /// </summary>
         protected override void Initialize() {
             // TODO: Add your initialization logic here
+            tileSize = 100; //the tile size
             base.Initialize();
         }
 
@@ -128,20 +130,20 @@ namespace MapEditor {
                 Process.Start("notepad.exe");
             }
             if (Keyboard.GetState().IsKeyDown(Keys.Right) && prev.IsKeyUp(Keys.Right)) {
-                currentX += 100;
-                lvlX += 100;
+                currentX += tileSize;
+                lvlX += tileSize;
             }
             if (Keyboard.GetState().IsKeyDown(Keys.Left) && prev.IsKeyUp(Keys.Left)) {
-                currentX -= 100;
-                lvlX -= 100;
+                currentX -= tileSize;
+                lvlX -= tileSize;
             }
             if (Keyboard.GetState().IsKeyDown(Keys.Down) && prev.IsKeyUp(Keys.Down)) {
-                currentY += 100;
-                lvlY += 100;
+                currentY += tileSize;
+                lvlY += tileSize;
             }
             if (Keyboard.GetState().IsKeyDown(Keys.Up) && prev.IsKeyUp(Keys.Up)) {
-                currentY -= 100;
-                lvlY -= 100;
+                currentY -= tileSize;
+                lvlY -= tileSize;
             }
 
 
@@ -152,8 +154,8 @@ namespace MapEditor {
             if (Mouse.GetState().LeftButton == ButtonState.Pressed && prevButton != ButtonState.Pressed) {
                 platforms.Add(new Tile() {
                     //For snapping, change the number to equal the Tile Size
-                    X = (Mouse.GetState().X / 100 * 100) + lvlX,
-                    Y = (Mouse.GetState().Y /100 *100) + lvlY,
+                    X = (Mouse.GetState().X / tileSize * tileSize) + lvlX,
+                    Y = (Mouse.GetState().Y /tileSize *tileSize) + lvlY,
                     text = currentTexture
                 });
             }
@@ -193,9 +195,9 @@ namespace MapEditor {
             spriteBatch.Draw(bg, destinationRectangle: new Rectangle(GraphicsDevice.Viewport.Width - currentX, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), effects: SpriteEffects.FlipHorizontally);
             spriteBatch.Draw(bg, new Rectangle(2 * GraphicsDevice.Viewport.Width - currentX, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), Color.White);
 
-            spriteBatch.Draw(currentTexture, new Rectangle(Mouse.GetState().X, Mouse.GetState().Y, 100, 100), Color.White);
+            spriteBatch.Draw(currentTexture, new Rectangle(Mouse.GetState().X, Mouse.GetState().Y, tileSize, tileSize), Color.White);
             foreach (var item in platforms) {
-                spriteBatch.Draw(item.text, new Rectangle((int)item.X - lvlX, (int)item.Y - lvlY, 100, 100), Color.White);
+                spriteBatch.Draw(item.text, new Rectangle((int)item.X - lvlX, (int)item.Y - lvlY, tileSize, tileSize), Color.White);
             }
 
             spriteBatch.End();
