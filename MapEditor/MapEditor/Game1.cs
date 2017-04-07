@@ -33,6 +33,8 @@ namespace MapEditor {
         Texture2D bg;
         int currentX = 0;
         int lvlX = 0;
+        int currentY = 0;
+        int lvlY = 0;
         int listPosition;
         List<Tile> platforms = new List<Tile>();
         List<SaveTile> save = new List<SaveTile>();
@@ -58,9 +60,6 @@ namespace MapEditor {
         /// </summary>
         protected override void Initialize() {
             // TODO: Add your initialization logic here
-            StreamWriter w = new StreamWriter("dogs.txt");
-            w.Write("Dogs are cool");
-            w.Close();
             base.Initialize();
         }
 
@@ -104,6 +103,7 @@ namespace MapEditor {
         /// checking for collisions, gathering input, and playing audio.
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
+        ButtonState prevButton = Mouse.GetState().LeftButton; //for saving the button state to bottleneck placing tiles when holding down the button
         KeyboardState prev = Keyboard.GetState(); //for saving keyboard state to stop infinite scrolling
         protected override void Update(GameTime gameTime) {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
@@ -135,15 +135,25 @@ namespace MapEditor {
                 currentX -= 100;
                 lvlX -= 100;
             }
+            if (Keyboard.GetState().IsKeyDown(Keys.Down) && prev.IsKeyUp(Keys.Down)) {
+                currentY += 100;
+                lvlY += 100;
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.Up) && prev.IsKeyUp(Keys.Up)) {
+                currentY -= 100;
+                lvlY -= 100;
+            }
+
+
             if (currentX < 0)
                 currentX = 0;
             currentX %= GraphicsDevice.Viewport.Bounds.Width * 2;
 
-            if (Mouse.GetState().LeftButton == ButtonState.Pressed) {
+            if (Mouse.GetState().LeftButton == ButtonState.Pressed && prevButton != ButtonState.Pressed) {
                 platforms.Add(new Tile() {
                     //For snapping, change the number to equal the Tile Size
-                    X = (Mouse.GetState().X / 100 * 100) + lvlX,  //Current BUG, positioning messes up after moving screen
-                    Y = Mouse.GetState().Y /100 *100,
+                    X = (Mouse.GetState().X / 100 * 100) + lvlX,
+                    Y = (Mouse.GetState().Y /100 *100) + lvlY,
                     text = currentTexture
                 });
             }
@@ -165,6 +175,7 @@ namespace MapEditor {
             }
 
             prev = Keyboard.GetState();
+            prevButton = Mouse.GetState().LeftButton;
             base.Update(gameTime);
 
         }
@@ -184,7 +195,7 @@ namespace MapEditor {
 
             spriteBatch.Draw(currentTexture, new Rectangle(Mouse.GetState().X, Mouse.GetState().Y, 100, 100), Color.White);
             foreach (var item in platforms) {
-                spriteBatch.Draw(item.text, new Rectangle((int)item.X - lvlX, (int)item.Y, 100, 100), Color.White);
+                spriteBatch.Draw(item.text, new Rectangle((int)item.X - lvlX, (int)item.Y - lvlY, 100, 100), Color.White);
             }
 
             spriteBatch.End();
