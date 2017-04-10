@@ -83,6 +83,9 @@ namespace Current
         public Vector2 Acceleration;
         private Texture2D tex;
 
+        //The last state this instance was in
+        protected GameState previousState; 
+
         /// <summary>
         /// Initializes a GameObject
         /// </summary>
@@ -110,6 +113,16 @@ namespace Current
             AnimationData.Add(texture.Name, defaultAnim);
             currentAnimation = texture.Name;
         }
+
+        /// <summary>
+        /// Decactivate this instance. This means no update, draw, or collision methods will ever be called.
+        /// </summary>
+        public void Deactivate()
+        {
+            previousState = ActiveState;
+            ActiveState = GameState.None;
+        }
+
 
         /// <summary>
         /// Change to a new animation and play it.

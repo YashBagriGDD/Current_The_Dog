@@ -14,24 +14,22 @@ namespace Current
         {
         }
 
-        public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override void Update(GameTime gameTime)
-        {
-            throw new NotImplementedException();
-        }
-
+        /// <summary>
+        /// Adds score on collision with player
+        /// </summary>
         protected override void HandleCollisionEnter(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            Collider other = (Collider)sender;
+
+            if (other.Host is Player)
+            {
+                GameManager.Score += Value;
+            }
         }
 
         protected override void HandleCollisionExit(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+
         }
     }
 }
