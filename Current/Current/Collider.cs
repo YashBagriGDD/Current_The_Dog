@@ -8,6 +8,10 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Current
 {
+    /// <summary>
+    /// Collider class to be attached to GameObjects.
+    /// Broadcasts messages for OnCollisionEnter, exit, and allows for checking of collisions each frame.
+    /// </summary>
     class Collider
     {
         /// <summary>
@@ -98,7 +102,7 @@ namespace Current
         /// <param name="source">Who am I colliding with?</param>
         public void OnCollision(Collider source)
         {
-            if (!sendEvents)
+            if (!sendEvents || !source.Host.Active) 
                 return;
             if (CollisionEnter != null)
             {
@@ -113,7 +117,7 @@ namespace Current
         /// <param name="source">Who was I colliding with?</param>
         public void OnCollisionExit(Collider source)
         {
-            if (!sendEvents)
+            if (!sendEvents || !source.Host.Active)
                 return;
             if (CollisionExit != null)
             {
@@ -128,6 +132,8 @@ namespace Current
         /// <returns></returns>
         public bool CollidingWith(CollidableObject other)
         {
+            if (!other.Active)
+                return false;
             return CurrentCollisions.Contains(other.Coll);
         }
 
@@ -138,7 +144,7 @@ namespace Current
         public bool CollidingWith<T>()
         {
             foreach (Collider c in CurrentCollisions)
-                if (c.Host is T)
+                if (c.Host is T && c.Host.Active)
                     return true;
             return false;
         }
@@ -148,7 +154,10 @@ namespace Current
         /// </summary>
         public bool CollidingWithAnything()
         {
-            return (CurrentCollisions.Count > 0);
+            foreach (Collider c in CurrentCollisions)
+                if (c.Host.Active)
+                    return true;
+            return false;
         }
 
         /// <summary>
@@ -158,6 +167,10 @@ namespace Current
         /// <param name="gameTime"></param>
         public void Update(GameTime gameTime)
         {
+            //Don't bother checking collisions if not active
+            if (!Host.Active)
+                return;
+
             UpdateHitbox();
             foreach (CollidableObject c in GameManager.CollidableObjects)
             {

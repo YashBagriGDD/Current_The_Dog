@@ -23,7 +23,9 @@ namespace Current
 
             if (other.Host is Player)
             {
-                //TODO 
+                Player p = (Player)other.Host;
+                p.Health += Value;
+                Deactivate();
             }
         }
 

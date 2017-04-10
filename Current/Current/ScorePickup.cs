@@ -24,6 +24,7 @@ namespace Current
             if (other.Host is Player)
             {
                 GameManager.Score += Value;
+                Deactivate(); //Don't let this be picked up again
             }
         }
 

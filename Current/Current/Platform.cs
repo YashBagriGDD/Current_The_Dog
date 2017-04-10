@@ -28,12 +28,10 @@ namespace Current
 
         protected override void HandleCollisionEnter(object sender, EventArgs e)
         {
-            
         }
 
         protected override void HandleCollisionExit(object sender, EventArgs e)
         {
-
         }
     }
 }

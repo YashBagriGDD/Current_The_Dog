@@ -31,21 +31,23 @@ namespace Current
         public SpriteEffects SpriteFX { get; set; }
             = SpriteEffects.None;
 
+        //The states are virtual so that objects, like UIButton can override it.
+
         //The state in which this object is drawn and updated
-        public GameState ActiveState { get; set; }
+        public virtual GameState ActiveState { get; set; }
             = GameState.Game;
 
-        public MainMenuState ActiveMainMenuState { get; set; }
+        public virtual MainMenuState ActiveMainMenuState { get; set; }
             = MainMenuState.MainMenu;
 
-        public GameplayState ActiveGameplayState { get; set; }
+        public virtual GameplayState ActiveGameplayState { get; set; }
             = GameplayState.Normal;
 
 
         /// <summary>
-        /// Used to determine if this is the state to draw and update everything
+        /// Used to determine if this is active, based on the GameState is the state to draw and update everything
         /// </summary>
-        protected bool InTheRightState
+        public bool Active
         {
             get
             {
@@ -84,7 +86,7 @@ namespace Current
         private Texture2D tex;
 
         //The last state this instance was in
-        protected GameState previousState; 
+        protected GameState previousState = GameState.None;
 
         /// <summary>
         /// Initializes a GameObject
@@ -121,6 +123,18 @@ namespace Current
         {
             previousState = ActiveState;
             ActiveState = GameState.None;
+        }
+
+        /// <summary>
+        /// Activate this instance. Only necessary to call if this has been deactivated previously.
+        /// </summary>
+        public void Activate()
+        {
+            if (previousState != GameState.None)
+            {
+                ActiveState = previousState;
+            }
+
         }
 
 
@@ -161,7 +175,7 @@ namespace Current
         /// <param name="gameTime">gameTime</param>
         public virtual void Update(GameTime gameTime)
         {
-            if (!InTheRightState)
+            if (!Active)
                 return;
 
             //Change the velocity by acceleration
@@ -186,7 +200,7 @@ namespace Current
         /// <param name="spriteBatch">Active spriteBatch</param>
         public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            if (!InTheRightState)
+            if (!Active || Texture == null)
                 return;
 
             if (AnimationData == null || !AnimationData.ContainsKey(currentAnimation))

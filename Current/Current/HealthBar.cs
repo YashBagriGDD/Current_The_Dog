@@ -32,7 +32,7 @@ namespace Current
         //Draw method that draws them based on health
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            if (!InTheRightState)
+            if (!Active)
                 return;
 
             //Draw as many crossbones as player has health

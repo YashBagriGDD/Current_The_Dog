@@ -145,6 +145,22 @@ namespace Current
             HealthBar bar = new HealthBar("HealthBar", texHealth, new Point(100,66));
             Score score = new Score("Score", hudFont, Anchor.UpperRight, SortingMode.None, GameState.Game, Point.Zero, Color.White);
 
+
+
+            //Add pickups
+            ScorePickup scorePickup = new ScorePickup("ScorePickup1", texBlock, new Rectangle(500, 100, 100, 100), 10);
+            HealthPickup healthPickup = new HealthPickup("HealthPickup1", texBlock, new Rectangle(200, 100, 100, 100), 1);
+            healthPickup.DrawColor = Color.Red;
+
+
+            //Setup the pause menu
+            UIText pauseText = new UIText("pauseText", "PAUSED", font, Anchor.CenterMiddle, SortingMode.Below, GameState.Game, Point.Zero, Color.White);
+            pauseText.ActiveGameplayState = GameplayState.Paused;
+            UIButton pauseResumeButton = new UIButton("pauseResumeButton", "Resume", font, texBlock, Anchor.CenterMiddle, SortingMode.Below, GameState.Game, new Point(0, 50), Color.White, buttonBackColor);
+            pauseResumeButton.ActiveGameplayState = GameplayState.Paused;
+
+
+
             /*Example UIText Objects.
             UIText t = new UIText("demoFont", "Test", font, Anchor.UpperLeft, SortingMode.Below, GameState.Game, Point.Zero, Color.Red);
             UIText t2 = new UIText("demoFont2", "Test", font, Anchor.UpperRight, SortingMode.Below, GameState.Game, Point.Zero, Color.White);
@@ -182,17 +198,18 @@ namespace Current
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
-
             //Update all the objects
             foreach (GameObject g in GameManager.GetAll().Values)
             {
                 g.Update(gameTime);
             }
-            //InputManager requires its own Update
+            //So does GameManager
+            GameManager.Update(gameTime);
+
+
+            //InputManager requires its own Update -- Make sure this is the last update call
             InputManager.Update(gameTime);
+
 
             fps = 1.0f / gameTime.ElapsedGameTime.TotalSeconds;
 

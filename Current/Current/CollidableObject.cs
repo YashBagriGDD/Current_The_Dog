@@ -9,6 +9,11 @@ using System.Diagnostics;
 
 namespace Current
 {
+    /// <summary>
+    /// A Collidable version of GameObject.
+    /// NOTE: HandleCollisionEnter and Exit will NOT be called if Active is false!
+    /// Likewise, Active objects colliding with inactive objects will not result in collisions.
+    /// </summary>
     abstract class CollidableObject : GameObject
     {
         //The Collider associated with this object
@@ -43,6 +48,7 @@ namespace Current
 
         /// <summary>
         /// What should this object the moment of a collision?
+        /// For subclasses, make sure to call base.Handle....... so it won't track collisions in the wrong state.
         /// </summary>
         /// <param name="sender">Who sent this collision?</param>
         /// <param name="e"></param>
@@ -50,6 +56,7 @@ namespace Current
 
         /// <summary>
         /// What should this object do the moment a collision ends?
+        /// For subclasses, make sure to call base.Handle....... so it won't track collisions in the wrong state.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

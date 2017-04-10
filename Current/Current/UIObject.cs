@@ -58,7 +58,7 @@ namespace Current
         public override void Update(GameTime gameTime)
         {
 
-            if (!InTheRightState)
+            if (!Active)
                 return;
 
             //Check if clicked on

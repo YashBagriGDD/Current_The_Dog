@@ -42,9 +42,10 @@ namespace Current
             {
                 {"Right", new Keys[] {Keys.D, Keys.Right } },
                 {"Left", new Keys[] {Keys.A, Keys.Left} },
-                {"Jump", new Keys[] {Keys.Space} },
                 {"Up", new Keys[] {Keys.W, Keys.Up} },
-                {"Down", new Keys[] {Keys.S, Keys.Down} }
+                {"Down", new Keys[] {Keys.S, Keys.Down} },
+                {"Jump", new Keys[] {Keys.Space} },
+                {"Cancel", new Keys[] {Keys.Escape, Keys.Back } }
             };
 
 

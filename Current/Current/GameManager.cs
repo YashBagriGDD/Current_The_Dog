@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.Xna.Framework;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -86,7 +87,7 @@ namespace Current
                 CollidableObject c = (CollidableObject)g;
                 CollidableObjects.Add(c);
             }
-                
+
         }
         /// <summary>
         /// Get a GameObject named name from the Objects dictionary
@@ -121,6 +122,40 @@ namespace Current
             }
 
             return tiles;
+        }
+
+        /// <summary>
+        /// Unique Update method for the GameManager. 
+        /// </summary>
+        public static void Update(GameTime gameTime)
+        {
+            if (InputManager.GetButtonDown("Cancel"))
+            {
+                switch (gameState)
+                {
+                    case GameState.Game:
+                        switch (gameplayState)
+                        {
+                            case GameplayState.Normal:
+                                gameplayState = GameplayState.Paused;
+                                break;
+                            case GameplayState.Paused:
+                                gameplayState = GameplayState.Normal;
+                                break;
+                            default:
+                                break;
+                        }
+                        break;
+                    case GameState.MainMenu:
+                        break;
+                    case GameState.GameOver:
+                        break;
+                    case GameState.None:
+                        break;
+                    default:
+                        break;
+                }
+            }
         }
         
     }

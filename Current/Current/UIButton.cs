@@ -18,6 +18,20 @@ namespace Current
         /// </summary>
         public UIText TextComponent { get; protected set; }
 
+        //TODO
+        //public override GameplayState ActiveGameplayState
+        //{
+        //    get
+        //    {
+
+        //    }
+        //    set
+        //    {
+
+        //    }
+        //}
+
+
 
         public UIButton(string name, string text, SpriteFont font, Texture2D background, Anchor anchor, SortingMode sortingMode, GameState activeState, Point offset, Color textColor, Color bgColor, int fixedWidth=0, int fixedHeight=0) : base(name, anchor, sortingMode, activeState, offset)
         {
@@ -61,7 +75,7 @@ namespace Current
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            if (!InTheRightState)
+            if (!Active)
                 return;
 
             //Only need to draw background, UIText does the text
