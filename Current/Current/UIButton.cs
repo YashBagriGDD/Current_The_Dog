@@ -18,20 +18,55 @@ namespace Current
         /// </summary>
         public UIText TextComponent { get; protected set; }
 
-        //TODO
-        //public override GameplayState ActiveGameplayState
-        //{
-        //    get
-        //    {
 
-        //    }
-        //    set
-        //    {
+        /// <summary>
+        /// Override the property to make gameplay state changes active in the text as well as the button
+        /// </summary>
+        private GameplayState activeGameplayState = GameplayState.Normal;
+        public override GameplayState ActiveGameplayState
+        {
+            get
+            {
+                return activeGameplayState;
+            }
+            set
+            {
+                activeGameplayState = value;
+                if (TextComponent != null)
+                    TextComponent.ActiveGameplayState = value;
+            }
+        }
 
-        //    }
-        //}
 
+        private GameState activeGameState = GameState.Game;
+        public override GameState ActiveState
+        {
+            get
+            {
+                return activeGameState;
+            }
+            set
+            {
+                activeGameState = value;
+                if (TextComponent != null)
+                    TextComponent.ActiveState = value;
+            }
+        }
 
+        private MainMenuState activeMainMenuState = MainMenuState.MainMenu;
+        public override MainMenuState ActiveMainMenuState
+        {
+            get
+            {
+                return activeMainMenuState;
+            }
+            set
+            {
+                activeMainMenuState = value;
+                if (TextComponent != null)
+                    TextComponent.ActiveMainMenuState = value;
+            }
+        }
 
         public UIButton(string name, string text, SpriteFont font, Texture2D background, Anchor anchor, SortingMode sortingMode, GameState activeState, Point offset, Color textColor, Color bgColor, int fixedWidth=0, int fixedHeight=0) : base(name, anchor, sortingMode, activeState, offset)
         {
@@ -71,6 +106,13 @@ namespace Current
             };
 
         }
+
+
+        public void AdjustLocation()
+        {
+            //TODO
+        }
+
 
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)

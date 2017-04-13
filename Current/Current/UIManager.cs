@@ -37,9 +37,34 @@ namespace Current
     static class UIManager
     {
         /// <summary>
+        /// Nested class that holds all data to send an instruction to calculate position
+        /// </summary>
+        private class UIInstruction
+        {
+            public UIObject uiObject;
+            public Anchor anchor;
+            public SortingMode sortingMode;
+            public Point offset;
+
+            public UIInstruction(UIObject ui, Anchor a, SortingMode s, Point o)
+            {
+                uiObject = ui;
+                anchor = a;
+                sortingMode = s;
+                offset = o;
+            }
+        }
+
+
+        /// <summary>
         /// This is only those that are NOT SortingMode.None
         /// </summary>
         static List<List<UIObject>> AnchoredObjects = new List<List<UIObject>>();
+
+        /// <summary>
+        /// A queue of instructions to send to the manager.
+        /// </summary>
+        static Queue<UIInstruction> Instructions = new Queue<UIInstruction>();
 
         //Shortcuts for screen width and height
         static int w = Game1.WindowWidth;
@@ -57,7 +82,7 @@ namespace Current
         }
 
         /// <summary>
-        /// Positions a UIObject relative to anchor and its sorting mode. 
+        /// Adds an instruction to the queue to be calucated later. Will NOT actually position a UIObject.
         /// </summary>
         /// <param name="obj">The UIObject to position</param>
         /// <param name="anchor">The anchor type</param>
@@ -65,15 +90,28 @@ namespace Current
         /// <param name="offset">Offset from calculated position</param>
         public static void AddAnchoredObject(UIObject obj, Anchor anchor, SortingMode sortingMode, Point offset)
         {
-            SetPosition(obj, anchor);
-            AdjustPositionBySortingMode(obj, (int)anchor, sortingMode);
-            //Add offset
-            obj.Location.X += offset.X;
-            obj.Location.Y += offset.Y;
-            //Add to list to keep track of anchored objects
-            if (sortingMode != SortingMode.None)
-                AnchoredObjects[(int)anchor].Add(obj);
+            Instructions.Enqueue(new UIInstruction(obj, anchor, sortingMode, offset));
+        }
 
+        /// <summary>
+        /// Calculate and set UI Object's positions.
+        /// This must be called for any ui centering to occur, and the Instructions queue should have been filled first with AddAnchoredObject
+        /// </summary>
+        public static void OrganizeObjects()
+        {
+            while (Instructions.Count > 0)
+            {
+                UIInstruction instr = Instructions.Dequeue();
+
+                SetPosition(instr.uiObject, instr.anchor);
+                AdjustPositionBySortingMode(instr.uiObject, (int)instr.anchor, instr.sortingMode);
+                //Add offset
+                instr.uiObject.Location.X += instr.offset.X;
+                instr.uiObject.Location.Y += instr.offset.Y;
+                //Add to list to keep track of anchored objects
+                if (instr.sortingMode != SortingMode.None)
+                    AnchoredObjects[(int)instr.anchor].Add(instr.uiObject);
+            }
         }
 
         /// <summary>
@@ -132,22 +170,22 @@ namespace Current
                     break;
                 case SortingMode.Left:
                     foreach (UIObject ui in AnchoredObjects[anchorIndex])
-                        if (ui.ActiveState == obj.ActiveState)
+                        if (ui.AreStatesEqual(obj))
                             obj.Location.X -= ui.Location.Width;
                     break;
                 case SortingMode.Right:
                     foreach (UIObject ui in AnchoredObjects[anchorIndex])
-                        if (ui.ActiveState == obj.ActiveState)
+                        if (ui.AreStatesEqual(obj))
                             obj.Location.X += ui.Location.Width;
                     break;
                 case SortingMode.Above:
                     foreach (UIObject ui in AnchoredObjects[anchorIndex])
-                        if (ui.ActiveState == obj.ActiveState)
+                        if (ui.AreStatesEqual(obj))
                             obj.Location.Y -= ui.Location.Height;
                     break;
                 case SortingMode.Below:
                     foreach (UIObject ui in AnchoredObjects[anchorIndex])
-                        if (ui.ActiveState == obj.ActiveState)
+                        if (ui.AreStatesEqual(obj))
                             obj.Location.Y += ui.Location.Height;
                     break;
                 default:

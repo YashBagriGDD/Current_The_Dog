@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Threading;
 
 namespace Current
 {
@@ -83,15 +84,15 @@ namespace Current
             List<SaveTile> tiles = GameManager.ParseLevel("Text/level.txt");
 
             float xRatio = (float)WindowWidth / ImportWidth;
-            float YRatio = (float)WindowHeight/ ImportHeight;
+            float YRatio = (float)WindowHeight / ImportHeight;
 
 
 
             //Load in the Background
-            Background b = new Background("bg1", texBG1, new Rectangle(0, 0, WindowWidth, WindowWidth));
+            Background b = new Background("bg1", texBG1, new Rectangle(0, 0, WindowWidth, WindowHeight));
 
             //Load in the level tiles
-            int numWater = 0, numPlatforms = 0; 
+            int numWater = 0, numPlatforms = 0;
             foreach (SaveTile tile in tiles)
             {
                 string type = GameManager.TextureMapping[tile.TextureName];
@@ -113,7 +114,7 @@ namespace Current
 
             //Setup more complicated objects
             Player player = new Player("Current", texCurSwim, new Rectangle(100, 0, 100, 100));
-            Animate playerSwim = new Animate(texCurSwim, 3, 3, Animate.ONESIXTIETHSECPERFRAME*10, player);
+            Animate playerSwim = new Animate(texCurSwim, 3, 3, Animate.ONESIXTIETHSECPERFRAME * 10, player);
             player.AddAnimation(playerSwim);
 
 
@@ -122,13 +123,14 @@ namespace Current
 
 
             //Create the Main Menu
-            Background bMainMenu = new Background("bgMainMenu", texBG1, new Rectangle(0, 0, WindowWidth, WindowWidth));
+            Background bMainMenu = new Background("bgMainMenu", texBG1, new Rectangle(0, 0, WindowWidth, WindowHeight));
             bMainMenu.ActiveState = GameState.MainMenu;
 
             //Main Menu Substate
             UIText title = new UIText("Title", "Current", titleFont, Anchor.UpperMiddle, SortingMode.None, GameState.MainMenu, Point.Zero, Color.White);
+
             UIButton play = new UIButton("PlayB", "Play", font, texBlock, Anchor.CenterMiddle, SortingMode.Below, GameState.MainMenu, Point.Zero, Color.White, buttonBackColor, bWidth, bHeight);
-            UIButton quit = new UIButton("QuitB", "Quit", font, texBlock, Anchor.CenterMiddle, SortingMode.Below, GameState.MainMenu, new Point(0,50), Color.White, buttonBackColor, bWidth, bHeight);
+            UIButton quit = new UIButton("QuitB", "Quit", font, texBlock, Anchor.CenterMiddle, SortingMode.Below, GameState.MainMenu, new Point(0, 50), Color.White, buttonBackColor, bWidth, bHeight);
 
             //Setup button delegates
             play.Click += () =>
@@ -142,7 +144,7 @@ namespace Current
             };
 
             //Setup HUD
-            HealthBar bar = new HealthBar("HealthBar", texHealth, new Point(100,66));
+            HealthBar bar = new HealthBar("HealthBar", texHealth, new Point(100, 66));
             Score score = new Score("Score", hudFont, Anchor.UpperRight, SortingMode.None, GameState.Game, Point.Zero, Color.White);
 
 
@@ -156,29 +158,19 @@ namespace Current
             //Setup the pause menu
             UIText pauseText = new UIText("pauseText", "PAUSED", font, Anchor.CenterMiddle, SortingMode.Below, GameState.Game, Point.Zero, Color.White);
             pauseText.ActiveGameplayState = GameplayState.Paused;
-            UIButton pauseResumeButton = new UIButton("pauseResumeButton", "Resume", font, texBlock, Anchor.CenterMiddle, SortingMode.Below, GameState.Game, new Point(0, 50), Color.White, buttonBackColor);
+            UIButton pauseResumeButton = new UIButton("pauseResumeButton", "Resume", font, texBlock, Anchor.CenterMiddle, SortingMode.Below, GameState.Game, new Point(0, 0), Color.White, buttonBackColor);
             pauseResumeButton.ActiveGameplayState = GameplayState.Paused;
 
 
 
-            /*Example UIText Objects.
-            UIText t = new UIText("demoFont", "Test", font, Anchor.UpperLeft, SortingMode.Below, GameState.Game, Point.Zero, Color.Red);
-            UIText t2 = new UIText("demoFont2", "Test", font, Anchor.UpperRight, SortingMode.Below, GameState.Game, Point.Zero, Color.White);
-            UIText t3 = new UIText("demoFont3", "Test", font, Anchor.UpperMiddle, SortingMode.Below, GameState.Game, Point.Zero, Color.Black);
+            ////Pause menu delegates
+            //pauseResumeButton.Click += () =>
+            //{
+            //    GameManager.gameplayState = GameplayState.Normal;
+            //};
 
-            //This is how you set up actions for UI Objects
-            t.HoverBegin += () =>
-            {
-                t.Text = "Dogs";
-            };*/
+            UIManager.OrganizeObjects();
 
-            /* UIButton button = new UIButton("button", "Menu", font, texBlock, Anchor.UpperLeft, SortingMode.Below, GameState.Game, Point.Zero, Color.White, Color.Black);
-
-             button.Click += () =>{
-                 GameManager.gameState = GameState.MainMenu;
-             };
-
-             UIText text = new UIText("menu", "There's nothing here right now...Check back later", font, Anchor.CenterMiddle, SortingMode.Below, GameState.MainMenu, Point.Zero, Color.White);*/
 
         }
 
@@ -198,12 +190,13 @@ namespace Current
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+
             //Update all the objects
             foreach (GameObject g in GameManager.GetAll().Values)
             {
                 g.Update(gameTime);
             }
-            //So does GameManager
+            //GameManager requires its own update
             GameManager.Update(gameTime);
 
 
@@ -222,6 +215,7 @@ namespace Current
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
+
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
 

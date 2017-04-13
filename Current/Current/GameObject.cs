@@ -116,6 +116,15 @@ namespace Current
             currentAnimation = texture.Name;
         }
 
+
+        /// <summary>
+        /// Is this object and the provided object equal in terms of states?
+        /// </summary>
+        public bool AreStatesEqual(GameObject other)
+        {
+            return (ActiveState == other.ActiveState && ActiveGameplayState == other.ActiveGameplayState && ActiveMainMenuState == other.ActiveMainMenuState);
+        }
+
         /// <summary>
         /// Decactivate this instance. This means no update, draw, or collision methods will ever be called.
         /// </summary>
