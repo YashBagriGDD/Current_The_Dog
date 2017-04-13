@@ -23,8 +23,12 @@ namespace Current
         public static Point MousePos {
             get
             {
-                mousePos.X = Mouse.GetState().X;
-                mousePos.Y = Mouse.GetState().Y;
+                float xMult = ((float)Game1.TargetWidth / Program.GAME.WindowSize.X);
+                float yMult = ((float)Game1.TargetWidth / Program.GAME.WindowSize.X);
+
+
+                mousePos.X = (int)(Mouse.GetState().X * xMult);
+                mousePos.Y = (int)(Mouse.GetState().Y * yMult);
                 return mousePos;
             }
         }
@@ -45,7 +49,8 @@ namespace Current
                 {"Up", new Keys[] {Keys.W, Keys.Up} },
                 {"Down", new Keys[] {Keys.S, Keys.Down} },
                 {"Jump", new Keys[] {Keys.Space} },
-                {"Cancel", new Keys[] {Keys.Escape, Keys.Back } }
+                {"Cancel", new Keys[] {Keys.Escape, Keys.Back } },
+                {"Fullscreen", new Keys[] {Keys.Enter} }
             };
 
 

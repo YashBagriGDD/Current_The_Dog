@@ -19,17 +19,40 @@ namespace Current
 
         SpriteFont font, titleFont, hudFont;
 
-        //Window sizes
-        public static int WindowWidth = 1280, WindowHeight = 720;
+        //Target Window resolution
+        public static int TargetWidth = 1280, TargetHeight = 720;
 
         //Sizes for level import
         private static int TileWidth = 100, TileHeight = 100;
         private static int ImportWidth = 800, ImportHeight = 480;
 
+
+
         //Debugging variables
         private double fps = 0;
 
+        
+        /// <summary>
+        /// Actual monitor size as a Point
+        /// </summary>
+        public Point MonitorSize
+        {
+            get
+            {
+                return new Point(GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width, GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height);
+            }
+        }
 
+        /// <summary>
+        /// Current window size as a point
+        /// </summary>
+        public Point WindowSize
+        {
+            get
+            {
+                return new Point(Window.ClientBounds.Width, Window.ClientBounds.Height);
+            }
+        }
 
         public Game1()
         {
@@ -37,11 +60,9 @@ namespace Current
             Content.RootDirectory = "Content";
 
             //Set window size
-            graphics.PreferredBackBufferWidth = WindowWidth;
-            graphics.PreferredBackBufferHeight = WindowHeight;
+            graphics.PreferredBackBufferWidth = TargetWidth;
+            graphics.PreferredBackBufferHeight = TargetHeight;
             graphics.ApplyChanges();
-            //Uncomment line below for fullscreen
-            //graphics.IsFullScreen = true;
         }
 
         /// <summary>
@@ -83,13 +104,13 @@ namespace Current
             //Parse the level file
             List<SaveTile> tiles = GameManager.ParseLevel("Text/level.txt");
 
-            float xRatio = (float)WindowWidth / ImportWidth;
-            float YRatio = (float)WindowHeight / ImportHeight;
+            float xRatio = (float)TargetWidth / ImportWidth;
+            float YRatio = (float)TargetHeight / ImportHeight;
 
 
 
             //Load in the Background
-            Background b = new Background("bg1", texBG1, new Rectangle(0, 0, WindowWidth, WindowHeight));
+            Background b = new Background("bg1", texBG1, new Rectangle(0, 0, TargetWidth, TargetHeight));
 
             //Load in the level tiles
             int numWater = 0, numPlatforms = 0;
@@ -123,7 +144,7 @@ namespace Current
 
 
             //Create the Main Menu
-            Background bMainMenu = new Background("bgMainMenu", texBG1, new Rectangle(0, 0, WindowWidth, WindowHeight));
+            Background bMainMenu = new Background("bgMainMenu", texBG1, new Rectangle(0, 0, TargetWidth, TargetHeight));
             bMainMenu.ActiveState = GameState.MainMenu;
 
             //Main Menu Substate
@@ -156,7 +177,7 @@ namespace Current
 
 
             //Setup the pause menu
-            UIText pauseText = new UIText("pauseText", "PAUSED", font, Anchor.CenterMiddle, SortingMode.Below, GameState.Game, Point.Zero, Color.White);
+            UIText pauseText = new UIText("pauseText", "PAUSED", font, Anchor.UpperMiddle, SortingMode.Below, GameState.Game, Point.Zero, Color.White);
             pauseText.ActiveGameplayState = GameplayState.Paused;
             UIButton pauseResumeButton = new UIButton("pauseResumeButton", "Resume", font, texBlock, Anchor.CenterMiddle, SortingMode.Below, GameState.Game, new Point(0, 0), Color.White, buttonBackColor);
             pauseResumeButton.ActiveGameplayState = GameplayState.Paused;
@@ -164,14 +185,23 @@ namespace Current
 
 
             ////Pause menu delegates
-            //pauseResumeButton.Click += () =>
-            //{
-            //    GameManager.gameplayState = GameplayState.Normal;
-            //};
+            pauseResumeButton.Click += () =>
+            {
+                GameManager.gameplayState = GameplayState.Normal;
+            };
 
             UIManager.OrganizeObjects();
 
 
+        }
+
+        /// <summary>
+        /// Toggles between fullscreen and windowed modes
+        /// </summary>
+        public void ToggleFullscreen()
+        {
+            graphics.IsFullScreen = !graphics.IsFullScreen;
+            graphics.ApplyChanges();
         }
 
         /// <summary>
@@ -228,6 +258,7 @@ namespace Current
             }
             //Uncomment line below to show FPS
             //spriteBatch.DrawString(font, fps.ToString(), new Vector2(0, 0), Color.White);
+            spriteBatch.DrawString(font, InputManager.MousePos.X.ToString(), new Vector2(0, 0), Color.White);
             spriteBatch.End();
 
 

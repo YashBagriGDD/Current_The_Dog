@@ -8,14 +8,21 @@ namespace Current
     /// </summary>
     public static class Program
     {
+
+        /// <summary>
+        /// The actual game object
+        /// </summary>
+        public static Game1 GAME; 
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
         static void Main()
         {
-            using (var game = new Game1())
-                game.Run();
+            GAME = new Game1();
+            using (GAME)
+                GAME.Run();
         }
     }
 #endif

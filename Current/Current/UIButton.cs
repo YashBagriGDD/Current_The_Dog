@@ -19,9 +19,7 @@ namespace Current
         public UIText TextComponent { get; protected set; }
 
 
-        /// <summary>
-        /// Override the property to make gameplay state changes active in the text as well as the button
-        /// </summary>
+        /// Override these properties to make state changes active in the text as well as the button
         private GameplayState activeGameplayState = GameplayState.Normal;
         public override GameplayState ActiveGameplayState
         {
@@ -36,7 +34,6 @@ namespace Current
                     TextComponent.ActiveGameplayState = value;
             }
         }
-
 
         private GameState activeGameState = GameState.Game;
         public override GameState ActiveState
@@ -76,7 +73,7 @@ namespace Current
 
             //Construct the UIText object
             TextComponent = new UIText("Text_" + name, text, font, anchor, sortingMode, activeState, offset, textColor);
-
+            TextComponent.Parent = this;
             //Calculate image size and location, based on the text, so long as optional width and heights aren't provided
             Point imgSize;
             if (fixedWidth == 0 || fixedHeight == 0)
@@ -107,10 +104,19 @@ namespace Current
 
         }
 
-
+        /// <summary>
+        /// Readjust the location--necessary because UIObjects aren't sorted until the end of LoadContent,
+        /// so the UIButton needs to be reset since UIManager doensn't directly set it's location - it gets 
+        /// it from it's text component.
+        /// </summary>
         public void AdjustLocation()
         {
-            //TODO
+            //Center the background
+            Point imgLoc = new Point(TextComponent.Location.X - (Location.Width - TextComponent.Location.Width) / 2,
+                TextComponent.Location.Y - (Location.Height - TextComponent.Location.Height) / 2);
+
+            //Set Location of the image -- The text is already set by the UIText Constructor
+            Location = new Rectangle(imgLoc.X, imgLoc.Y, Location.Width, Location.Height);
         }
 
 

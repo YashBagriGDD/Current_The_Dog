@@ -67,8 +67,8 @@ namespace Current
         static Queue<UIInstruction> Instructions = new Queue<UIInstruction>();
 
         //Shortcuts for screen width and height
-        static int w = Game1.WindowWidth;
-        static int h = Game1.WindowHeight;
+        static int w = Game1.TargetWidth;
+        static int h = Game1.TargetHeight;
 
         /// <summary>
         /// Setup static variables
@@ -111,6 +111,15 @@ namespace Current
                 //Add to list to keep track of anchored objects
                 if (instr.sortingMode != SortingMode.None)
                     AnchoredObjects[(int)instr.anchor].Add(instr.uiObject);
+
+                //Final adjustment for Buttons now that everything is updated
+                //since buttons aren't directly manipulated in this class
+                if (instr.uiObject is UIText)
+                {
+                    UIText t = (UIText)instr.uiObject;
+                    if (t.Parent != null)
+                        t.Parent.AdjustLocation();
+                }
             }
         }
 

@@ -156,6 +156,11 @@ namespace Current
                         break;
                 }
             }
+
+            if (InputManager.GetButtonDown("Fullscreen"))
+            {
+                Program.GAME.ToggleFullscreen();
+            }
         }
         
     }

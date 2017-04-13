@@ -15,6 +15,11 @@ namespace Current
     {
         public SpriteFont Font { get; set; }
         public string Text { get; set; }
+        
+        /// <summary>
+        /// Possible button parent component. Not mandatory
+        /// </summary>
+        public UIButton Parent { get; set; }
 
         //Construct a new UIText object
         public UIText(string name, string text, SpriteFont font, Anchor anchor, SortingMode sortingMode, GameState activeState, Point offset, Color color) 
