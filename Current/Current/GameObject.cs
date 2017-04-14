@@ -43,6 +43,15 @@ namespace Current
         public virtual GameplayState ActiveGameplayState { get; set; }
             = GameplayState.Normal;
 
+        /// <summary>
+        /// Initial location for this object.
+        /// </summary>
+        public Rectangle StartLocation { get; set; }
+
+
+        protected GameState initGameState;
+        protected GameplayState initGameplayState;
+        protected MainMenuState initMainmenuState;
 
         /// <summary>
         /// Used to determine if this is active, based on the GameState is the state to draw and update everything
@@ -96,7 +105,14 @@ namespace Current
             Name = name;
             Texture = null;
             GameManager.Add(Name, this);
+
+
+            //Save start values
             Location = location;
+            StartLocation = Location;
+            initGameplayState = ActiveGameplayState;
+            initGameState = ActiveState;
+            initMainmenuState = ActiveMainMenuState;
         }
         /// <summary>
         /// Initializes a GameObject
@@ -107,7 +123,15 @@ namespace Current
             Name = name;
             Texture = texture;
             GameManager.Add(Name, this);
+
+
+
+            //Save start values
             Location = location;
+            StartLocation = Location;
+            initGameplayState = ActiveGameplayState;
+            initGameState = ActiveState;
+            initMainmenuState = ActiveMainMenuState;
 
             //Setup Animation
             Animate defaultAnim = new Animate(Texture, 1, 1, Animate.ONESIXTIETHSECPERFRAME, this);
@@ -146,6 +170,15 @@ namespace Current
 
         }
 
+
+        /// <summary>
+        /// Resets this GameObject to its initial location.
+        /// Any derived objects can add more functionality if necessary
+        /// </summary>
+        public virtual void Reset()
+        {
+            Location = StartLocation;
+        }
 
         /// <summary>
         /// Change to a new animation and play it.

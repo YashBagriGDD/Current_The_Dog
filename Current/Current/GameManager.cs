@@ -60,7 +60,6 @@ namespace Current
         public static MainMenuState mainMenuState = MainMenuState.MainMenu;
         public static GameplayState gameplayState = GameplayState.Normal;
 
-
         //Dictionary of texture names to cooresponding class names
         public static readonly Dictionary<string, string> TextureMapping
             = new Dictionary<string, string>
@@ -122,6 +121,19 @@ namespace Current
             }
 
             return tiles;
+        }
+
+
+        /// <summary>
+        /// Reset all active GameObjects
+        /// </summary>
+        public static void ResetAll()
+        {
+            Score = 0;
+            foreach (GameObject g in Objects.Values)
+            {
+                g.Reset();
+            }
         }
 
         /// <summary>

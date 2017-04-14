@@ -40,6 +40,7 @@
   <ItemGroup>
     <Compile Include="Animate.cs" />
     <Compile Include="Background.cs" />
+    <Compile Include="Camera.cs" />
     <Compile Include="Catfish.cs" />
     <Compile Include="CheckPoint.cs" />
     <Compile Include="CollidableObject.cs" />
