@@ -12,7 +12,7 @@ namespace SaveGameTest
     {
         static void Main(string[] args)
         {
-            StufftoSave file = new StufftoSave(1, "");
+            
             SaveAndLoad data = new SaveAndLoad();
             
             
