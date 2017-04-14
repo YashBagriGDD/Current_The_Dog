@@ -57,6 +57,7 @@ namespace Current
         private Vector2 airAcceleration = new Vector2(0, 1);
 
 
+        private int startHealth = 3;
         
         /// <summary>
         /// Initialize player
@@ -74,7 +75,7 @@ namespace Current
 
             SpriteFX = SpriteEffects.FlipHorizontally;
 
-            Health = 3;
+            Health = startHealth;
 
             //For the sake of physics
             Acceleration = airAcceleration;
@@ -239,6 +240,13 @@ namespace Current
 
         }
 
+
+        public override void Reset()
+        {
+            Health = startHealth;
+            base.Reset();
+
+        }
 
         /// <summary>
         /// What do for collisions

@@ -16,15 +16,6 @@ namespace Current
 
         }
 
-        public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
-        {
-            base.Draw(gameTime, spriteBatch);
-        }
-
-        public override void Update(GameTime gameTime)
-        {
-            base.Update(gameTime);
-        }
 
         protected override void HandleCollisionEnter(object sender, EventArgs e)
         {

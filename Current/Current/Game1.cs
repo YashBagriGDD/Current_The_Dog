@@ -132,6 +132,7 @@ namespace Current
                 }
             }
 
+            
 
             //Setup more complicated objects
             Player player = new Player("Current", texCurSwim, new Rectangle(100, 0, 100, 100));
@@ -156,7 +157,7 @@ namespace Current
             //Setup button delegates
             play.Click += () =>
             {
-                GameManager.gameState = GameState.Game;
+                GameManager.gameState = GameState.Game;         
             };
 
             quit.Click += () =>
@@ -181,6 +182,8 @@ namespace Current
             pauseText.ActiveGameplayState = GameplayState.Paused;
             UIButton pauseResumeButton = new UIButton("pauseResumeButton", "Resume", font, texBlock, Anchor.CenterMiddle, SortingMode.Below, GameState.Game, new Point(0, 0), Color.White, buttonBackColor);
             pauseResumeButton.ActiveGameplayState = GameplayState.Paused;
+            UIButton pauseMainMenuButton = new UIButton("pauseMainMenuButton", "Main Menu", font, texBlock, Anchor.CenterMiddle, SortingMode.Below, GameState.Game, new Point(0, 50), Color.White, buttonBackColor);
+            pauseMainMenuButton.ActiveGameplayState = GameplayState.Paused;
 
 
 
@@ -188,6 +191,15 @@ namespace Current
             pauseResumeButton.Click += () =>
             {
                 GameManager.gameplayState = GameplayState.Normal;
+            };
+
+
+            pauseMainMenuButton.Click += () =>
+            {
+                GameManager.gameplayState = GameplayState.Normal;
+                GameManager.gameState = GameState.MainMenu;
+                GameManager.mainMenuState = MainMenuState.MainMenu;
+                GameManager.ResetAll();
             };
 
             UIManager.OrganizeObjects();
@@ -258,7 +270,14 @@ namespace Current
             }
             //Uncomment line below to show FPS
             //spriteBatch.DrawString(font, fps.ToString(), new Vector2(0, 0), Color.White);
-            spriteBatch.DrawString(font, InputManager.MousePos.X.ToString(), new Vector2(0, 0), Color.White);
+
+            /*Wanna see some states? Uncomment!
+            spriteBatch.DrawString(font, GameManager.gameState.ToString(), new Vector2(0, 0), Color.White);
+            spriteBatch.DrawString(font, GameManager.gameplayState.ToString(), new Vector2(0, 50), Color.White);
+            spriteBatch.DrawString(font, GameManager.mainMenuState.ToString(), new Vector2(0, 100), Color.White);*/
+
+
+
             spriteBatch.End();
 
 

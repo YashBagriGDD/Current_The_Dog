@@ -77,6 +77,11 @@ namespace Current
             base.Update(gameTime);
         }
 
+        public override void Reset()
+        {
+            
+        }
+
         /// <summary>
         /// Event handler for beginning of mouse hover
         /// </summary>

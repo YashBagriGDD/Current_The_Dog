@@ -19,5 +19,12 @@ namespace Current
         {
             Value = value;
         }
+
+
+        public override void Reset()
+        {
+            Activate();
+            base.Reset();
+        }
     }
 }
