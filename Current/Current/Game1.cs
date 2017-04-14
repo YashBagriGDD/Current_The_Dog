@@ -13,6 +13,7 @@ namespace Current
     /// </summary>
     public class Game1 : Game
     {
+        
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
@@ -76,6 +77,7 @@ namespace Current
             // TODO: Add your initialization logic here
             InputManager.Init();
 
+
             IsMouseVisible = true;
             base.Initialize();
         }
@@ -132,13 +134,12 @@ namespace Current
                 }
             }
 
-
+            
             //Setup more complicated objects
             Player player = new Player("Current", texCurSwim, new Rectangle(100, 0, 100, 100));
             Animate playerSwim = new Animate(texCurSwim, 3, 3, Animate.ONESIXTIETHSECPERFRAME * 10, player);
             player.AddAnimation(playerSwim);
-
-
+            
             Color buttonBackColor = new Color(50, 80, 130);
             int bWidth = 400, bHeight = 100;
 
@@ -248,6 +249,7 @@ namespace Current
 
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
+            
 
             spriteBatch.Begin();
 
