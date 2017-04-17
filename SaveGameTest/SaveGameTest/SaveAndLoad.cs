@@ -12,21 +12,19 @@ namespace SaveGameTest
     class SaveAndLoad
     {
         
-        JsonSerializer ser;
+        //JsonSerializer ser;
         StreamReader stRead;
         StreamWriter stWrite;
         StufftoSave stuff = new StufftoSave(10, "dog");
         public SaveAndLoad()
         {
-             
-            if (Directory.Exists("savedata.txt") == false)
-            {
-                File.Create("savedata.txt");
-                
-            }
+            
             //ser = new JsonSerializer();
            
         }
+
+
+
        /* 
         public void setdata()
         {
@@ -40,7 +38,7 @@ namespace SaveGameTest
         public void Save()
         {
             string data = "";
-            stWrite = new StreamWriter("savedata.txt");
+            stWrite = new StreamWriter("savedata");
             data = JsonConvert.SerializeObject(stuff);
             stWrite.WriteLine(data);
             stWrite.Close();
@@ -48,10 +46,13 @@ namespace SaveGameTest
         public void load()
         {
             string lData = "";
-            stRead = new StreamReader("savedata.txt");
+            stRead = new StreamReader("savedata");
             lData = stRead.ReadToEnd();
+            Console.WriteLine(lData);
             stuff = JsonConvert.DeserializeObject<StufftoSave>(lData);
             lData =  stuff.ToString();
+            
         }
+        
     }
 }

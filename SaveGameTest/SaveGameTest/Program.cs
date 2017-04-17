@@ -17,7 +17,7 @@ namespace SaveGameTest
             
             
 
-            data.Save();
+           
             data.load();
             
             
