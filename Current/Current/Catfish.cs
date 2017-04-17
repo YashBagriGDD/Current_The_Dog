@@ -13,11 +13,6 @@ namespace Current
         PlayerDetected
     }
 
-    enum Direction {
-        Left,
-        Right
-    }
-
     class Catfish : Enemy
     {
         public EnemyState state { get; set; }
@@ -57,17 +52,7 @@ namespace Current
                 case EnemyState.Roaming:
                     //Check to see if player is within range of detection
 
-                    //Set speed based on current direction
-                    switch (direction) {
-                        case Direction.Left:
-                            Speed = (float)(-.25 * MAX_SPEED);
-                    break;
-                        case Direction.Right:
-                            Speed = (float)(.25 * MAX_SPEED);
-                            break;
-                        default:
-                            break;
-                    }
+                    
 
                     //Call wander method to move enemy
                     Wander(gameTime);
@@ -75,17 +60,6 @@ namespace Current
                 case EnemyState.PlayerDetected:
                     //Check to see if player is still in range of detection
 
-                    //Set speed based on current direction
-                    switch (direction) {
-                        case Direction.Left:
-                            Speed = (float)(-1 * MAX_SPEED);
-                            break;
-                        case Direction.Right:
-                            Speed = (float)(MAX_SPEED);
-                            break;
-                        default:
-                            break;
-                    }
 
                     //Move Catfish
 
@@ -113,6 +87,7 @@ namespace Current
             if (TotalElapsedSeconds >= MoveChangeTime) {
                 TotalElapsedSeconds -= MoveChangeTime;
                 ChangeDirection();
+                SetSpeed();
             }
 
             this.Location.X += (int)Speed;
@@ -121,13 +96,50 @@ namespace Current
         public void ChangeDirection() {
             switch (direction) {
                 case Direction.Left:
+                    //Change  direction
                     direction = Direction.Right;
                     break;
                 case Direction.Right:
+                    //Change Direction
                     direction = Direction.Left;
                     break;
                 default:
                     break;
+            }
+        }
+
+        public void SetSpeed() {
+            switch (direction) {
+                case Direction.Left:
+                    //sets speed for new direction depending on state
+                    if (state == EnemyState.Roaming) {
+                        Speed = (float)(.25 * MAX_SPEED);
+                    }
+                    else {
+                        Speed = MAX_SPEED;
+                    }
+                    break;
+                case Direction.Right:
+                    //sets speed for new direction depending on state
+                    if (state == EnemyState.Roaming) {
+                        Speed = (float)(-.25 * MAX_SPEED);
+                    }
+                    else {
+                        Speed = -1 * MAX_SPEED;
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        public void ChasePlayer() {
+            GameObject player = GameManager.Get("Current");
+
+            //Check to see if player is within range
+            //This checks to see if player is within a 200x200 square around the enemy
+            if (Math.Abs(player.Location.X - this.Location.X) <= MAX_DETECTION || Math.Abs(player.Location.Y - this.Location.Y) <= MAX_DETECTION) {
+
             }
         }
     }
