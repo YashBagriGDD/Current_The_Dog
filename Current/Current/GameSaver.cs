@@ -36,7 +36,7 @@ namespace Current
                 */
             }
             string sData = null;
-            saver = new StreamWriter("savedata");
+            saver = new StreamWriter("savedata.txt");
             
             sData = JsonConvert.SerializeObject(data);
             saver.WriteLine(sData);

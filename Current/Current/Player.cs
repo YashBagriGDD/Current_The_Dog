@@ -18,15 +18,8 @@ namespace Current
 
     enum Direction
     {
-        Idle=0,
-        Right=1,
-        Left=2,
-        Up=4,
-        UpRight=5,
-        UpLeft=6,
-        Down=8,
-        DownRight = 9,
-        DownLeft = 10
+        Left,
+        Right
     }
 
 
@@ -71,7 +64,7 @@ namespace Current
             MoveSpeed = 8;
             //Assume in air to begin with
             state = PlayerState.InAir;
-            direction = Direction.Idle;
+            direction = Direction.Right;
 
             SpriteFX = SpriteEffects.FlipHorizontally;
 
@@ -107,11 +100,13 @@ namespace Current
             {
                 case PlayerState.OnLand:
                     Move(MoveSpeed);
+                    CheckForWaterWhenNotSwimming();
                     break;
                 case PlayerState.InAir:
                     //Move at reduced speed
                     Move(3*MoveSpeed/4);
                     Jump();
+                    CheckForWaterWhenNotSwimming();
                     break;
                 case PlayerState.InWater:
                     Swim(MoveSpeed);
@@ -193,12 +188,10 @@ namespace Current
             if (InputManager.GetButtonDown("Up"))
             {
                 Velocity = new Vector2(0, -speed);
-                direction = Direction.Up;
             }
             if (InputManager.GetButtonDown("Down"))
             {
                 Velocity = new Vector2(0, speed);
-                direction = Direction.Down;
             }
 
             //Check for collisions and stop appropriate component of velocity while swimming
@@ -215,12 +208,12 @@ namespace Current
             //Exit swimming state when not colliding with any water objects
             //Done here rather than in HandleCollision events because there 
             //will be a lot of water tiles near each other.
-            if ((CollBelow.CollidingWith<Platform>() && !CollAbove.CollidingWith<Water>()) 
-                || !Coll.CollidingWith<Water>())
+            if (CollBelow.CollidingWith<Platform>() || !Coll.CollidingWith<Water>())
             {
                 state = PlayerState.InAir;
                 Acceleration = airAcceleration;
-                Velocity = .5f * jumpVelocity;
+                if (Velocity.Y < 0)
+                    Velocity = .5f * jumpVelocity;
             }
         }
 
@@ -228,10 +221,9 @@ namespace Current
         /// Check for a collision with water when we're not swimming
         /// </summary>
         /// <param name="other">Collider to check with</param>
-        private void CheckForWaterWhenNotSwimming(Collider other)
+        private void CheckForWaterWhenNotSwimming()
         {
-            if (other.Host is Water &&
-                (!CollBelow.CollidingWith<Platform>() || CollAbove.CollidingWith<Water>()))
+            if (!CollBelow.CollidingWith<Platform>() && Coll.CollidingWith<Water>() )
             {
                 state = PlayerState.InWater;
                 Velocity = Vector2.Normalize(Velocity) * MoveSpeed;
@@ -269,7 +261,7 @@ namespace Current
             switch (state)
             {
                 case PlayerState.OnLand:
-                    CheckForWaterWhenNotSwimming(other);
+                   // CheckForWaterWhenNotSwimming(other);
                     break;
                 case PlayerState.InAir:
 
@@ -292,9 +284,10 @@ namespace Current
                         }
                         
                     }
-                    CheckForWaterWhenNotSwimming(other);
+                    //CheckForWaterWhenNotSwimming(other);
                     break;
                 case PlayerState.InWater:
+
                     break;
                 case PlayerState.IsDead:
                     break;
@@ -321,7 +314,7 @@ namespace Current
                     //If you walk off a platform, you should fall if you're no longer colliding below with anything
                     if (other.Host is Platform)
                     {
-                        if (!CollBelow.CollidingWith<Platform>())
+                        if (!CollBelow.CollidingWith<Platform>() && !CollBelow.CollidingWith<Water>())
                         {
                             Acceleration = airAcceleration;
                             state = PlayerState.InAir;

@@ -102,7 +102,7 @@ namespace Current
             hudFont = Content.Load<SpriteFont>("Fonts/HudFont");
 
             //Parse the level file
-            List<SaveTile> tiles = GameManager.ParseLevel("Text/level.txt");
+            List<SaveTile> tiles = GameManager.ParseLevel("Text/level2demo.txt");
 
             float xRatio = (float)TargetWidth / ImportWidth;
             float YRatio = (float)TargetHeight / ImportHeight;
@@ -275,6 +275,9 @@ namespace Current
             spriteBatch.DrawString(font, GameManager.gameState.ToString(), new Vector2(0, 0), Color.White);
             spriteBatch.DrawString(font, GameManager.gameplayState.ToString(), new Vector2(0, 50), Color.White);
             spriteBatch.DrawString(font, GameManager.mainMenuState.ToString(), new Vector2(0, 100), Color.White);*/
+
+            Player p = (Player)(GameManager.Get("Current"));
+            spriteBatch.DrawString(font, p.state.ToString(), new Vector2(0,50), Color.White);
 
 
 

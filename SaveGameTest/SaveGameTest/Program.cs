@@ -14,8 +14,8 @@ namespace SaveGameTest
         {
             
             SaveAndLoad data = new SaveAndLoad();
-            
-            
+
+            data.Save();
 
            
             data.load();

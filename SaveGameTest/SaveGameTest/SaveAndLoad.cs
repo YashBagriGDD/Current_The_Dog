@@ -38,15 +38,18 @@ namespace SaveGameTest
         public void Save()
         {
             string data = "";
-            stWrite = new StreamWriter("savedata");
+            stWrite = new StreamWriter("savedata.txt");
             data = JsonConvert.SerializeObject(stuff);
             stWrite.WriteLine(data);
             stWrite.Close();
         }
         public void load()
         {
+            if (!File.Exists("savedata.txt"))
+                return;
+
             string lData = "";
-            stRead = new StreamReader("savedata");
+            stRead = new StreamReader("savedata.txt");
             lData = stRead.ReadToEnd();
             Console.WriteLine(lData);
             stuff = JsonConvert.DeserializeObject<StufftoSave>(lData);
