@@ -8,40 +8,59 @@ using System.Threading.Tasks;
 
 namespace Current
 {
-    class Camera
+    /// <summary>
+    /// Camera class.
+    /// Some inspiration taken from https://roguesharp.wordpress.com/2014/07/13/tutorial-5-creating-a-2d-camera-with-pan-and-zoom-in-monogame/
+    /// </summary>
+    class Camera : GameObject
     {
-        ///*
-        public Matrix Transform
+        /// <summary>
+        /// Matrix used to offset everything we draw
+        /// </summary>
+        public Matrix TransformMatrix
         {
-            get; set;
+            get
+            {
+                //Matrix multiplication is commutative, so from bottom to top:
+                //We center the camera based on the screen, and then offset by -camera location
+                //in order to simulate camera movement.
+                return Matrix.CreateTranslation(-Location.X, -Location.Y, 0) *
+                    Matrix.CreateTranslation(Game1.TargetWidth/2, Game1.TargetHeight/2, 0);
+            }
         }
 
 
-        Viewport view;
-
-        Vector2 centerview;
+        /// <summary>
+        /// Who should the camera look at?
+        /// </summary>
+        public GameObject Target { get; set; }
         
         /// <summary>
-        /// 
+        /// Create a new Camera
         /// </summary>
-        /// <param name="newView"> The new viewing position of the camera</param>
-        /// <param name="viewportWidth"> The width of the game screen</param>
-        /// <param name="viewportHeight"> The height of the game screen</param>
-        /// <param name="playerWidth"> The width of the drawn player</param>
-        /// <param name="playerHeight"> The height of the drawn player</param>
-        public Camera(/*Viewport newView,*/ int viewportWidth, int viewportHeight, int playerWidth, int playerHeight)
+        /// <param name="name">Name of the camera</param>
+        /// <param name="location">Location of the camera - typically set to empty rectangle</param>
+        /// <param name="target">GameObject to look at</param>
+        public Camera(string name, Rectangle location, GameObject target) : base(name, location )
         {
-            // view = newView;
-            // new vector2.X = half the total of the viewport's X value minus half of the player's X value
-            // new Vector2.Y = half the total of the viewport's Y value minus half of the player's Y value
-            centerview = new Vector2((viewportWidth - (playerWidth / 2)) / 2, (viewportHeight - (playerHeight / 2))/ 2);
+            Target = target;
         }
 
-        public void Update()
+        /// <summary>
+        /// Set location to that of the target
+        /// </summary>
+        public override void Update(GameTime gameTime)
         {
-            Transform = Matrix.Identity * Matrix.CreateTranslation(centerview.X, centerview.Y, 0);
+            Location = Target.Location;
         }
-        //*/
-        
+
+        /// <summary>
+        /// Don't draw anything
+        /// </summary>
+        public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+        {
+            
+        }
+
     }
 }

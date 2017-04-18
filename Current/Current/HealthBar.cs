@@ -12,7 +12,7 @@ namespace Current
     /// <summary>
     /// Represents the health bar
     /// </summary>
-    class HealthBar : GameObject
+    class HealthBar : UIObject
     {
         
         //The base UIImage to draw
@@ -22,7 +22,7 @@ namespace Current
 
 
         //Constructor taking health texture.
-        public HealthBar(string name, Texture2D Texture, Point size) : base(name, Rectangle.Empty)
+        public HealthBar(string name, Texture2D Texture, Point size) : base(name, Anchor.UpperLeft, SortingMode.None, GameState.Game, Point.Zero)
         {
             baseImage = new UIImage("HealthPiece", Texture, size, Anchor.UpperLeft, SortingMode.Right, GameState.None, Point.Zero, Color.White);
 

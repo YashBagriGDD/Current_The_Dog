@@ -11,16 +11,22 @@ namespace Current
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
-    public class Game1 : Game
+    class Game1 : Game
     {
         GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
+        SpriteBatch spriteBatchGameplay;
+        SpriteBatch spriteBatchUI;
 
 
         SpriteFont font, titleFont, hudFont;
 
         //Target Window resolution
         public static int TargetWidth = 1280, TargetHeight = 720;
+
+        /// <summary>
+        /// The main camera
+        /// </summary>
+        public Camera MainCamera;
 
         //Sizes for level import
         private static int TileWidth = 100, TileHeight = 100;
@@ -58,7 +64,7 @@ namespace Current
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-
+            
             //Set window size
             graphics.PreferredBackBufferWidth = TargetWidth;
             graphics.PreferredBackBufferHeight = TargetHeight;
@@ -88,7 +94,8 @@ namespace Current
         protected override void LoadContent()
         {
             // Create a new SpriteBatch, which can be used to draw textures.
-            spriteBatch = new SpriteBatch(GraphicsDevice);
+            spriteBatchGameplay = new SpriteBatch(GraphicsDevice);
+            spriteBatchUI = new SpriteBatch(GraphicsDevice);
 
             //Load textures
             Texture2D texCurSwim = Content.Load<Texture2D>("Textures/Current/CurrentSwim");
@@ -110,7 +117,7 @@ namespace Current
 
 
             //Load in the Background
-            Background b = new Background("bg1", texBG1, new Rectangle(0, 0, TargetWidth, TargetHeight));
+            Background b = new Background("bg1", texBG1, new Rectangle(0, 0, TargetWidth, TargetHeight), GameState.Game);
 
             //Load in the level tiles
             int numWater = 0, numPlatforms = 0;
@@ -134,10 +141,13 @@ namespace Current
 
             
 
-            //Setup more complicated objects
+            //Create the player
             Player player = new Player("Current", texCurSwim, new Rectangle(100, 0, 100, 100));
             Animate playerSwim = new Animate(texCurSwim, 3, 3, Animate.ONESIXTIETHSECPERFRAME * 10, player);
             player.AddAnimation(playerSwim);
+
+            //Create the Camera
+            MainCamera = new Camera("MainCamera", new Rectangle(0, 0, 0, 0), player);
 
 
             Color buttonBackColor = new Color(50, 80, 130);
@@ -145,8 +155,7 @@ namespace Current
 
 
             //Create the Main Menu
-            Background bMainMenu = new Background("bgMainMenu", texBG1, new Rectangle(0, 0, TargetWidth, TargetHeight));
-            bMainMenu.ActiveState = GameState.MainMenu;
+            Background bMainMenu = new Background("bgMainMenu", texBG1, new Rectangle(0, 0, TargetWidth, TargetHeight), GameState.MainMenu);
 
             //Main Menu Substate
             UIText title = new UIText("Title", "Current", titleFont, Anchor.UpperMiddle, SortingMode.None, GameState.MainMenu, Point.Zero, Color.White);
@@ -260,14 +269,25 @@ namespace Current
 
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
+            spriteBatchUI.Begin();
+                //Draw all the UI objects normally
+                foreach (UIObject ui in GameManager.UIObjects)
+                {
+                    ui.Draw(gameTime, spriteBatchUI);
+                }
+            spriteBatchUI.End();
 
-            spriteBatch.Begin();
 
-            //Draw all the objects
-            foreach (GameObject g in GameManager.GetAll().Values)
-            {
-                g.Draw(gameTime, spriteBatch);
-            }
+            spriteBatchGameplay.Begin(transformMatrix: MainCamera.TransformMatrix);
+                //Draw all the gameobjects using the translation matrix
+                foreach (GameObject g in GameManager.NonUIObjects)
+                {
+                    g.Draw(gameTime, spriteBatchGameplay);
+                }
+            spriteBatchGameplay.End();
+
+
+
             //Uncomment line below to show FPS
             //spriteBatch.DrawString(font, fps.ToString(), new Vector2(0, 0), Color.White);
 
@@ -276,12 +296,10 @@ namespace Current
             spriteBatch.DrawString(font, GameManager.gameplayState.ToString(), new Vector2(0, 50), Color.White);
             spriteBatch.DrawString(font, GameManager.mainMenuState.ToString(), new Vector2(0, 100), Color.White);*/
 
-            Player p = (Player)(GameManager.Get("Current"));
-            spriteBatch.DrawString(font, p.state.ToString(), new Vector2(0,50), Color.White);
+            //Player p = (Player)(GameManager.Get("Current"));
+            //spriteBatchGameplay.DrawString(font, p.state.ToString(), new Vector2(0,50), Color.White);
 
 
-
-            spriteBatch.End();
 
 
             base.Draw(gameTime);

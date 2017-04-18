@@ -11,11 +11,12 @@ namespace Current
     /// <summary>
     /// 
     /// </summary>
-    class Background : GameObject
+    class Background : UIObject
     {
-        public Background(string name, Texture2D tex, Rectangle location) : base(name, tex, location)
+        public Background(string name, Texture2D tex, Rectangle loc, GameState state) : base(name, Anchor.UpperLeft, SortingMode.None, state, Point.Zero)
         {
-
+            Location = loc;
+            Texture = tex;
         } 
     }
 }

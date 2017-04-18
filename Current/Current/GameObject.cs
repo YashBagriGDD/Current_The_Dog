@@ -53,6 +53,7 @@ namespace Current
         protected GameplayState initGameplayState;
         protected MainMenuState initMainmenuState;
 
+
         /// <summary>
         /// Used to determine if this is active, based on the GameState is the state to draw and update everything
         /// </summary>

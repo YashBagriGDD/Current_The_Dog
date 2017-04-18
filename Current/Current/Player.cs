@@ -232,9 +232,6 @@ namespace Current
 
         }
 
-        //private void SetVelocity
-
-
         public override void Reset()
         {
             Health = startHealth;

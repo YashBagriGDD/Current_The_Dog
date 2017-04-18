@@ -42,13 +42,21 @@ namespace Current
     /// </summary>
     static class GameManager
     {
-        //This should hold ALL GameObjects in the game. 
+        //This should hold all GameObjects in the game. 
         private static Dictionary<string, GameObject> Objects { get; }
             = new Dictionary<string, GameObject>();
 
-        //This should hold ALL CollidableObjects in the game
+        //This should hold all CollidableObjects in the game
         public static List<CollidableObject> CollidableObjects { get; }
             = new List<CollidableObject>();
+
+        //This should hold all UI objects
+        public static List<UIObject> UIObjects { get; }
+            = new List<UIObject>();
+        //This should hold all Non-UI objects
+        public static List<GameObject> NonUIObjects { get; }
+            = new List<GameObject>();
+
         //The current score of the game
         public static int Score { get; set; }
             = 0;
@@ -85,6 +93,15 @@ namespace Current
             {
                 CollidableObject c = (CollidableObject)g;
                 CollidableObjects.Add(c);
+            }
+            if (g is UIObject)
+            {
+                UIObject ui = (UIObject)g;
+                UIObjects.Add(ui);
+            }
+            else
+            {
+                NonUIObjects.Add(g);
             }
 
         }

@@ -6,7 +6,7 @@ namespace Current
     /// <summary>
     /// The main class.
     /// </summary>
-    public static class Program
+    static class Program
     {
 
         /// <summary>
