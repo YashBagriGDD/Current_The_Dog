@@ -44,9 +44,17 @@ namespace Current
             = GameplayState.Normal;
 
         /// <summary>
-        /// Initial location for this object.
+        /// Spawn Location for this object
+        /// You can change this, and have the object move to this location on reset
         /// </summary>
-        public Rectangle StartLocation { get; set; }
+        public Rectangle SpawnLocation { get; set; }
+
+
+        /// <summary>
+        /// The actual location that this object was loaded that.
+        /// This cannot be changed.
+        /// </summary>
+        public Rectangle LoadLocation { get; private set; }
 
 
         protected GameState initGameState;
@@ -110,7 +118,8 @@ namespace Current
 
             //Save start values
             Location = location;
-            StartLocation = Location;
+            LoadLocation = Location;
+            SpawnLocation = Location;
             initGameplayState = ActiveGameplayState;
             initGameState = ActiveState;
             initMainmenuState = ActiveMainMenuState;
@@ -129,7 +138,8 @@ namespace Current
 
             //Save start values
             Location = location;
-            StartLocation = Location;
+            SpawnLocation = Location;
+            LoadLocation = location;
             initGameplayState = ActiveGameplayState;
             initGameState = ActiveState;
             initMainmenuState = ActiveMainMenuState;
@@ -173,12 +183,20 @@ namespace Current
 
 
         /// <summary>
-        /// Resets this GameObject to its initial location.
-        /// Any derived objects can add more functionality if necessary
+        /// Resets this GameObject to its initial location, and resets states to default.
         /// </summary>
         public virtual void Reset()
         {
-            Location = StartLocation;
+            Location = LoadLocation;
+            SpawnLocation = LoadLocation;
+        }
+
+        /// <summary>
+        /// Respawns this gameobject at SpawnLocation, and resets states to default.
+        /// </summary>
+        public virtual void Respawn()
+        {
+            Location = SpawnLocation;
         }
 
         /// <summary>
