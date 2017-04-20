@@ -10,10 +10,13 @@ namespace Current
 {
     class CheckPoint : CollidableObject
     {
+
+
         /// <summary>
-        /// unique ID for this checkpoint. Read-only
+        /// Has the checkpoint been passed by the player?
         /// </summary>
-        public int ID { get; }
+        public bool Passed { get; set; }
+
 
         /// <summary>
         /// Makes a checkpoint AND generates a unique ID
@@ -21,27 +24,31 @@ namespace Current
         /// <param name="tex"></param>
         public CheckPoint(string name, Texture2D tex, Rectangle location) : base(name, tex, location)
         {
-
-        }
-
-        public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
-        {
-            throw new NotImplementedException();
+            Passed = false;
         }
 
         public override void Update(GameTime gameTime)
         {
-            throw new NotImplementedException();
+            base.Update(gameTime);   
         }
 
         protected override void HandleCollisionEnter(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            Collider other = (Collider)sender;
+            //Only call this if we haven't been passed yet
+            if (other.Host is Player && !Passed)
+            {
+                Player player = (Player)(other.Host);
+                //Update player's start location
+                player.SpawnLocation = new Rectangle(Location.X, Location.Y, player.Location.Width, player.Location.Height);
+                //Don't let this checkpoint be triggered again
+                Passed = true;
+
+            }
         }
 
         protected override void HandleCollisionExit(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
         }
     }
 }

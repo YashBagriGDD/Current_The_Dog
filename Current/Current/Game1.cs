@@ -185,6 +185,10 @@ namespace Current
             HealthPickup healthPickup = new HealthPickup("HealthPickup1", texBlock, new Rectangle(200, 100, 100, 100), 1);
             healthPickup.DrawColor = Color.Red;
 
+            //Add a checkpoint
+            CheckPoint checkPoint = new CheckPoint("Checkpoint", texBlock, new Rectangle(700, 200, 50, 100));
+
+
 
             //Setup the pause menu
             UIText pauseText = new UIText("pauseText", "PAUSED", font, Anchor.UpperMiddle, SortingMode.Below, GameState.Game, Point.Zero, Color.White);
@@ -277,7 +281,6 @@ namespace Current
                 }
             spriteBatchUI.End();
 
-
             spriteBatchGameplay.Begin(transformMatrix: MainCamera.TransformMatrix);
                 //Draw all the gameobjects using the translation matrix
                 foreach (GameObject g in GameManager.NonUIObjects)
@@ -285,23 +288,6 @@ namespace Current
                     g.Draw(gameTime, spriteBatchGameplay);
                 }
             spriteBatchGameplay.End();
-
-
-
-            //Uncomment line below to show FPS
-            //spriteBatch.DrawString(font, fps.ToString(), new Vector2(0, 0), Color.White);
-
-            /*Wanna see some states? Uncomment!
-            spriteBatch.DrawString(font, GameManager.gameState.ToString(), new Vector2(0, 0), Color.White);
-            spriteBatch.DrawString(font, GameManager.gameplayState.ToString(), new Vector2(0, 50), Color.White);
-            spriteBatch.DrawString(font, GameManager.mainMenuState.ToString(), new Vector2(0, 100), Color.White);*/
-
-            //Player p = (Player)(GameManager.Get("Current"));
-            //spriteBatchGameplay.DrawString(font, p.state.ToString(), new Vector2(0,50), Color.White);
-
-
-
-
             base.Draw(gameTime);
         }
     }

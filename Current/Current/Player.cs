@@ -105,7 +105,6 @@ namespace Current
                 case PlayerState.InAir:
                     //Move at reduced speed
                     Move(3*MoveSpeed/4);
-                    Jump();
                     CheckForWaterWhenNotSwimming();
                     break;
                 case PlayerState.InWater:
@@ -116,21 +115,34 @@ namespace Current
                 default:
                     break;
             }
+            if (state != PlayerState.IsDead)
+                CheckIfDead();
             base.Update(gameTime);
         }
 
-
-        public void Die()
+        /// <summary>
+        /// Determines if player is dead
+        /// </summary>
+        public void CheckIfDead()
         {
+            //Nic - do this. 
+
+            //Check if health <= 0
+
+            //Check if go out of bounds
+            //Use GameManager.GetMaxLevelLocation(); GameManager.GetMinLevelLocation();
+
+            //if any of those happen
+                //Set player's state to IsDead
+                //Wait 3 seconds
+                //Respawn player
+
         }
+ 
         public void Hurt()
         {
         }
 
-        public void Jump()
-        {
-   
-        }
         /// <summary>
         /// Manage movement for a variable speed
         /// Jump also activated here, but only on Land
@@ -208,7 +220,7 @@ namespace Current
             //Exit swimming state when not colliding with any water objects
             //Done here rather than in HandleCollision events because there 
             //will be a lot of water tiles near each other.
-            if (!Coll.CollidingWith<Water>())
+            if (!Coll.CollidingWith<Water>() && !CollBelow.CollidingWith<Platform>())
             {
                 state = PlayerState.InAir;
                 Acceleration = airAcceleration;
@@ -232,12 +244,25 @@ namespace Current
 
         }
 
+        /// <summary>
+        /// Set the health to the initial health, and move to start load location
+        /// </summary>
         public override void Reset()
         {
+            state = PlayerState.InAir;
             Health = startHealth;
             base.Reset();
-
         }
+        /// <summary>
+        /// Set health to initial health, and move to location of last checkpoint.
+        /// </summary>
+        public override void Respawn()
+        {
+            state = PlayerState.InAir;
+            Health = startHealth;
+            base.Respawn();
+        }
+
 
         /// <summary>
         /// What do for collisions

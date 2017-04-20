@@ -63,6 +63,8 @@ namespace Current
         //Time of the game. (Not gameTime, just for like score and stuff)
         public static float Time { get; set; }
 
+        public static int CurrentLevel { get; set; } = 0;
+
         //Various states for the game
         public static GameState gameState = GameState.MainMenu;
         public static MainMenuState mainMenuState = MainMenuState.MainMenu;
@@ -151,6 +153,22 @@ namespace Current
             {
                 g.Reset();
             }
+        }
+
+        /// <summary>
+        /// Get the minimum location of the level
+        /// </summary>
+        public static Point GetMinLevelLocation()
+        {
+            return Point.Zero;
+        }
+
+        /// <summary>
+        /// Get the maximum location of the level
+        /// </summary>
+        public static Point GetMaxLevelLocation()
+        {
+            return Point.Zero;
         }
 
         /// <summary>
