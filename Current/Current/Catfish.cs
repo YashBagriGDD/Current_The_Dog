@@ -10,7 +10,8 @@ namespace Current
 {
     enum EnemyState {
         Roaming,
-        PlayerDetected
+        PlayerDetected,
+        Returning
     }
 
     class Catfish : Enemy
@@ -51,17 +52,27 @@ namespace Current
             switch (state) {
                 case EnemyState.Roaming:
                     //Check to see if player is within range of detection
+                    GameObject player = GameManager.Get("Current");
 
-                    
+                    //store the distance between
+                    int distX = player.Location.X - this.Location.X;
+                    int distY = player.Location.Y - this.Location.Y;
+
+                    if (Math.Abs(distX) <= MAX_DETECTION || Math.Abs(distY) <= MAX_DETECTION) {
+                        state = EnemyState.PlayerDetected;
+                    }
 
                     //Call wander method to move enemy
                     Wander(gameTime);
                     break;
                 case EnemyState.PlayerDetected:
-                    //Check to see if player is still in range of detection
+                    //Call Chase player method
+                    ChasePlayer();
 
-
-                    //Move Catfish
+                    //Once method is broken, go to return enum
+                    state = EnemyState.Returning;
+                    break;
+                case EnemyState.Returning:
 
                     break;
                 default:
@@ -136,10 +147,35 @@ namespace Current
         public void ChasePlayer() {
             GameObject player = GameManager.Get("Current");
 
+            //store the distance between
+            int distX = player.Location.X - this.Location.X;
+            int distY = player.Location.Y - this.Location.Y;
+
             //Check to see if player is within range
             //This checks to see if player is within a 200x200 square around the enemy
-            if (Math.Abs(player.Location.X - this.Location.X) <= MAX_DETECTION || Math.Abs(player.Location.Y - this.Location.Y) <= MAX_DETECTION) {
+            while (Math.Abs(distX) <= MAX_DETECTION || Math.Abs(distY) <= MAX_DETECTION) {
+                //Check if to the left or right of the player, set speed to player direction and move
+                if (distX < 0) {
+                    direction = Direction.Left;
+                    SetSpeed();
+                }
+                if (distX > 0) {
+                    direction = Direction.Right;
+                    SetSpeed();
+                }
+                Location.X += (int)Speed;
 
+                //Check if below or above player, then move it in player direction
+                if (distY < 0) {
+                    Location.Y -= (int)Math.Abs(Speed) * -1;
+                }
+                if (distY > 0) {
+                    Location.Y -= (int)Math.Abs(Speed);
+                }
+
+                //Update distance between this and player
+                distX = player.Location.X - this.Location.X;
+                distY = player.Location.Y - this.Location.Y;
             }
         }
     }
