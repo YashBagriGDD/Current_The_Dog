@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Threading;
 
 namespace Current
 {
@@ -125,17 +126,37 @@ namespace Current
         /// </summary>
         public void CheckIfDead()
         {
-            //Nic - do this. 
+            //Nic - do this please
 
-            //Check if health <= 0
+            //Check if health <= 0 then set player too ISDEAD
+            //Wait 3 sec then respond
+           
+            if (Health <= 0)
+            {
+                state = PlayerState.IsDead;
+                Thread.Sleep(3000);// what is the wait command wait 3 seacond
+                this.Respawn();
 
-            //Check if go out of bounds
-            //Use GameManager.GetMaxLevelLocation(); GameManager.GetMinLevelLocation();
+            }
 
-            //if any of those happen
-                //Set player's state to IsDead
-                //Wait 3 seconds
-                //Respawn player
+            //check the to if the play has broken through 
+            //its commented out until we finish Get Max/Min Location
+           
+            if (this.Location.X + this.Location.Width > GameManager.GetMaxLevelLocation().X || this.Location.X < GameManager.GetMinLevelLocation().X)
+            {
+                state = PlayerState.IsDead;
+                Thread.Sleep(3000);
+                this.Respawn();
+            }
+            if (this.Location.Y > GameManager.GetMaxLevelLocation().Y || this.Location.Y - this.Location.Height < GameManager.GetMinLevelLocation().Y)
+            {
+                state = PlayerState.IsDead;
+                Thread.Sleep(3000);
+                this.Respawn();
+            }
+            
+
+          
 
         }
  
