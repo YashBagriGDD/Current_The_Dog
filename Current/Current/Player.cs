@@ -105,7 +105,7 @@ namespace Current
                     break;
                 case PlayerState.InAir:
                     //Move at reduced speed
-                    Move(3*MoveSpeed/4);
+                    Move(3 * MoveSpeed / 4);
                     CheckForWaterWhenNotSwimming();
                     break;
                 case PlayerState.InWater:
@@ -125,39 +125,28 @@ namespace Current
         /// Determines if player is dead
         /// </summary>
         public void CheckIfDead()
-        {
-            //Nic - do this please
-
-            //Check if health <= 0 then set player too ISDEAD
-            //Wait 3 sec then respond
-           
+        {           
             if (Health <= 0)
             {
                 state = PlayerState.IsDead;
-                Thread.Sleep(3000);// what is the wait command wait 3 seacond
-                this.Respawn();
-
+                GameManager.gameplayState = GameplayState.Dead;
             }
-
+            
             //check the to if the play has broken through 
             //its commented out until we finish Get Max/Min Location
            
-            if (this.Location.X + this.Location.Width > GameManager.MaxLevelLocation.X || this.Location.X < GameManager.MinLevelLocation.X)
+            if (this.Location.X - this.Location.Width > GameManager.MaxLevelLocation.X || this.Location.X + this.Location.Width < GameManager.MinLevelLocation.X)
             {
                 state = PlayerState.IsDead;
-                Thread.Sleep(3000);
-                this.Respawn();
+                GameManager.gameplayState = GameplayState.Dead;
+
             }
-            if (this.Location.Y > GameManager.MaxLevelLocation.Y || this.Location.Y - this.Location.Height < GameManager.MinLevelLocation.Y)
+            if (this.Location.Y + this.Location.Height < GameManager.MaxLevelLocation.Y || this.Location.Y - this.Location.Height > GameManager.MinLevelLocation.Y)
             {
                 state = PlayerState.IsDead;
-                Thread.Sleep(3000);
-                this.Respawn();
+                GameManager.gameplayState = GameplayState.Dead;
+
             }
-            
-
-          
-
         }
  
         public void Hurt()
@@ -271,6 +260,7 @@ namespace Current
         public override void Reset()
         {
             state = PlayerState.InAir;
+            Acceleration = airAcceleration;
             Health = startHealth;
             base.Reset();
         }
@@ -280,6 +270,8 @@ namespace Current
         public override void Respawn()
         {
             state = PlayerState.InAir;
+            Acceleration = airAcceleration;
+
             Health = startHealth;
             base.Respawn();
         }
