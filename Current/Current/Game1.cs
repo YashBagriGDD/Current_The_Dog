@@ -223,6 +223,14 @@ namespace Current
                 GameManager.ResetAll();
             };
 
+
+            //Setup the gameover menu
+            UIText gameoverText = new UIText("GameoverText", "You have died.", titleFont, Anchor.UpperMiddle, SortingMode.Below, GameState.Game, Point.Zero, Color.White);
+            gameoverText.ActiveGameplayState = GameplayState.Dead;
+
+            UIText gameoverInstr = new UIText("GameoverInstr", "Press the jump button to respawn.", font, Anchor.CenterMiddle, SortingMode.Below, GameState.Game, Point.Zero, Color.White);
+            gameoverInstr.ActiveGameplayState = GameplayState.Dead;
+
             UIManager.OrganizeObjects();
             GameManager.OnLoadComplete();
         }

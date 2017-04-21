@@ -35,7 +35,8 @@ namespace Current
     enum GameplayState
     {
         Normal,
-        Paused
+        Paused,
+        Dead
     }
     /// <summary>
     /// Manages the game.
@@ -92,27 +93,26 @@ namespace Current
         /// </summary>
         public static void OnLoadComplete()
         {
+            Point min = Point.Zero;
             foreach (GameObject g in NonUIObjects)
             {
                 //Calculate min location (upper left)
-                Point min = Point.Zero;
                 if (g.LoadLocation.X < min.X)
                     min.X = g.LoadLocation.X;
                 if (g.LoadLocation.Y > min.Y)
                     min.Y = g.LoadLocation.Y;
-                MinLevelLocation = min;
-
-                //Calculate max location (lower right)
-                Point max = Point.Zero;
-                foreach (GameObject g in NonUIObjects)
-                {
-                    if (g.LoadLocation.X > max.X)
-                        max.X = g.LoadLocation.X;
-                    if (g.LoadLocation.Y < max.Y)
-                        max.Y = g.LoadLocation.Y;
-                }
-                MaxLevelLocation = max;
             }
+            MinLevelLocation = min;
+            //Calculate max location (lower right)
+            Point max = Point.Zero;
+            foreach (GameObject g in NonUIObjects)
+            {
+                if (g.LoadLocation.X > max.X)
+                    max.X = g.LoadLocation.X;
+                if (g.LoadLocation.Y < max.Y)
+                    max.Y = g.LoadLocation.Y;
+            }
+            MaxLevelLocation = max;
         }
 
 
@@ -222,6 +222,11 @@ namespace Current
                 }
             }
 
+            if (InputManager.GetButtonDown("Jump") && gameplayState == GameplayState.Dead)
+            {
+                gameplayState = GameplayState.Normal;
+                Get("Current").Respawn();
+            }
             if (InputManager.GetButtonDown("Fullscreen"))
             {
                 Program.GAME.ToggleFullscreen();
