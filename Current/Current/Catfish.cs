@@ -35,8 +35,8 @@ namespace Current
             direction = Direction.Left;
             Health = 1;
             IsAlive = true;
-            Speed = (float)(-.25 * MAX_SPEED);
-            
+            SetSpeed();
+            HomePoint = new Vector2(Location.X, Location.Y);
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -61,6 +61,7 @@ namespace Current
 
                     if (Math.Abs(distX) <= MAX_DETECTION || Math.Abs(distY) <= MAX_DETECTION) {
                         state = EnemyState.PlayerDetected;
+                        break;
                     }
 
                     //Call wander method to move enemy
@@ -74,10 +75,18 @@ namespace Current
                     state = EnemyState.Returning;
                     break;
                 case EnemyState.Returning:
-
+                    //Call ReturnHome Method
+                    ReturnHome();
+                    //Once it ends go into Roaming
+                    state = EnemyState.Roaming;
                     break;
                 default:
                     break;
+            }
+
+            //Death logic
+            if (Health <= 0) {
+                IsAlive = false;
             }
 
             base.Update(gameTime);
@@ -93,6 +102,10 @@ namespace Current
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Has enemy move back and forth in a time interval
+        /// </summary>
+        /// <param name="gameTime"></param>
         public void Wander(GameTime gameTime) {
             TotalElapsedSeconds += gameTime.ElapsedGameTime.TotalSeconds;
 
@@ -105,6 +118,9 @@ namespace Current
             this.Location.X += (int)Speed;
         }
 
+        /// <summary>
+        /// Switched direction from left to right, or right to left
+        /// </summary>
         public void ChangeDirection() {
             switch (direction) {
                 case Direction.Left:
@@ -120,24 +136,28 @@ namespace Current
             }
         }
 
+        /// <summary>
+        /// Sets the speed of the enemy depending on if it is Chasing the player or not and which direction
+        /// </summary>
         public void SetSpeed() {
             switch (direction) {
                 case Direction.Left:
                     //sets speed for new direction depending on state
-                    if (state == EnemyState.Roaming) {
-                        Speed = (float)(.25 * MAX_SPEED);
+                    //If Player is detected, will go to max speed otherwise will move slower
+                    if (state == EnemyState.PlayerDetected) {
+                        Speed = MAX_SPEED;
                     }
                     else {
-                        Speed = MAX_SPEED;
+                        Speed = (float)(.25 * MAX_SPEED);
                     }
                     break;
                 case Direction.Right:
                     //sets speed for new direction depending on state
-                    if (state == EnemyState.Roaming) {
-                        Speed = (float)(-.25 * MAX_SPEED);
+                    if (state == EnemyState.PlayerDetected) {
+                        Speed = -1 * MAX_SPEED;
                     }
                     else {
-                        Speed = -1 * MAX_SPEED;
+                        Speed = (float)(-.25 * MAX_SPEED);
                     }
                     break;
                 default:
@@ -145,6 +165,10 @@ namespace Current
             }
         }
 
+        /// <summary>
+        /// Finds the distance between enemy and player and advances toward player
+        /// Once player exits range method ends
+        /// </summary>
         public void ChasePlayer() {
             GameObject player = GameManager.Get("Current");
 
@@ -180,8 +204,37 @@ namespace Current
             }
         }
 
+        /// <summary>
+        /// Makes the enemy return to it's homepoint. Once within a certain range of the home, exits method
+        /// </summary>
         public void ReturnHome() {
+            //find distance between enemy and home
+            int distX = Location.X - (int)HomePoint.X;
+            int distY = Location.Y - (int)HomePoint.Y;
 
+            //loop to it going back to home
+            while (Math.Abs(distX) > 5 || Math.Abs(distY) > 5) {
+                //X Movement
+                if (distX < 0) {
+                    direction = Direction.Right;
+                    SetSpeed();
+                }
+                if (distX > 0) {
+                    direction = Direction.Left;
+                    SetSpeed();
+                }
+                Location.X += (int)Speed;
+
+                //y direction
+                if (distY > 0)
+                    Location.Y += -1 * (int)Math.Abs(Speed);
+                else
+                    Location.Y += (int)Math.Abs(Speed);
+
+                //Update distances
+                distX = Location.X - (int)HomePoint.X;
+                distY = Location.Y - (int)HomePoint.Y;
+            }
         }
     }
 }
