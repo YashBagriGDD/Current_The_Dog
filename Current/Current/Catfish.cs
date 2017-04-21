@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -27,6 +26,8 @@ namespace Current
 
         //When enemy is wandering, keep track of how many seconds has passed. Change direction after set amount of time
         public double TotalElapsedSeconds { get; set; } = 0;
+        public object Thread { get; private set; }
+
         const double MoveChangeTime = 2.0; //seconds
 
         public Catfish(string name, Texture2D tex, Rectangle location) : base(name, tex, location)
@@ -94,12 +95,36 @@ namespace Current
 
         protected override void HandleCollisionEnter(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            //Cast to a Collider
+            Collider other = (Collider)sender;
+
+            //Player Collision
+            if (other.Host is Player) {
+                //Move enemy after collision
+                Location.X += 5;
+                Location.Y += 5;
+
+                //Stop enemy for a time
+                System.Threading.Thread.Sleep(1500);
+            }
+
+            //Coral Collision
+            if (other.Host is Coral) {
+                Health--;
+                Location.X -= (Location.X - other.Hitbox.Y);
+                Location.Y -= (Location.Y - other.Hitbox.Y);
+            }
         }
 
         protected override void HandleCollisionExit(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            //Cast to a Collider
+            Collider other = (Collider)sender;
+
+            //Set to return home after colliding with Coral
+            if (other.Host is Coral) {
+                state = EnemyState.Returning;
+            }
         }
 
         /// <summary>
