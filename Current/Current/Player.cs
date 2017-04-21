@@ -34,7 +34,7 @@ namespace Current
         //How strong is the player??
         public int Strength { get; set; }
 
-
+        
 
         //General state enum
         public PlayerState state { get; set; }
@@ -142,13 +142,13 @@ namespace Current
             //check the to if the play has broken through 
             //its commented out until we finish Get Max/Min Location
            
-            if (this.Location.X + this.Location.Width > GameManager.GetMaxLevelLocation().X || this.Location.X < GameManager.GetMinLevelLocation().X)
+            if (this.Location.X + this.Location.Width > GameManager.MaxLevelLocation.X || this.Location.X < GameManager.MinLevelLocation.X)
             {
                 state = PlayerState.IsDead;
                 Thread.Sleep(3000);
                 this.Respawn();
             }
-            if (this.Location.Y > GameManager.GetMaxLevelLocation().Y || this.Location.Y - this.Location.Height < GameManager.GetMinLevelLocation().Y)
+            if (this.Location.Y > GameManager.MaxLevelLocation.Y || this.Location.Y - this.Location.Height < GameManager.MinLevelLocation.Y)
             {
                 state = PlayerState.IsDead;
                 Thread.Sleep(3000);
