@@ -141,7 +141,7 @@ namespace Current
                 GameManager.gameplayState = GameplayState.Dead;
 
             }
-            if (this.Location.Y + this.Location.Height < GameManager.MaxLevelLocation.Y || this.Location.Y - this.Location.Height > GameManager.MinLevelLocation.Y)
+            if (this.Location.Y - this.Location.Height > GameManager.MinLevelLocation.Y)
             {
                 state = PlayerState.IsDead;
                 GameManager.gameplayState = GameplayState.Dead;
@@ -149,8 +149,12 @@ namespace Current
             }
         }
  
+        /// <summary>
+        /// Hurts the player
+        /// </summary>
         public void Hurt()
         {
+            Health -= 1;
         }
 
         /// <summary>
@@ -230,12 +234,11 @@ namespace Current
             //Exit swimming state when not colliding with any water objects
             //Done here rather than in HandleCollision events because there 
             //will be a lot of water tiles near each other.
-            if (!Coll.CollidingWith<Water>() && !CollBelow.CollidingWith<Platform>())
+            if (!Coll.CollidingWith<Water>())
             {
                 state = PlayerState.InAir;
                 Acceleration = airAcceleration;
-                if (Velocity.Y < 0)
-                    Velocity = .5f * jumpVelocity;
+                Velocity.Y = .5f * jumpVelocity.Y;
             }
         }
 
@@ -305,7 +308,7 @@ namespace Current
                     if (other.Host is Platform)
                     {
                         //When colliding below, stop
-                        if (CollBelow.CollidingWith(other.Host) )
+                         if (CollBelow.CollidingWith(other.Host) )
                         {
                             Acceleration = Vector2.Zero;
                             Velocity.Y = 0;

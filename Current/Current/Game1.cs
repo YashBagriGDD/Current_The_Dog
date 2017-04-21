@@ -151,8 +151,13 @@ namespace Current
 
             //Create the player
             Player player = new Player("Current", texCurSwim, new Rectangle(100, 0, 100, 100));
-            Animate playerSwim = new Animate(texCurSwim, 3, 3, Animate.ONESIXTIETHSECPERFRAME * 10, player);
+            Animate playerSwim = new Animate(texCurSwim, 12, 1, Animate.ONESIXTIETHSECPERFRAME * 10, player);
             player.AddAnimation(playerSwim);
+
+
+            //Enemies
+            GameObject wa = GameManager.Get("Water1");
+            Catfish catfish = new Catfish("Catfish1", texBlock, new Rectangle(wa.LoadLocation.X + 300, wa.LoadLocation.Y, 50, 50));
 
             //Create the Camera
             MainCamera = new Camera("MainCamera", new Rectangle(0, 0, 0, 0), player);
@@ -294,6 +299,12 @@ namespace Current
                 {
                     ui.Draw(gameTime, spriteBatchUI);
                 }
+            //Catfish c = (Catfish)(GameManager.Get("Catfish1"));
+            //spriteBatchUI.DrawString(font, c.state.ToString(), new Vector2(0,50), Color.White);
+
+            Player p = GameManager.Get("Current") as Player;
+            spriteBatchUI.DrawString(font, p.state.ToString(), new Vector2(0, 50), Color.White); 
+
             spriteBatchUI.End();
 
             spriteBatchGameplay.Begin(transformMatrix: MainCamera.TransformMatrix);

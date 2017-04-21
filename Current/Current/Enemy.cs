@@ -17,7 +17,6 @@ namespace Current
 
         public Enemy(string name, Texture2D tex, Rectangle location) : base(name, tex, location)
         {
-            throw new NotImplementedException();
         }
     }
 }

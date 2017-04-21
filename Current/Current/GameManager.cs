@@ -84,7 +84,13 @@ namespace Current
             };
 
 
+        /// <summary>
+        /// Lower Left coordinate of map
+        /// </summary>
         public static Point MinLevelLocation { get; set; } = Point.Zero;
+        /// <summary>
+        /// Upper right coordinate of map
+        /// </summary>
         public static Point MaxLevelLocation { get; set; } = Point.Zero;
 
 

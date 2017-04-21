@@ -10,7 +10,8 @@ namespace Current
     enum EnemyState {
         Roaming,
         PlayerDetected,
-        Returning
+        Returning,
+        Waiting
     }
 
     class Catfish : Enemy
@@ -20,16 +21,20 @@ namespace Current
         public bool IsAlive { get; set; }
 
         //Max speed the Catfish goes at
-        const float MAX_SPEED = 15f;
+        const float MAX_SPEED = 4f;
         //How far until enemy notices player
-        const int MAX_DETECTION = 200;
+        const int MAX_DETECTION = 250;
 
         //When enemy is wandering, keep track of how many seconds has passed. Change direction after set amount of time
         public double TotalElapsedSeconds { get; set; } = 0;
-        public object Thread { get; private set; }
+
+        private double delayTimer = 0;
+        private GameTime gameTime;
+
 
         const double MoveChangeTime = 2.0; //seconds
 
+        
         public Catfish(string name, Texture2D tex, Rectangle location) : base(name, tex, location)
         {
             state = EnemyState.Roaming;
@@ -50,19 +55,17 @@ namespace Current
 
         public override void Update(GameTime gameTime)
         {
+            this.gameTime = gameTime;
             //add update logic here
+            GameObject player = GameManager.Get("Current");
+            int distX = this.Location.X - player.Location.X;
+            int distY = this.Location.X - player.Location.X;
+
             switch (state) {
                 case EnemyState.Roaming:
                     //Check to see if player is within range of detection
-                    GameObject player = GameManager.Get("Current");
-
-                    //store the distance between
-                    int distX = player.Location.X - this.Location.X;
-                    int distY = player.Location.Y - this.Location.Y;
-
                     if (Math.Abs(distX) <= MAX_DETECTION || Math.Abs(distY) <= MAX_DETECTION) {
                         state = EnemyState.PlayerDetected;
-                        break;
                     }
 
                     //Call wander method to move enemy
@@ -72,17 +75,41 @@ namespace Current
                     //Call Chase player method
                     ChasePlayer();
 
-                    //Once method is broken, go to return enum
-                    state = EnemyState.Returning;
+                    //Checks if player is still withing detection range
+                    if (Math.Abs(distX) > MAX_DETECTION || Math.Abs(distY) > MAX_DETECTION) {
+                        state = EnemyState.Returning;
+                    }
                     break;
                 case EnemyState.Returning:
                     //Call ReturnHome Method
                     ReturnHome();
-                    //Once it ends go into Roaming
-                    state = EnemyState.Roaming;
+
+                    //find distance between enemy and home
+                    int disX = Location.X - (int)HomePoint.X;
+                    int disY = Location.Y - (int)HomePoint.Y;
+
+                    //If in range set to roaming
+                    if (Math.Abs(disX) <= 5 || Math.Abs(disY) <= 5)
+                    {
+                        state = EnemyState.Roaming;
+                    }
+                    break;
+                case EnemyState.Waiting:
+                    delayTimer += gameTime.ElapsedGameTime.TotalMilliseconds;
+                    if (delayTimer >= 1500)
+                    {
+                        state = EnemyState.PlayerDetected;
+                        delayTimer = 0;
+                    }
                     break;
                 default:
                     break;
+            }
+
+            //Don't go leavin dat water do
+            if (!Coll.CollidingWith<Water>())
+            {
+                state = EnemyState.Returning;
             }
 
             //Death logic
@@ -105,14 +132,18 @@ namespace Current
                 Location.Y += 5;
 
                 //Stop enemy for a time
-                System.Threading.Thread.Sleep(1500);
+                state = EnemyState.Waiting;
+
+                //Hurt the player's feelings
+                Player p = (Player)(other.Host);
+                p.Hurt();
             }
 
             //Coral Collision
             if (other.Host is Coral) {
                 Health--;
-                Location.X -= (Location.X - other.Hitbox.Y);
-                Location.Y -= (Location.Y - other.Hitbox.Y);
+                Location.X += (int)-Speed;
+                Location.Y += (int)-Speed;
             }
         }
 
@@ -170,19 +201,19 @@ namespace Current
                     //sets speed for new direction depending on state
                     //If Player is detected, will go to max speed otherwise will move slower
                     if (state == EnemyState.PlayerDetected) {
-                        Speed = MAX_SPEED;
+                        Speed =  -MAX_SPEED;
                     }
                     else {
-                        Speed = (float)(.25 * MAX_SPEED);
+                        Speed = (float)(-.25 * MAX_SPEED);
                     }
                     break;
                 case Direction.Right:
                     //sets speed for new direction depending on state
                     if (state == EnemyState.PlayerDetected) {
-                        Speed = -1 * MAX_SPEED;
+                        Speed = MAX_SPEED;
                     }
                     else {
-                        Speed = (float)(-.25 * MAX_SPEED);
+                        Speed = (float)(.25 * MAX_SPEED);
                     }
                     break;
                 default:
@@ -203,7 +234,7 @@ namespace Current
 
             //Check to see if player is within range
             //This checks to see if player is within a 200x200 square around the enemy
-            while (Math.Abs(distX) <= MAX_DETECTION || Math.Abs(distY) <= MAX_DETECTION) {
+            if (Math.Abs(distX) <= MAX_DETECTION || Math.Abs(distY) <= MAX_DETECTION) {
                 //Check if to the left or right of the player, set speed to player direction and move
                 if (distX < 0) {
                     direction = Direction.Left;
@@ -216,16 +247,13 @@ namespace Current
                 Location.X += (int)Speed;
 
                 //Check if below or above player, then move it in player direction
-                if (distY < 0) {
+                if (distY > 0) {
                     Location.Y -= (int)Math.Abs(Speed) * -1;
                 }
-                if (distY > 0) {
+                if (distY < 0) {
                     Location.Y -= (int)Math.Abs(Speed);
                 }
 
-                //Update distance between this and player
-                distX = player.Location.X - this.Location.X;
-                distY = player.Location.Y - this.Location.Y;
             }
         }
 
@@ -238,7 +266,7 @@ namespace Current
             int distY = Location.Y - (int)HomePoint.Y;
 
             //loop to it going back to home
-            while (Math.Abs(distX) > 5 || Math.Abs(distY) > 5) {
+            if (Math.Abs(distX) > 5 || Math.Abs(distY) > 5) {
                 //X Movement
                 if (distX < 0) {
                     direction = Direction.Right;
