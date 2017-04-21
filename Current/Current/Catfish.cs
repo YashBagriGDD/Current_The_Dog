@@ -36,6 +36,7 @@ namespace Current
             Health = 1;
             IsAlive = true;
             Speed = (float)(-.25 * MAX_SPEED);
+            
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -177,6 +178,10 @@ namespace Current
                 distX = player.Location.X - this.Location.X;
                 distY = player.Location.Y - this.Location.Y;
             }
+        }
+
+        public void ReturnHome() {
+
         }
     }
 }

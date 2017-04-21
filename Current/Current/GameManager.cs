@@ -156,11 +156,19 @@ namespace Current
         }
 
         /// <summary>
-        /// Get the minimum location of the level
+        /// Get the minimum location of the level (Lower left)
         /// </summary>
         public static Point GetMinLevelLocation()
         {
-            return Point.Zero;
+            Point min = Point.Zero;
+            foreach (GameObject g in NonUIObjects)
+            {
+                if (g.LoadLocation.X < min.X)
+                    min.X = g.LoadLocation.X;
+                if (g.LoadLocation.Y > min.Y)
+                    min.Y = g.LoadLocation.Y;
+            }
+            return min;
         }
 
         /// <summary>
@@ -168,7 +176,15 @@ namespace Current
         /// </summary>
         public static Point GetMaxLevelLocation()
         {
-            return Point.Zero;
+            Point max = Point.Zero;
+            foreach (GameObject g in NonUIObjects)
+            {
+                if (g.LoadLocation.X > max.X)
+                    max.X = g.LoadLocation.X;
+                if (g.LoadLocation.Y < max.Y)
+                    max.Y = g.LoadLocation.Y;
+            }
+            return max;
         }
 
         /// <summary>

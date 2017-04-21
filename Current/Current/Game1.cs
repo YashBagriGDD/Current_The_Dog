@@ -56,7 +56,15 @@ namespace Current
         {
             get
             {
-                return new Point(Window.ClientBounds.Width, Window.ClientBounds.Height);
+                try
+                {
+                    return new Point(Window.ClientBounds.Width, Window.ClientBounds.Height);
+                }
+                catch(Exception e)
+                {
+                    return Point.Zero;
+
+                }
             }
         }
 
@@ -216,7 +224,6 @@ namespace Current
             };
 
             UIManager.OrganizeObjects();
-
 
         }
 
