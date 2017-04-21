@@ -224,7 +224,7 @@ namespace Current
             };
 
             UIManager.OrganizeObjects();
-
+            GameManager.OnLoadComplete();
         }
 
         /// <summary>
