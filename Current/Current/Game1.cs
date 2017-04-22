@@ -16,6 +16,7 @@ namespace Current
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatchGameplay;
         SpriteBatch spriteBatchUI;
+        SpriteBatch spriteBatchBG;
 
 
         SpriteFont font, titleFont, hudFont;
@@ -104,6 +105,7 @@ namespace Current
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatchGameplay = new SpriteBatch(GraphicsDevice);
             spriteBatchUI = new SpriteBatch(GraphicsDevice);
+            spriteBatchBG = new SpriteBatch(GraphicsDevice);
 
             //Load textures
             Texture2D texCurSwim = Content.Load<Texture2D>("Textures/Current/CurrentSwim");
@@ -230,11 +232,13 @@ namespace Current
 
 
             //Setup the gameover menu
-            UIText gameoverText = new UIText("GameoverText", "You have died.", titleFont, Anchor.UpperMiddle, SortingMode.Below, GameState.Game, Point.Zero, Color.White);
-            gameoverText.ActiveGameplayState = GameplayState.Dead;
+            UIText gameoverText = new UIText("GameoverText", "You have died.", titleFont, Anchor.CenterMiddle, SortingMode.Below, GameState.Game, Point.Zero, Color.White);
+            gameoverText.ActiveState = GameState.Game;
+            gameoverText.Deactivate();
 
-            UIText gameoverInstr = new UIText("GameoverInstr", "Press the jump button to respawn.", font, Anchor.CenterMiddle, SortingMode.Below, GameState.Game, Point.Zero, Color.White);
-            gameoverInstr.ActiveGameplayState = GameplayState.Dead;
+            UIText gameoverInstr = new UIText("GameoverInstr", "Press the jump button to respawn.", font, Anchor.LowerMiddle, SortingMode.Below, GameState.Game, Point.Zero, Color.White);
+            gameoverInstr.ActiveState = GameState.Game;
+            gameoverInstr.Deactivate();
 
             UIManager.OrganizeObjects();
             GameManager.OnLoadComplete();
@@ -293,19 +297,14 @@ namespace Current
 
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            spriteBatchUI.Begin();
-                //Draw all the UI objects normally
-                foreach (UIObject ui in GameManager.UIObjects)
-                {
-                    ui.Draw(gameTime, spriteBatchUI);
-                }
-            //Catfish c = (Catfish)(GameManager.Get("Catfish1"));
-            //spriteBatchUI.DrawString(font, c.state.ToString(), new Vector2(0,50), Color.White);
 
-            Player p = GameManager.Get("Current") as Player;
-            spriteBatchUI.DrawString(font, p.state.ToString(), new Vector2(0, 50), Color.White); 
+            spriteBatchBG.Begin();
+            foreach (Background b in GameManager.Backgrounds)
+            {
+                b.Draw(gameTime, spriteBatchBG);
+            }
+            spriteBatchBG.End();
 
-            spriteBatchUI.End();
 
             spriteBatchGameplay.Begin(transformMatrix: MainCamera.TransformMatrix);
                 //Draw all the gameobjects using the translation matrix
@@ -314,6 +313,18 @@ namespace Current
                     g.Draw(gameTime, spriteBatchGameplay);
                 }
             spriteBatchGameplay.End();
+
+
+            spriteBatchUI.Begin();
+                //Draw all the UI objects normally
+                foreach (UIObject ui in GameManager.UIObjects)
+                {
+                    ui.Draw(gameTime, spriteBatchUI);
+                }
+
+            spriteBatchUI.End();
+
+
             base.Draw(gameTime);
         }
     }

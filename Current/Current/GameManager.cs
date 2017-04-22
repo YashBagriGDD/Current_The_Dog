@@ -58,6 +58,10 @@ namespace Current
         public static List<GameObject> NonUIObjects { get; }
             = new List<GameObject>();
 
+        //All backgrounds in the game
+        public static List<Background> Backgrounds { get; set; }
+            = new List<Background>();
+
         //The current score of the game
         public static int Score { get; set; }
             = 0;
@@ -135,8 +139,14 @@ namespace Current
             {
                 CollidableObject c = (CollidableObject)g;
                 CollidableObjects.Add(c);
+                NonUIObjects.Add(g);
             }
-            if (g is UIObject)
+            else if (g is Background)
+            {
+                Background b = (Background)g;
+                Backgrounds.Add(b);
+            }
+            else if (g is UIObject)
             {
                 UIObject ui = (UIObject)g;
                 UIObjects.Add(ui);
@@ -145,6 +155,8 @@ namespace Current
             {
                 NonUIObjects.Add(g);
             }
+
+
 
         }
         /// <summary>
@@ -193,6 +205,25 @@ namespace Current
             {
                 g.Reset();
             }
+        }
+
+
+        /// <summary>
+        /// Stop all non-ui objects from updating
+        /// </summary>
+        public static void StopNonUIUpdates()
+        {
+            foreach (GameObject g in NonUIObjects)
+                g.CanUpdate = false;
+        }
+
+        /// <summary>
+        /// Resume updating of non-ui objects
+        /// </summary>
+        public static void ResumeNonUIUpdates()
+        {
+            foreach (GameObject g in NonUIObjects)
+                g.CanUpdate = true;
         }
 
         /// <summary>

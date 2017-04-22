@@ -8,31 +8,28 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Current
 {
-    class Goal : CollidableObject
+    /// <summary>
+    /// Represents the goal of the level
+    /// </summary>
+    class Goal : Pickup
     {
-        public Goal(string name, Texture2D tex, Rectangle location) : base(name, tex, location)
+        public Goal(string name, Texture2D tex, Rectangle location) : base(name, tex, location, 0)
         {
-            throw new NotImplementedException();
+
         }
 
-        public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override void Update(GameTime gameTime)
-        {
-            throw new NotImplementedException();
-        }
 
         protected override void HandleCollisionEnter(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            Collider other = (Collider)sender;
+            if (other.Host is Player)
+            {
+
+            }
         }
 
         protected override void HandleCollisionExit(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
         }
     }
 }

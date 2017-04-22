@@ -127,7 +127,7 @@ namespace Current
                 return;
 
             //Only need to draw background, UIText does the text
-            spriteBatch.Draw(Texture, Location, DrawColor);
+            base.Draw(gameTime, spriteBatch);
         }
     }
 }

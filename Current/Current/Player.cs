@@ -85,7 +85,8 @@ namespace Current
         /// <param name="spriteBatch"></param>
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            base.Draw(gameTime, spriteBatch);
+            if (state != PlayerState.IsDead)
+                base.Draw(gameTime, spriteBatch);
         }
 
         /// <summary>
@@ -118,6 +119,14 @@ namespace Current
             }
             if (state != PlayerState.IsDead)
                 CheckIfDead();
+            else
+            {
+                //Respawn
+                if (InputManager.GetButtonDown("Jump"))
+                {
+                    Respawn();
+                }
+            }
             base.Update(gameTime);
         }
 
@@ -126,27 +135,18 @@ namespace Current
         /// </summary>
         public void CheckIfDead()
         {           
-            if (Health <= 0)
+            //If we're out of health, or below level bounds
+            if (Health <= 0 || Location.Y - Location.Height > GameManager.MinLevelLocation.Y)
             {
                 state = PlayerState.IsDead;
-                GameManager.gameplayState = GameplayState.Dead;
+                //Freeze player
+                Velocity = Vector2.Zero;
+                Acceleration = Vector2.Zero;
+                //Show a message
+                GameManager.Get("GameoverText").Activate();
+                GameManager.Get("GameoverInstr").Activate();
             }
-            
-            //check the to if the play has broken through 
-            //its commented out until we finish Get Max/Min Location
-           
-            if (this.Location.X - this.Location.Width > GameManager.MaxLevelLocation.X || this.Location.X + this.Location.Width < GameManager.MinLevelLocation.X)
-            {
-                state = PlayerState.IsDead;
-                GameManager.gameplayState = GameplayState.Dead;
 
-            }
-            if (this.Location.Y - this.Location.Height > GameManager.MinLevelLocation.Y)
-            {
-                state = PlayerState.IsDead;
-                GameManager.gameplayState = GameplayState.Dead;
-
-            }
         }
  
         /// <summary>
@@ -274,6 +274,10 @@ namespace Current
         {
             state = PlayerState.InAir;
             Acceleration = airAcceleration;
+
+            //Hide death message
+            GameManager.Get("GameoverText").Deactivate();
+            GameManager.Get("GameoverInstr").Deactivate();
 
             Health = startHealth;
             base.Respawn();

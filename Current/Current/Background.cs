@@ -9,14 +9,13 @@ using Microsoft.Xna.Framework.Graphics;
 namespace Current
 {
     /// <summary>
-    /// 
+    /// A background element.
     /// </summary>
-    class Background : UIObject
+    class Background : GameObject
     {
-        public Background(string name, Texture2D tex, Rectangle loc, GameState state) : base(name, Anchor.UpperLeft, SortingMode.None, state, Point.Zero)
+        public Background(string name, Texture2D tex, Rectangle loc, GameState state) : base(name, tex, loc)
         {
-            Location = loc;
-            Texture = tex;
-        } 
+            ActiveState = state;
+        }
     }
 }

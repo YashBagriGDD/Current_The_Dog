@@ -56,10 +56,16 @@ namespace Current
         /// </summary>
         public Rectangle LoadLocation { get; private set; }
 
-
+        //Initial states
         protected GameState initGameState;
         protected GameplayState initGameplayState;
         protected MainMenuState initMainmenuState;
+
+        
+        /// <summary>
+        /// Should this gameobject update?
+        /// </summary>
+        public bool CanUpdate { get; set; } = true;
 
 
         /// <summary>
@@ -236,7 +242,7 @@ namespace Current
         /// <param name="gameTime">gameTime</param>
         public virtual void Update(GameTime gameTime)
         {
-            if (!Active)
+            if (!Active || !CanUpdate)
                 return;
 
             //Change the velocity by acceleration
@@ -259,6 +265,7 @@ namespace Current
         /// </summary>
         /// <param name="gameTime">gameTime</param>
         /// <param name="spriteBatch">Active spriteBatch</param>
+        /// <param name="depth">Optional depth specification</param>
         public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             if (!Active || Texture == null)
