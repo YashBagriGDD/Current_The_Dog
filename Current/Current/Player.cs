@@ -248,6 +248,9 @@ namespace Current
                 state = PlayerState.InAir;
                 Acceleration = airAcceleration;
                 Velocity.Y = .5f * jumpVelocity.Y;
+
+                //Turn back to normal color
+                DrawColor = Color.White;
             }
         }
 
@@ -262,6 +265,9 @@ namespace Current
                 state = PlayerState.InWater;
                 Acceleration = .05f * airAcceleration;
                 Velocity.Y = MathHelper.Clamp(Velocity.Y, -MoveSpeed, MoveSpeed);
+
+                //Turn blue to match water
+                DrawColor = Color.Blue;
             }
 
         }

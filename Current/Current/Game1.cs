@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -109,6 +110,10 @@ namespace Current
         Texture2D texHealth;
         #endregion
 
+        #region Audio
+        Song songBg;
+        #endregion
+
         /// <summary>
         /// LoadContent will be called once per game and is the place to load
         /// all of your content.
@@ -125,6 +130,13 @@ namespace Current
             texBlock = Content.Load<Texture2D>("Textures/WhiteBlock");
             texBG1 = Content.Load<Texture2D>("Textures/Backgrounds/Background");
             texHealth = Content.Load<Texture2D>("Textures/HUD/Crossbone");
+
+            //Load audio
+            songBg = Content.Load<Song>("Audio/Current");
+
+            //Play audio
+            MediaPlayer.Play(songBg);
+            MediaPlayer.IsRepeating = true;
 
             //Load fonts
             font = Content.Load<SpriteFont>("Fonts/Font");

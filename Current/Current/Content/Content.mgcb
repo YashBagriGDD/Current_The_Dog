@@ -175,3 +175,9 @@
 /processorParam:TextureFormat=Color
 /build:Textures/Current/CurrentSwim.png
 
+#begin Audio/Current.wav
+/importer:WavImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/Current.wav
+
