@@ -26,7 +26,6 @@ namespace Current
         {
             baseImage = new UIImage("HealthPiece", Texture, size, Anchor.UpperLeft, SortingMode.Right, GameState.None, Point.Zero, Color.White);
 
-            player = GameManager.Get("Current") as Player;
         }
 
         //Draw method that draws them based on health
@@ -34,6 +33,9 @@ namespace Current
         {
             if (!Active)
                 return;
+
+            player = GameManager.Get("Current") as Player;
+
 
             //Draw as many crossbones as player has health
             for (int i=0; i<player.Health; i++)

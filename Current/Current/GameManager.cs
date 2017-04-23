@@ -58,7 +58,7 @@ namespace Current
         public static List<GameObject> NonUIObjects { get; }
             = new List<GameObject>();
 
-        //All backgrounds in the game
+        //List of the paralax backgrounds in the game (not the ui ones)
         public static List<Background> Backgrounds { get; set; }
             = new List<Background>();
 
@@ -68,7 +68,26 @@ namespace Current
         //Time of the game. (Not gameTime, just for like score and stuff)
         public static float Time { get; set; }
 
+        /// <summary>
+        /// The current level. Or Current's level.  
+        /// </summary>
         public static int CurrentLevel { get; set; } = 0;
+
+        /// <summary>
+        /// Have we completed all levels?
+        /// </summary>
+        public static bool CompletedAllLevels
+        {
+            get
+            {
+                return (CurrentLevel >= TotalLevels);
+            }
+        }
+
+        /// <summary>
+        /// Total number of levels. Read only.
+        /// </summary>
+        public static int TotalLevels { get; private set; } = 1;
 
         //Various states for the game
         public static GameState gameState = GameState.MainMenu;
@@ -97,6 +116,11 @@ namespace Current
         /// </summary>
         public static Point MaxLevelLocation { get; set; } = Point.Zero;
 
+        public static bool IsLoading { get; set; } = false;
+
+
+
+
 
         /// <summary>
         /// Call this once a level has completed loading to calculate level bounds
@@ -123,6 +147,8 @@ namespace Current
                     max.Y = g.LoadLocation.Y;
             }
             MaxLevelLocation = max;
+
+            IsLoading = false;
         }
 
 
@@ -166,7 +192,10 @@ namespace Current
         /// <returns></returns>
         public static GameObject Get(string name)
         {
-            return Objects[name];
+            if (Objects.ContainsKey(name))
+                return Objects[name];
+            else
+                return null; 
         }
         /// <summary>
         /// Get all of the known GameObjects in the game as a Dictionary
@@ -224,6 +253,25 @@ namespace Current
         {
             foreach (GameObject g in NonUIObjects)
                 g.CanUpdate = true;
+        }
+
+        /// <summary>
+        /// Removes all level-specific objects from the manager. 
+        /// UI objects are not deleted.
+        /// </summary>
+        public static void RemoveLevel()
+        {
+            IsLoading = true;
+
+            //Wipe out the objects dictionary
+            Objects.Clear();
+            //Delete CollidableObjects, NonUIObjects
+            CollidableObjects.Clear();
+            NonUIObjects.Clear();
+            //Add in UIObjects back to the dictionary
+            foreach (UIObject ui in UIObjects)
+                Objects.Add(ui.Name, ui);
+
         }
 
         /// <summary>

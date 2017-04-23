@@ -24,7 +24,28 @@ namespace Current
             Collider other = (Collider)sender;
             if (other.Host is Player)
             {
+                Player p = (Player)(other.Host);
+                p.state = PlayerState.HasWon;
+                p.Acceleration = Vector2.Zero;
+                p.Velocity = Vector2.Zero;
+                GameManager.CurrentLevel++;
 
+                GameManager.Get("WinMainMenuButton").Activate();
+
+
+                //We still have more levels to get through.
+                if (!GameManager.CompletedAllLevels)
+                {
+                    GameManager.Get("WinText").Activate();
+                    GameManager.Get("WinNextButton").Activate();
+                }
+                else
+                {
+                    GameManager.Get("WinGameText").Activate();
+                }
+
+
+                GameManager.StopNonUIUpdates();
             }
         }
 

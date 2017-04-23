@@ -71,6 +71,7 @@
     <Compile Include="Score.cs" />
     <Compile Include="ScorePickup.cs" />
     <Compile Include="Tile.cs" />
+    <Compile Include="UIBackground.cs" />
     <Compile Include="UIButton.cs" />
     <Compile Include="UIImage.cs" />
     <Compile Include="UIManager.cs" />
@@ -96,7 +97,7 @@
     <Content Include="Text\level.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Text\level2demo.txt">
+    <Content Include="Text\level0.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

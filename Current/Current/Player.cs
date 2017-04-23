@@ -14,7 +14,8 @@ namespace Current
         OnLand,
         InAir,
         InWater,
-        IsDead
+        IsDead,
+        HasWon
     }
 
     enum Direction
@@ -103,30 +104,36 @@ namespace Current
                 case PlayerState.OnLand:
                     Move(MoveSpeed);
                     CheckForWaterWhenNotSwimming();
+                    CheckIfDead();
                     break;
                 case PlayerState.InAir:
                     //Move at reduced speed
                     Move(3 * MoveSpeed / 4);
                     CheckForWaterWhenNotSwimming();
+                    CheckIfDead();
                     break;
                 case PlayerState.InWater:
                     Swim(MoveSpeed);
+                    CheckIfDead();
                     break;
                 case PlayerState.IsDead:
+                    //Respawn
+                    if (InputManager.GetButtonDown("Jump"))
+                    {
+                        Respawn();
+                        //Let everyone else resume updating.
+                        GameManager.ResumeNonUIUpdates();
+                    }
+                    break;
+                case PlayerState.HasWon:
                     break;
                 default:
                     break;
             }
-            if (state != PlayerState.IsDead)
-                CheckIfDead();
-            else
-            {
-                //Respawn
-                if (InputManager.GetButtonDown("Jump"))
-                {
-                    Respawn();
-                }
-            }
+   
+
+
+
             base.Update(gameTime);
         }
 
@@ -145,6 +152,8 @@ namespace Current
                 //Show a message
                 GameManager.Get("GameoverText").Activate();
                 GameManager.Get("GameoverInstr").Activate();
+                //Stop everyone else from updating.
+                GameManager.StopNonUIUpdates();
             }
 
         }

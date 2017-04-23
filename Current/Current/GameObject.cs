@@ -195,6 +195,8 @@ namespace Current
         {
             Location = LoadLocation;
             SpawnLocation = LoadLocation;
+            if (!CanUpdate)
+                CanUpdate = true;
         }
 
         /// <summary>
