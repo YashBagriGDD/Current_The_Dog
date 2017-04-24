@@ -99,6 +99,9 @@
     <Content Include="Text\level.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Text\level0000.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Text\level0.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

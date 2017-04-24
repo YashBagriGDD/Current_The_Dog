@@ -267,7 +267,7 @@ namespace Current
                 AnimationData[currentAnimation].Update(gameTime);
         }
 
-        /// <summary>
+        /// <summary>   
         /// By default, draws this GameObject
         /// </summary>
         /// <param name="gameTime">gameTime</param>
@@ -275,6 +275,15 @@ namespace Current
         /// <param name="depth">Optional depth specification</param>
         public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
+            //Don't draw if outside camera's bounds
+            Camera cam = GameManager.Get("MainCamera") as Camera;
+            if (cam != null)
+            {
+                if (!cam.Bounds.Intersects(Location))
+                    return;
+            }
+
+
             if (!Active || Texture == null)
                 return;
 

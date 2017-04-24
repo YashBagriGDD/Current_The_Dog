@@ -29,6 +29,17 @@ namespace Current
             }
         }
 
+        /// <summary>
+        /// Bounds of the screen based on Camera's location.
+        /// </summary>
+        public Rectangle Bounds
+        {
+            get
+            {
+                return new Rectangle(Location.X - Game1.TargetWidth / 2, Location.Y - Game1.TargetHeight / 2, Game1.TargetWidth, Game1.TargetHeight);
+                
+            }
+        }
 
         /// <summary>
         /// Who should the camera look at?
