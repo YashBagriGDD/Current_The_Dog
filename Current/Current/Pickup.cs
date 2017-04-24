@@ -26,5 +26,16 @@ namespace Current
             Activate();
             base.Reset();
         }
+
+
+        protected override void HandleCollisionEnter(object sender, EventArgs e)
+        {
+            Collider other = (Collider)sender;
+            if (other.Host is Player)
+            {
+                //Play Sound effect - common to all pickups
+                GameManager.PlaySFX("Pickup");
+            }
+        }
     }
 }

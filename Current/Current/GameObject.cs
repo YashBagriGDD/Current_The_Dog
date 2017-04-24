@@ -171,8 +171,13 @@ namespace Current
         /// </summary>
         public void Deactivate()
         {
-            previousState = ActiveState;
-            ActiveState = GameState.None;
+            //Assuming we're not already deactivated
+            if (ActiveState != GameState.None)
+            {
+                previousState = ActiveState;
+                ActiveState = GameState.None;
+            }
+
         }
 
         /// <summary>

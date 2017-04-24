@@ -96,10 +96,15 @@ namespace Current
             HoverBegin += () =>
             {
                 DrawColor = shade;
+                GameManager.PlaySFX("Hover");
             };
             HoverEnd += () =>
             {
                 DrawColor = bgColor;
+            };
+            Click += () =>
+            {
+                GameManager.PlaySFX("Select");
             };
 
         }

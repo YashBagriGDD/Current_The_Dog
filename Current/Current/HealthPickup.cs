@@ -19,6 +19,9 @@ namespace Current
 
         protected override void HandleCollisionEnter(object sender, EventArgs e)
         {
+            //Include sfx logic
+            base.HandleCollisionEnter(sender, e);
+
             Collider other = (Collider)sender;
 
             if (other.Host is Player)

@@ -54,6 +54,7 @@ namespace Current
         //This should hold all UI objects
         public static List<UIObject> UIObjects { get; }
             = new List<UIObject>();
+
         //This should hold all Non-UI objects
         public static List<GameObject> NonUIObjects { get; }
             = new List<GameObject>();
@@ -61,6 +62,9 @@ namespace Current
         //List of the paralax backgrounds in the game (not the ui ones)
         public static List<Background> Backgrounds { get; set; }
             = new List<Background>();
+
+        public static List<SFXWrapper> SoundEffects { get; set; }
+            = new List<SFXWrapper>();
 
         //The current score of the game
         public static int Score { get; set; }
@@ -152,6 +156,37 @@ namespace Current
         }
 
 
+
+        /// <summary>
+        /// Plays the sound effect.
+        /// </summary>
+        /// <param name="clipName">Name of the clip as instaniated.</param>
+        public static void PlaySFX(string clipName)
+        {
+            SFXWrapper clip = (SFXWrapper)(Get(clipName));
+            clip.Play();
+        }
+        
+        /// <summary>
+        /// Loop the sound effect.
+        /// </summary>
+        public static void LoopSFX(string clipName)
+        {
+            SFXWrapper clip = (SFXWrapper)(Get(clipName));
+            clip.Loop();
+        }
+
+        /// <summary>
+        /// Stop the sound effect.
+        /// </summary>
+        /// <param name="clipName"></param>
+        public static void StopSFX(string clipName)
+        {
+            SFXWrapper clip = (SFXWrapper)(Get(clipName));
+            clip.Stop();
+        }
+
+
         /// <summary>
         /// Adds a GameObject reference to the Objects dictionary
         /// If a CollidableObject is passed, it is also added to the CollidableObjects List
@@ -176,6 +211,11 @@ namespace Current
             {
                 UIObject ui = (UIObject)g;
                 UIObjects.Add(ui);
+            }
+            else if (g is SFXWrapper)
+            {
+                SFXWrapper wrap = (SFXWrapper)g;
+                SoundEffects.Add(wrap);
             }
             else
             {
@@ -271,6 +311,9 @@ namespace Current
             //Add in UIObjects back to the dictionary
             foreach (UIObject ui in UIObjects)
                 Objects.Add(ui.Name, ui);
+            //Add in Soundeffects back to the dictionary
+            foreach (SFXWrapper wrap in SoundEffects)
+                Objects.Add(wrap.Name, wrap);
 
         }
 

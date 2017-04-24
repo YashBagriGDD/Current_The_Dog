@@ -24,27 +24,35 @@ namespace Current
             Collider other = (Collider)sender;
             if (other.Host is Player)
             {
+                //Set player to win state, and freeze them.
                 Player p = (Player)(other.Host);
                 p.state = PlayerState.HasWon;
                 p.Acceleration = Vector2.Zero;
                 p.Velocity = Vector2.Zero;
+                //Increment level
                 GameManager.CurrentLevel++;
 
+
+                //Turn on the main menu button no matter what
                 GameManager.Get("WinMainMenuButton").Activate();
 
 
-                //We still have more levels to get through.
+                //Play a sound effect
+                GameManager.PlaySFX("Win");
+
+                //We still have more levels to get through, so show the win level text and next level button
                 if (!GameManager.CompletedAllLevels)
                 {
                     GameManager.Get("WinText").Activate();
                     GameManager.Get("WinNextButton").Activate();
                 }
+                //No more levels - only additional thing to show is win game text
                 else
                 {
                     GameManager.Get("WinGameText").Activate();
                 }
 
-
+                //Stop everyone from updating.
                 GameManager.StopNonUIUpdates();
             }
         }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
@@ -112,6 +113,7 @@ namespace Current
 
         #region Audio
         Song songBg;
+        SoundEffect sfxHover, sfxHurt, sfxJump, sfxLand, sfxPickup, sfxSelect, sfxWaterLoop, sfxWin;
         #endregion
 
         /// <summary>
@@ -131,17 +133,40 @@ namespace Current
             texBG1 = Content.Load<Texture2D>("Textures/Backgrounds/Background");
             texHealth = Content.Load<Texture2D>("Textures/HUD/Crossbone");
 
-            //Load audio
+            //Load Background Music
             songBg = Content.Load<Song>("Audio/Current");
-
-            //Play audio
-            MediaPlayer.Play(songBg);
-            MediaPlayer.IsRepeating = true;
+            //Load Sound Effects
+            sfxHover = Content.Load<SoundEffect>("Audio/Hover");
+            sfxHurt = Content.Load<SoundEffect>("Audio/Hurt");
+            sfxJump = Content.Load<SoundEffect>("Audio/Jump");
+            sfxLand = Content.Load<SoundEffect>("Audio/Land");
+            sfxPickup = Content.Load<SoundEffect>("Audio/Pickup");
+            sfxSelect = Content.Load<SoundEffect>("Audio/Select");
+            sfxHurt = Content.Load<SoundEffect>("Audio/Hurt");
+            sfxWaterLoop = Content.Load<SoundEffect>("Audio/WaterLoop");
+            sfxWin = Content.Load<SoundEffect>("Audio/Win");
 
             //Load fonts
             font = Content.Load<SpriteFont>("Fonts/Font");
             titleFont = Content.Load<SpriteFont>("Fonts/TitleFont");
             hudFont = Content.Load<SpriteFont>("Fonts/HudFont");
+
+
+
+            //Construct audio holders so we can reference soundeffects through GameManager
+            SoundEffect[] clips = { sfxHover, sfxHurt, sfxJump, sfxLand, sfxPickup, sfxSelect, sfxWaterLoop, sfxWin };
+            foreach (SoundEffect clip in clips)
+            {
+                int start = clip.Name.LastIndexOf("/") + 1;
+                string name = clip.Name.Substring(start);
+                SFXWrapper wrapper = new SFXWrapper(name, clip);
+            }
+
+            //Play background music
+            MediaPlayer.Play(songBg);
+            MediaPlayer.IsRepeating = true;
+
+
 
             Color buttonBackColor = new Color(50, 80, 130);
             int bWidth = 400, bHeight = 100;

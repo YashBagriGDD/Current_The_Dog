@@ -149,6 +149,10 @@ namespace Current
                 //Freeze player
                 Velocity = Vector2.Zero;
                 Acceleration = Vector2.Zero;
+
+                //Play a sound effect
+                GameManager.PlaySFX("Hurt");
+
                 //Show a message
                 GameManager.Get("GameoverText").Activate();
                 GameManager.Get("GameoverInstr").Activate();
@@ -164,6 +168,9 @@ namespace Current
         public void Hurt()
         {
             Health -= 1;
+            //Don't play if dead because it will play in CheckIfDead as well
+            if (Health > 0)
+                GameManager.PlaySFX("Hurt");
         }
 
         /// <summary>
@@ -198,6 +205,8 @@ namespace Current
                 Acceleration = airAcceleration;
                 //But give them an initial upward velocity
                 Velocity = jumpVelocity;
+                //Play a sound effect
+                GameManager.PlaySFX("Jump");
             }
 
             
@@ -251,6 +260,9 @@ namespace Current
 
                 //Turn back to normal color
                 DrawColor = Color.White;
+
+                //Stop ambient swim noise
+                GameManager.StopSFX("WaterLoop");
             }
         }
 
@@ -268,17 +280,19 @@ namespace Current
 
                 //Turn blue to match water
                 DrawColor = Color.Blue;
+
+                //Loop ambient swim noise
+                GameManager.LoopSFX("WaterLoop");
             }
 
         }
 
         /// <summary>
-        /// Set the health to the initial health, and move to start load location
+        /// Set the health to the initial health, and respawn
         /// </summary>
         public override void Reset()
         {
-            state = PlayerState.InAir;
-            Acceleration = airAcceleration;
+            Respawn();
             Health = startHealth;
             base.Reset();
         }
@@ -290,9 +304,15 @@ namespace Current
             state = PlayerState.InAir;
             Acceleration = airAcceleration;
 
+            //Reset color
+            DrawColor = Color.White;
+
             //Hide death message
             GameManager.Get("GameoverText").Deactivate();
             GameManager.Get("GameoverInstr").Deactivate();
+
+            //Stop ambient swim noise if we die in the water
+            GameManager.StopSFX("WaterLoop");
 
             Health = startHealth;
             base.Respawn();

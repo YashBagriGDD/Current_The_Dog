@@ -70,6 +70,7 @@
     <Compile Include="SaveTile.cs" />
     <Compile Include="Score.cs" />
     <Compile Include="ScorePickup.cs" />
+    <Compile Include="SFXWrapper.cs" />
     <Compile Include="Tile.cs" />
     <Compile Include="UIBackground.cs" />
     <Compile Include="UIButton.cs" />

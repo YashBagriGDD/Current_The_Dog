@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Current
 {
-    class CheckPoint : CollidableObject
+    class CheckPoint : Pickup
     {
 
 
@@ -19,10 +19,10 @@ namespace Current
 
 
         /// <summary>
-        /// Makes a checkpoint AND generates a unique ID
+        /// Makes a checkpoint.
         /// </summary>
         /// <param name="tex"></param>
-        public CheckPoint(string name, Texture2D tex, Rectangle location) : base(name, tex, location)
+        public CheckPoint(string name, Texture2D tex, Rectangle location) : base(name, tex, location, 0)
         {
             Passed = false;
         }
@@ -34,6 +34,10 @@ namespace Current
 
         protected override void HandleCollisionEnter(object sender, EventArgs e)
         {
+            //Include sfx logic
+            if (!Passed)
+                base.HandleCollisionEnter(sender, e);
+
             Collider other = (Collider)sender;
             //Only call this if we haven't been passed yet
             if (other.Host is Player && !Passed)
