@@ -113,6 +113,11 @@ namespace Current
         protected GameState previousState = GameState.None;
 
         /// <summary>
+        /// Should this object draw no matter what and ignore optimizations?
+        /// </summary>
+        public bool AlwaysDraw { get; set; } = false;
+
+        /// <summary>
         /// Initializes a GameObject
         /// </summary>
         public GameObject(string name, Rectangle location)
@@ -277,7 +282,7 @@ namespace Current
         {
             //Don't draw if outside camera's bounds
             Camera cam = GameManager.Get("MainCamera") as Camera;
-            if (cam != null)
+            if (cam != null && !AlwaysDraw)
             {
                 if (!cam.Bounds.Intersects(Location))
                     return;

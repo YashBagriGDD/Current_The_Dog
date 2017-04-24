@@ -16,6 +16,7 @@ namespace Current
         public Background(string name, Texture2D tex, Rectangle loc, GameState state) : base(name, tex, loc)
         {
             ActiveState = state;
+            AlwaysDraw = true;
         }
     }
 }

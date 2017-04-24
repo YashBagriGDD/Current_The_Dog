@@ -109,6 +109,7 @@ namespace Current
         Texture2D texBlock;
         Texture2D texBG1;
         Texture2D texHealth;
+        Texture2D texCatfish;
         #endregion
 
         #region Audio
@@ -132,6 +133,7 @@ namespace Current
             texBlock = Content.Load<Texture2D>("Textures/WhiteBlock");
             texBG1 = Content.Load<Texture2D>("Textures/Backgrounds/Background");
             texHealth = Content.Load<Texture2D>("Textures/HUD/Crossbone");
+            texCatfish = Content.Load<Texture2D>("Textures/Enemies/catfish");
 
             //Load Background Music
             songBg = Content.Load<Song>("Audio/Current");
@@ -319,24 +321,26 @@ namespace Current
                 Animate playerSwim = new Animate(texCurSwim, 12, 1, Animate.ONESIXTIETHSECPERFRAME * 10, player);
                 player.AddAnimation(playerSwim);
 
+
                 //Enemies
-                GameObject wa = GameManager.Get("Water1");
-                Catfish catfish = new Catfish("Catfish1", texBlock, new Rectangle(wa.LoadLocation.X + 300, wa.LoadLocation.Y, 50, 50));
+                Catfish c1 = new Catfish("Catfish1", texCatfish, new Rectangle(1997, 1000, 200, 100));
+                Catfish c2 = new Catfish("Catfish2", texCatfish, new Rectangle(2500, 1000, 200, 100));
+
 
                 //Drop in a goal
-                Goal goal = new Goal("Goal1", texBlock, new Rectangle(TargetWidth, 300, 50, 200));
+                Goal goal = new Goal("Goal1", texBlock, new Rectangle(5655, -244, 100, 300));
 
                 //Create the Camera
                 MainCamera = new Camera("MainCamera", new Rectangle(0, 0, 0, 0), player);
 
 
                 //Add pickups
-                ScorePickup scorePickup = new ScorePickup("ScorePickup1", texBlock, new Rectangle(500, 100, 100, 100), 10);
-                HealthPickup healthPickup = new HealthPickup("HealthPickup1", texBlock, new Rectangle(200, 100, 100, 100), 1);
+                ScorePickup scorePickup = new ScorePickup("ScorePickup1", texBlock, new Rectangle(1063, 505, 100, 100), 10);
+                HealthPickup healthPickup = new HealthPickup("HealthPickup1", texBlock, new Rectangle(1391, 55, 100, 100), 1);
                 healthPickup.DrawColor = Color.Red;
 
                 //Add a checkpoint
-                CheckPoint checkPoint = new CheckPoint("Checkpoint", texBlock, new Rectangle(700, 200, 50, 100));
+                CheckPoint checkPoint = new CheckPoint("Checkpoint", texBlock, new Rectangle(2270, -400, 50, 100));
             }
         }
 
@@ -347,6 +351,8 @@ namespace Current
         private void GenerateTiles(string path)
         {
 
+            Dictionary<Point, GameObject> tileDirectory = new Dictionary<Point, GameObject>();
+
             //Parse the level file
             List<SaveTile> tiles = GameManager.ParseLevel(path);
             //Load in the level tiles
@@ -354,16 +360,42 @@ namespace Current
             foreach (SaveTile tile in tiles)
             {
                 string type = GameManager.TextureMapping[tile.TextureName];
-                Texture2D tex = Content.Load<Texture2D>("textures/tiles/" + tile.TextureName);                                      //Some height lost here, so multiply it 
-                Rectangle loc = new Rectangle((int)(tile.X * xRatio), (int)(tile.Y * YRatio), (int)(TileWidth * xRatio), (int)(TileHeight * YRatio * 1.2f));
+                Texture2D tex = Content.Load<Texture2D>("textures/tiles/" + tile.TextureName);                                      
+                Rectangle loc = new Rectangle((int)(tile.X * xRatio), (int)(tile.Y * YRatio), (int)(TileWidth * xRatio), (int)(TileHeight * YRatio ));
+
+                Point check = new Point(loc.X, loc.Y);
                 switch (type)
                 {
                     case "Water":
                         Water w = new Water("Water" + numWater, tex, loc, Vector2.Zero);
+                        //Weed out duplicates
+                        if (tileDirectory.ContainsKey(check))
+                        {
+                            tileDirectory[check].Deactivate();
+                            tileDirectory[check] = w;
+                        }
+                        else
+                        {
+                            tileDirectory.Add(new Point(loc.X, loc.Y), w);
+                        }
+
                         numWater++;
                         break;
                     case "Platform":
                         Platform p = new Platform("Platform" + numPlatforms, tex, loc);
+
+                        //Weed out duplicates
+                        if (tileDirectory.ContainsKey(check))
+                        {
+                            tileDirectory[check].Deactivate();
+                            tileDirectory[check] = p;
+                        }
+                        else
+                        {
+                            tileDirectory.Add(new Point(loc.X, loc.Y), p);
+                        }
+
+
                         numPlatforms++;
                         break;
                 }
