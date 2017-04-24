@@ -53,6 +53,7 @@ namespace Current
             ActiveState = activeState;
             this.anchor = anchor;
             this.sortingMode = sortingMode;
+            AlwaysDraw = true;
         }
 
         public override void Update(GameTime gameTime)
