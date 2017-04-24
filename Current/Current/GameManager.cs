@@ -106,8 +106,8 @@ namespace Current
                 {"grass tile", "Platform" },
                 {"grass to sand tile", "Platform" },
                 {"sand tile",  "Platform" },
-                {"shore tile" , "Water" },
-                {"upper water tile", "Platform" }
+                {"shore tile" , "Platform" },
+                {"upper water tile", "Water" }
             };
 
 
