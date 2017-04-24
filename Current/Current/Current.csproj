@@ -94,6 +94,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bin\Windows\x86\Debug\Text\level1.txt" />
     <Content Include="Icon.ico" />
     <Content Include="Text\level.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
