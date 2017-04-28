@@ -263,6 +263,17 @@ namespace Current
             return tiles;
         }
 
+        /// <summary>
+        /// Given a file path, return that path without trailing directory.
+        /// For example, Textures/Folder/file returns file
+        /// </summary>
+        /// <param name="path">Path to file, without extension</param>
+        public static string TrimFilePath(string path)
+        {
+            int index = path.LastIndexOf("/") + 1;
+            return path.Substring(index);
+        }
+
 
         /// <summary>
         /// Reset all active GameObjects

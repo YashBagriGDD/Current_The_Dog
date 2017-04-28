@@ -43,6 +43,9 @@ namespace Current
             IsAlive = true;
             SetSpeed();
             HomePoint = new Vector2(Location.X, Location.Y);
+
+            //Make it blend in with water
+            DrawColor = Color.Blue;
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)

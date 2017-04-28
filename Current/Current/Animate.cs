@@ -43,7 +43,7 @@ namespace Current
             MillisecondsPerFrame = millisecondsPerFrame;
             totalFrames = Rows * Columns;
             Parent = parent;
-            Name = texture.Name;
+            Name = GameManager.TrimFilePath(texture.Name);
             isRunning = true;
         }
         

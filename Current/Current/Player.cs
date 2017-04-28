@@ -105,16 +105,22 @@ namespace Current
                     Move(MoveSpeed);
                     CheckForWaterWhenNotSwimming();
                     CheckIfDead();
+                    if (Velocity == Vector2.Zero)
+                        ChangeAnimation("CurrentIdle");
+                    else
+                        ChangeAnimation("CurrentWalk");
                     break;
                 case PlayerState.InAir:
                     //Move at reduced speed
                     Move(3 * MoveSpeed / 4);
                     CheckForWaterWhenNotSwimming();
                     CheckIfDead();
+                    ChangeAnimation("CurrentWalk");//Temporary
                     break;
                 case PlayerState.InWater:
                     Swim(MoveSpeed);
                     CheckIfDead();
+                    ChangeAnimation("CurrentSwim");
                     break;
                 case PlayerState.IsDead:
                     //Respawn
@@ -132,7 +138,7 @@ namespace Current
             }
    
 
-
+            
 
             base.Update(gameTime);
         }
