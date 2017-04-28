@@ -505,9 +505,9 @@ namespace Current
                     ui.Draw(gameTime, spriteBatchUI);
                 }
 
-           // Player p = GameManager.Get("Current") as Player;
-           // if (p != null)
-           //     spriteBatchUI.DrawString(font, p.Location.X + ", " + p.Location.Y, new Vector2(0, 50), Color.White);
+            Player p = GameManager.Get("Current") as Player;
+            if (p != null)
+                spriteBatchUI.DrawString(font, p.Location.X + ", " + p.Location.Y, new Vector2(0, 50), Color.White);
 
 
             spriteBatchUI.End();
