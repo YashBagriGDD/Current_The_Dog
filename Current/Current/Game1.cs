@@ -321,7 +321,7 @@ namespace Current
         {
 
             if (level == 0)
-            {   
+            {
 
                 //Load in the Background
                 Background b = new Background("bg1", Textures["Background"], new Rectangle(0, 0, TargetWidth, TargetHeight), GameState.Game);
@@ -352,7 +352,7 @@ namespace Current
 
 
             //Create the player regardless of level
-            Player player = new Player("Current", Textures["CurrentIdle"], new Rectangle(100, 0, 100, 100));
+            Player player = new Player("Current", Textures["CurrentIdle"], Textures["WhiteBlock"], new Rectangle(100, 0, 100, 100));
             player.AddAnimation(new Animate(Textures["CurrentIdle"], 1, 1, Animate.ONESIXTIETHSECPERFRAME, player));
             player.AddAnimation(new Animate(Textures["CurrentSwim"], 4, 3, Animate.ONESIXTIETHSECPERFRAME*5, player));
             player.AddAnimation(new Animate(Textures["CurrentWalk"], 4, 3, Animate.ONESIXTIETHSECPERFRAME, player));

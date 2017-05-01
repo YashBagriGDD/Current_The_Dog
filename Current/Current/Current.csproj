@@ -60,6 +60,7 @@
     <Compile Include="HUD.cs" />
     <Compile Include="InputManager.cs" />
     <Compile Include="Landcat.cs" />
+    <Compile Include="Laser.cs" />
     <Compile Include="MovingPlatform.cs" />
     <Compile Include="Pickup.cs" />
     <Compile Include="Platform.cs" />
