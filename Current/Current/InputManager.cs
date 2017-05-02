@@ -94,9 +94,18 @@ namespace Current
             }
             return false;
         }
-        public static bool GetButtonUp(string key)
+        public static bool GetButtonUp(string button)
         {
-            throw new NotImplementedException();
+            var ks = Keyboard.GetState();
+
+            foreach (Keys k in KeysDictionary[button])
+            {
+                if (ks.IsKeyUp(k) && prev.IsKeyDown(k))
+                {
+                    return true;
+                }
+            }
+            return false;
         } 
 
         /// <summary>

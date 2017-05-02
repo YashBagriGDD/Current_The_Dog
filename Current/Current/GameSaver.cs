@@ -16,9 +16,10 @@ namespace Current
         StreamWriter saver;
         StreamReader loader;
         
-        public GameSaver(int s , string n, int p)
+        
+        public GameSaver(int score , string name, int progress)
         {
-            data = new SavedData(s, n, p);
+            data = new SavedData(score, name, progress);
 
         }
         public void Save()

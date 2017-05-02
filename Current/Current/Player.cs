@@ -35,6 +35,13 @@ namespace Current
         //How strong is the player??
         public int Strength { get; set; }
 
+        public bool HasLaser { get; set; } 
+
+        /// <summary>
+        /// Reference to the laser gameobject
+        /// </summary>
+        public Laser LaserReference { get; set; }
+
         
 
         //General state enum
@@ -60,7 +67,7 @@ namespace Current
         /// <param name="name"></param>
         /// <param name="tex"></param>
         /// <param name="speed"></param>
-        public Player(string name, Texture2D tex, Rectangle location) : base(name, tex, location)
+        public Player(string name, Texture2D tex, Texture2D laserTex, Rectangle location) : base(name, tex, location)
         {
             //Setup various states and attributes
             MoveSpeed = 8;
@@ -72,11 +79,14 @@ namespace Current
 
             Health = startHealth;
 
+            HasLaser = true;
+
+            LaserReference = new Laser(name + "_laser", laserTex, new Rectangle(location.X, location.Y, Game1.TargetWidth, 20), this);
+
             //For the sake of physics
             Acceleration = airAcceleration;
             Velocity = new Vector2(0, 0);
-            
-            
+
         }
         
         /// <summary>
@@ -105,16 +115,22 @@ namespace Current
                     Move(MoveSpeed);
                     CheckForWaterWhenNotSwimming();
                     CheckIfDead();
+                    if (Velocity == Vector2.Zero)
+                        ChangeAnimation("CurrentIdle");
+                    else
+                        ChangeAnimation("CurrentWalk");
                     break;
                 case PlayerState.InAir:
                     //Move at reduced speed
                     Move(3 * MoveSpeed / 4);
                     CheckForWaterWhenNotSwimming();
                     CheckIfDead();
+                    ChangeAnimation("CurrentWalk");//Temporary
                     break;
                 case PlayerState.InWater:
                     Swim(MoveSpeed);
                     CheckIfDead();
+                    ChangeAnimation("CurrentSwim");
                     break;
                 case PlayerState.IsDead:
                     //Respawn
@@ -132,7 +148,7 @@ namespace Current
             }
    
 
-
+            
 
             base.Update(gameTime);
         }
@@ -231,11 +247,11 @@ namespace Current
             }   
             if (InputManager.GetButtonDown("Up"))
             {
-                Velocity = new Vector2(0, -speed);
+                Velocity.Y = -speed;
             }
             if (InputManager.GetButtonDown("Down"))
             {
-                Velocity = new Vector2(0, speed);
+                Velocity.Y = speed;
             }
 
             //Check for collisions and stop appropriate component of velocity while swimming
@@ -264,6 +280,14 @@ namespace Current
                 //Stop ambient swim noise
                 GameManager.StopSFX("WaterLoop");
             }
+        }
+
+        /// <summary>
+        /// Laser update logic
+        /// </summary>
+        public void LaserUpdate()
+        {
+            
         }
 
         /// <summary>

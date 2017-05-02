@@ -230,6 +230,9 @@ namespace Current
             }
             else
             {
+                //If we change to the same animation, no need to change anything
+                if (currentAnimation == animationName)
+                    return;
                 currentAnimation = animationName;
                 AnimationData[currentAnimation].Reset();
             }
@@ -237,7 +240,7 @@ namespace Current
         
 
         /// <summary>
-        /// Add a new animation that will be able to be played by name
+        /// Add a new animation that can be able to be played by name
         /// </summary>
         /// <param name="newAnimation"></param>
         public void AddAnimation(Animate newAnimation)

@@ -42,9 +42,17 @@ namespace Current
         //Debugging variables
         private double fps = 0;
 
+        //BG audio
+        public Song songBg;
 
-        //For threading.
-        public static object locker = new object();
+        /// <summary>
+        /// Holds all textures
+        /// </summary>
+        public static Dictionary<string, Texture2D> Textures;
+        /// <summary>
+        /// Holds all Sound Effects
+        /// </summary>
+        public static Dictionary<string, SoundEffect> SoundEffects;
 
         
         /// <summary>
@@ -102,20 +110,7 @@ namespace Current
             IsMouseVisible = true;
             base.Initialize();
         }
-
-
-        #region Textures
-        Texture2D texCurSwim;
-        Texture2D texBlock;
-        Texture2D texBG1;
-        Texture2D texHealth;
-        Texture2D texCatfish;
-        #endregion
-
-        #region Audio
-        Song songBg;
-        SoundEffect sfxHover, sfxHurt, sfxJump, sfxLand, sfxPickup, sfxSelect, sfxWaterLoop, sfxWin;
-        #endregion
+        
 
         /// <summary>
         /// LoadContent will be called once per game and is the place to load
@@ -129,24 +124,44 @@ namespace Current
             spriteBatchBG = new SpriteBatch(GraphicsDevice);
 
             //Load textures
-            texCurSwim = Content.Load<Texture2D>("Textures/Current/CurrentSwim");
-            texBlock = Content.Load<Texture2D>("Textures/WhiteBlock");
-            texBG1 = Content.Load<Texture2D>("Textures/Backgrounds/Background");
-            texHealth = Content.Load<Texture2D>("Textures/HUD/Crossbone");
-            texCatfish = Content.Load<Texture2D>("Textures/Enemies/catfish");
+            Textures = new Dictionary<string, Texture2D>
+            {
+                {"CurrentSwim", Content.Load<Texture2D>("Textures/Current/CurrentSwim")},
+                {"CurrentWalk", Content.Load<Texture2D>("Textures/Current/CurrentWalk") },
+                {"CurrentIdle", Content.Load<Texture2D>("Textures/Current/CurrentIdle") },
+                {"WhiteBlock",  Content.Load<Texture2D>("Textures/WhiteBlock")},
+                {"Background",  Content.Load<Texture2D>("Textures/Backgrounds/Background")},
+                {"Crossbone", Content.Load<Texture2D>("Textures/HUD/Crossbone") },
+                {"catfish", Content.Load<Texture2D>("Textures/Enemies/catfish") },
+                {"deep water tile", Content.Load<Texture2D>("Textures/Tiles/deep water tile")},
+                {"grass tile", Content.Load<Texture2D>("Textures/Tiles/grass tile")},
+                {"grass to sand tile", Content.Load<Texture2D>("Textures/Tiles/grass to sand tile")},
+                {"sand tile", Content.Load<Texture2D>("Textures/Tiles/sand tile")},
+                {"shore tile", Content.Load<Texture2D>("Textures/Tiles/shore tile")},
+                {"upper water tile", Content.Load<Texture2D>("Textures/Tiles/upper water tile")}
+            };
 
+
+
+    
             //Load Background Music
             songBg = Content.Load<Song>("Audio/Current");
+
+
+
             //Load Sound Effects
-            sfxHover = Content.Load<SoundEffect>("Audio/Hover");
-            sfxHurt = Content.Load<SoundEffect>("Audio/Hurt");
-            sfxJump = Content.Load<SoundEffect>("Audio/Jump");
-            sfxLand = Content.Load<SoundEffect>("Audio/Land");
-            sfxPickup = Content.Load<SoundEffect>("Audio/Pickup");
-            sfxSelect = Content.Load<SoundEffect>("Audio/Select");
-            sfxHurt = Content.Load<SoundEffect>("Audio/Hurt");
-            sfxWaterLoop = Content.Load<SoundEffect>("Audio/WaterLoop");
-            sfxWin = Content.Load<SoundEffect>("Audio/Win");
+            SoundEffects = new Dictionary<string, SoundEffect>
+            {
+                {"Hover", Content.Load<SoundEffect>("Audio/Hover") },
+                {"Hurt", Content.Load<SoundEffect>("Audio/Hurt") },
+                {"Jump", Content.Load<SoundEffect>("Audio/Jump") },
+                {"Land", Content.Load<SoundEffect>("Audio/Land") },
+                {"Pickup", Content.Load<SoundEffect>("Audio/Pickup")},
+                {"Select",  Content.Load<SoundEffect>("Audio/Select") },
+                {"WaterLoop",  Content.Load<SoundEffect>("Audio/WaterLoop")},
+                {"Win", Content.Load<SoundEffect>("Audio/Win")}
+            };
+
 
             //Load fonts
             font = Content.Load<SpriteFont>("Fonts/Font");
@@ -156,12 +171,9 @@ namespace Current
 
 
             //Construct audio holders so we can reference soundeffects through GameManager
-            SoundEffect[] clips = { sfxHover, sfxHurt, sfxJump, sfxLand, sfxPickup, sfxSelect, sfxWaterLoop, sfxWin };
-            foreach (SoundEffect clip in clips)
+            foreach (string clipName in SoundEffects.Keys)
             {
-                int start = clip.Name.LastIndexOf("/") + 1;
-                string name = clip.Name.Substring(start);
-                SFXWrapper wrapper = new SFXWrapper(name, clip);
+                SFXWrapper wrapper = new SFXWrapper(clipName, SoundEffects[clipName]);
             }
 
             //Play background music
@@ -174,13 +186,13 @@ namespace Current
             int bWidth = 400, bHeight = 100;
 
             //Create the Main Menu
-            Background bMainMenu = new Background("bgMainMenu", texBG1, new Rectangle(0, 0, TargetWidth, TargetHeight), GameState.MainMenu);
+            Background bMainMenu = new Background("bgMainMenu", Textures["Background"], new Rectangle(0, 0, TargetWidth, TargetHeight), GameState.MainMenu);
 
             //Main Menu Substate
             UIText title = new UIText("Title", "Current", titleFont, Anchor.UpperMiddle, SortingMode.None, GameState.MainMenu, Point.Zero, Color.White);
 
-            UIButton play = new UIButton("PlayB", "Play", font, texBlock, Anchor.CenterMiddle, SortingMode.Below, GameState.MainMenu, Point.Zero, Color.White, buttonBackColor, bWidth, bHeight);
-            UIButton quit = new UIButton("QuitB", "Quit", font, texBlock, Anchor.CenterMiddle, SortingMode.Below, GameState.MainMenu, new Point(0, 50), Color.White, buttonBackColor, bWidth, bHeight);
+            UIButton play = new UIButton("PlayB", "Play", font, Textures["WhiteBlock"], Anchor.CenterMiddle, SortingMode.Below, GameState.MainMenu, Point.Zero, Color.White, buttonBackColor, bWidth, bHeight);
+            UIButton quit = new UIButton("QuitB", "Quit", font, Textures["WhiteBlock"], Anchor.CenterMiddle, SortingMode.Below, GameState.MainMenu, new Point(0, 50), Color.White, buttonBackColor, bWidth, bHeight);
 
             //Setup button delegates
             play.Click += LoadCurrentLevel;
@@ -191,7 +203,7 @@ namespace Current
             };
 
             //Setup HUD
-            HealthBar bar = new HealthBar("HealthBar", texHealth, new Point(100, 66));
+            HealthBar bar = new HealthBar("HealthBar", Textures["Crossbone"], new Point(100, 66));
             Score score = new Score("Score", hudFont, Anchor.UpperRight, SortingMode.None, GameState.Game, Point.Zero, Color.White);
 
 
@@ -200,9 +212,9 @@ namespace Current
             //Setup the pause menu
             UIText pauseText = new UIText("pauseText", "PAUSED", font, Anchor.UpperMiddle, SortingMode.Below, GameState.Game, Point.Zero, Color.White);
             pauseText.ActiveGameplayState = GameplayState.Paused;
-            UIButton pauseResumeButton = new UIButton("pauseResumeButton", "Resume", font, texBlock, Anchor.CenterMiddle, SortingMode.Below, GameState.Game, new Point(0, 0), Color.White, buttonBackColor);
+            UIButton pauseResumeButton = new UIButton("pauseResumeButton", "Resume", font, Textures["WhiteBlock"], Anchor.CenterMiddle, SortingMode.Below, GameState.Game, new Point(0, 0), Color.White, buttonBackColor);
             pauseResumeButton.ActiveGameplayState = GameplayState.Paused;
-            UIButton pauseMainMenuButton = new UIButton("pauseMainMenuButton", "Main Menu", font, texBlock, Anchor.CenterMiddle, SortingMode.Below, GameState.Game, new Point(0, 50), Color.White, buttonBackColor);
+            UIButton pauseMainMenuButton = new UIButton("pauseMainMenuButton", "Main Menu", font, Textures["WhiteBlock"], Anchor.CenterMiddle, SortingMode.Below, GameState.Game, new Point(0, 50), Color.White, buttonBackColor);
             pauseMainMenuButton.ActiveGameplayState = GameplayState.Paused;
 
 
@@ -240,12 +252,12 @@ namespace Current
 
 
             //Setup win level buttons
-            UIButton winMainMenuButton = new UIButton("WinMainMenuButton", "Back to Main Menu", font, texBlock, Anchor.LowerMiddle, SortingMode.None, GameState.Game, Point.Zero, Color.White, buttonBackColor);
+            UIButton winMainMenuButton = new UIButton("WinMainMenuButton", "Back to Main Menu", font, Textures["WhiteBlock"], Anchor.LowerMiddle, SortingMode.None, GameState.Game, Point.Zero, Color.White, buttonBackColor);
             winMainMenuButton.ActiveState = GameState.Game;
             winMainMenuButton.Deactivate();
 
             //Next level button (part of win menu)
-            UIButton winNextButton = new UIButton("WinNextButton", "Next Level", font, texBlock, Anchor.LowerMiddle, SortingMode.None, GameState.Game, Point.Zero, Color.White, buttonBackColor);
+            UIButton winNextButton = new UIButton("WinNextButton", "Next Level", font, Textures["WhiteBlock"], Anchor.LowerMiddle, SortingMode.None, GameState.Game, Point.Zero, Color.White, buttonBackColor);
             winNextButton.ActiveState = GameState.Game;
             winNextButton.Deactivate();
 
@@ -307,41 +319,50 @@ namespace Current
         /// <param name="levelFile">Path to level txt file (With extension) </param>
         public void LoadLevel(int level, string levelFile)
         {
+
             if (level == 0)
-            {   
+            {
 
                 //Load in the Background
-                Background b = new Background("bg1", texBG1, new Rectangle(0, 0, TargetWidth, TargetHeight), GameState.Game);
+                Background b = new Background("bg1", Textures["Background"], new Rectangle(0, 0, TargetWidth, TargetHeight), GameState.Game);
 
                 //Generate tiles
                 GenerateTiles(levelFile);
 
-                //Create the player
-                Player player = new Player("Current", texCurSwim, new Rectangle(100, 0, 100, 100));
-                Animate playerSwim = new Animate(texCurSwim, 12, 1, Animate.ONESIXTIETHSECPERFRAME * 10, player);
-                player.AddAnimation(playerSwim);
+
 
 
                 //Enemies
-                Catfish c1 = new Catfish("Catfish1", texCatfish, new Rectangle(1997, 1000, 200, 100));
-                Catfish c2 = new Catfish("Catfish2", texCatfish, new Rectangle(2500, 1000, 200, 100));
+                Catfish c1 = new Catfish("Catfish1", Textures["catfish"], new Rectangle(1997, 1000, 200, 100));
+                Catfish c2 = new Catfish("Catfish2", Textures["catfish"], new Rectangle(2500, 1000, 200, 100));
 
 
                 //Drop in a goal
-                Goal goal = new Goal("Goal1", texBlock, new Rectangle(5655, -244, 100, 300));
-
-                //Create the Camera
-                MainCamera = new Camera("MainCamera", new Rectangle(0, 0, 0, 0), player);
-
+                Goal goal = new Goal("Goal1", Textures["WhiteBlock"], new Rectangle(5655, -244, 100, 300));
 
                 //Add pickups
-                ScorePickup scorePickup = new ScorePickup("ScorePickup1", texBlock, new Rectangle(1063, 505, 100, 100), 10);
-                HealthPickup healthPickup = new HealthPickup("HealthPickup1", texBlock, new Rectangle(1391, 55, 100, 100), 1);
+                ScorePickup scorePickup = new ScorePickup("ScorePickup1", Textures["WhiteBlock"], new Rectangle(1063, 505, 100, 100), 10);
+                HealthPickup healthPickup = new HealthPickup("HealthPickup1", Textures["WhiteBlock"], new Rectangle(1391, 55, 100, 100), 1);
                 healthPickup.DrawColor = Color.Red;
 
                 //Add a checkpoint
-                CheckPoint checkPoint = new CheckPoint("Checkpoint", texBlock, new Rectangle(2270, -400, 50, 100));
+                CheckPoint checkPoint = new CheckPoint("Checkpoint", Textures["WhiteBlock"], new Rectangle(2270, -400, 50, 100));
             }
+
+
+
+            //Create the player regardless of level
+            Player player = new Player("Current", Textures["CurrentIdle"], Textures["WhiteBlock"], new Rectangle(100, 0, 100, 100));
+            player.AddAnimation(new Animate(Textures["CurrentIdle"], 1, 1, Animate.ONESIXTIETHSECPERFRAME, player));
+            player.AddAnimation(new Animate(Textures["CurrentSwim"], 4, 3, Animate.ONESIXTIETHSECPERFRAME*5, player));
+            player.AddAnimation(new Animate(Textures["CurrentWalk"], 4, 3, Animate.ONESIXTIETHSECPERFRAME, player));
+
+            //Create the Camera
+            MainCamera = new Camera("MainCamera", new Rectangle(0, 0, 0, 0), player);
+
+
+
+
         }
 
         /// <summary>
@@ -360,8 +381,8 @@ namespace Current
             foreach (SaveTile tile in tiles)
             {
                 string type = GameManager.TextureMapping[tile.TextureName];
-                Texture2D tex = Content.Load<Texture2D>("textures/tiles/" + tile.TextureName);                                      
-                Rectangle loc = new Rectangle((int)(tile.X * xRatio), (int)(tile.Y * YRatio), (int)(TileWidth * xRatio), (int)(TileHeight * YRatio ));
+                Texture2D tex = Textures[tile.TextureName];                                      
+                Rectangle loc = new Rectangle((int)(tile.X * xRatio), (int)(tile.Y * YRatio), (int)(TileWidth * xRatio), (int)(TileHeight * YRatio * 1.1f));
 
                 Point check = new Point(loc.X, loc.Y);
                 switch (type)
