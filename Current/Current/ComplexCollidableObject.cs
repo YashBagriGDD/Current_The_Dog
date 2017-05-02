@@ -20,6 +20,11 @@ namespace Current
         protected Collider CollRight { get; set; }
 
         /// <summary>
+        /// Draw rectangles where the colliders are?
+        /// </summary>
+        protected bool DebugDraw { get; set; } 
+
+        /// <summary>
         /// Makes a new object with colliders above, below, left, and right
         /// </summary>
         /// <param name="name"></param>
@@ -28,7 +33,7 @@ namespace Current
         public ComplexCollidableObject(string name, Texture2D texture, Rectangle location) : base(name, texture, location)
         {
             //Multipliers for the longer and shorter dimensions of the rectangle
-            float maxMod = .65f;
+            float maxMod = .35f;
             float minMod = .10f;
             //The width and height of the new horizontal rectangles
             int hWidth = (int)(Location.Width * maxMod);
@@ -55,6 +60,8 @@ namespace Current
             CollLeft = new Collider(this, rLeft);
             CollRight = new Collider(this, rRight);
 
+            DebugDraw = false;
+
 
         }
 
@@ -70,7 +77,17 @@ namespace Current
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-           base.Draw(gameTime, spriteBatch);
+            base.Draw(gameTime, spriteBatch);
+            if (DebugDraw)
+            {
+                spriteBatch.Draw(Game1.Textures["WhiteBlock"], CollAbove.Hitbox, Color.White);
+                spriteBatch.Draw(Game1.Textures["WhiteBlock"], CollBelow.Hitbox, Color.White);
+                spriteBatch.Draw(Game1.Textures["WhiteBlock"], CollRight.Hitbox, Color.White);
+                spriteBatch.Draw(Game1.Textures["WhiteBlock"], CollLeft.Hitbox, Color.White);
+            }
+
+
+
         }
     }
 }

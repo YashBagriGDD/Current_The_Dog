@@ -90,8 +90,8 @@ namespace Current
 
 
             //Set up a hover effect
-            float tintFactor = .4f;
-            Color shade = new Color((int)(bgColor.R + (255-bgColor.R)*tintFactor), (int)(bgColor.G + (255 - bgColor.G) * tintFactor), (int)(bgColor.B + (255 - bgColor.B) * tintFactor), bgColor.A);
+            float tintFactor = .9f;
+            Color shade = new Color((int)(bgColor.R*tintFactor), (int)(bgColor.G * tintFactor), (int)(bgColor.B * tintFactor), bgColor.A);
 
             HoverBegin += () =>
             {

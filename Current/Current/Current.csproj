@@ -62,6 +62,7 @@
     <Compile Include="Landcat.cs" />
     <Compile Include="Laser.cs" />
     <Compile Include="MovingPlatform.cs" />
+    <Compile Include="ParallaxBackground.cs" />
     <Compile Include="Pickup.cs" />
     <Compile Include="Platform.cs" />
     <Compile Include="Player.cs" />
@@ -73,7 +74,6 @@
     <Compile Include="ScorePickup.cs" />
     <Compile Include="SFXWrapper.cs" />
     <Compile Include="Tile.cs" />
-    <Compile Include="UIBackground.cs" />
     <Compile Include="UIButton.cs" />
     <Compile Include="UIImage.cs" />
     <Compile Include="UIManager.cs" />

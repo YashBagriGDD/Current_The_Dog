@@ -130,7 +130,7 @@ namespace Current
                 {"CurrentWalk", Content.Load<Texture2D>("Textures/Current/CurrentWalk") },
                 {"CurrentIdle", Content.Load<Texture2D>("Textures/Current/CurrentIdle") },
                 {"WhiteBlock",  Content.Load<Texture2D>("Textures/WhiteBlock")},
-                {"Background",  Content.Load<Texture2D>("Textures/Backgrounds/Background")},
+                {"Background", Content.Load<Texture2D>("Textures/Backgrounds/Sunset") },
                 {"Crossbone", Content.Load<Texture2D>("Textures/HUD/Crossbone") },
                 {"catfish", Content.Load<Texture2D>("Textures/Enemies/catfish") },
                 {"deep water tile", Content.Load<Texture2D>("Textures/Tiles/deep water tile")},
@@ -138,7 +138,8 @@ namespace Current
                 {"grass to sand tile", Content.Load<Texture2D>("Textures/Tiles/grass to sand tile")},
                 {"sand tile", Content.Load<Texture2D>("Textures/Tiles/sand tile")},
                 {"shore tile", Content.Load<Texture2D>("Textures/Tiles/shore tile")},
-                {"upper water tile", Content.Load<Texture2D>("Textures/Tiles/upper water tile")}
+                {"upper water tile", Content.Load<Texture2D>("Textures/Tiles/upper water tile")},
+                {"Button", Content.Load<Texture2D>("Textures/HUD/Button") }
             };
 
 
@@ -177,8 +178,8 @@ namespace Current
             }
 
             //Play background music
-            MediaPlayer.Play(songBg);
-            MediaPlayer.IsRepeating = true;
+            //MediaPlayer.Play(songBg);
+            //MediaPlayer.IsRepeating = true;
 
 
 
@@ -191,8 +192,8 @@ namespace Current
             //Main Menu Substate
             UIText title = new UIText("Title", "Current", titleFont, Anchor.UpperMiddle, SortingMode.None, GameState.MainMenu, Point.Zero, Color.White);
 
-            UIButton play = new UIButton("PlayB", "Play", font, Textures["WhiteBlock"], Anchor.CenterMiddle, SortingMode.Below, GameState.MainMenu, Point.Zero, Color.White, buttonBackColor, bWidth, bHeight);
-            UIButton quit = new UIButton("QuitB", "Quit", font, Textures["WhiteBlock"], Anchor.CenterMiddle, SortingMode.Below, GameState.MainMenu, new Point(0, 50), Color.White, buttonBackColor, bWidth, bHeight);
+            UIButton play = new UIButton("PlayB", "Play", font, Textures["Button"], Anchor.CenterMiddle, SortingMode.Below, GameState.MainMenu, Point.Zero, Color.Black, Color.White, bWidth, bHeight);
+            UIButton quit = new UIButton("QuitB", "Quit", font, Textures["Button"], Anchor.CenterMiddle, SortingMode.Below, GameState.MainMenu, new Point(0, 50), Color.Black, Color.White, bWidth, bHeight);
 
             //Setup button delegates
             play.Click += LoadCurrentLevel;
@@ -210,11 +211,15 @@ namespace Current
 
 
             //Setup the pause menu
+            Background bgPause = new Background("bgPause", Textures["Background"], new Rectangle(0, 0, TargetWidth, TargetHeight), GameState.Game);
+            bgPause.ActiveGameplayState = GameplayState.Paused;
+
+
             UIText pauseText = new UIText("pauseText", "PAUSED", font, Anchor.UpperMiddle, SortingMode.Below, GameState.Game, Point.Zero, Color.White);
             pauseText.ActiveGameplayState = GameplayState.Paused;
-            UIButton pauseResumeButton = new UIButton("pauseResumeButton", "Resume", font, Textures["WhiteBlock"], Anchor.CenterMiddle, SortingMode.Below, GameState.Game, new Point(0, 0), Color.White, buttonBackColor);
+            UIButton pauseResumeButton = new UIButton("pauseResumeButton", "Resume", font, Textures["Button"], Anchor.CenterMiddle, SortingMode.Below, GameState.Game, new Point(0, 0), Color.Black, Color.White);
             pauseResumeButton.ActiveGameplayState = GameplayState.Paused;
-            UIButton pauseMainMenuButton = new UIButton("pauseMainMenuButton", "Main Menu", font, Textures["WhiteBlock"], Anchor.CenterMiddle, SortingMode.Below, GameState.Game, new Point(0, 50), Color.White, buttonBackColor);
+            UIButton pauseMainMenuButton = new UIButton("pauseMainMenuButton", "Main Menu", font, Textures["Button"], Anchor.CenterMiddle, SortingMode.Below, GameState.Game, new Point(0, 50), Color.Black, Color.White);
             pauseMainMenuButton.ActiveGameplayState = GameplayState.Paused;
 
 
@@ -252,12 +257,12 @@ namespace Current
 
 
             //Setup win level buttons
-            UIButton winMainMenuButton = new UIButton("WinMainMenuButton", "Back to Main Menu", font, Textures["WhiteBlock"], Anchor.LowerMiddle, SortingMode.None, GameState.Game, Point.Zero, Color.White, buttonBackColor);
+            UIButton winMainMenuButton = new UIButton("WinMainMenuButton", "Back to Main Menu", font, Textures["Button"], Anchor.LowerMiddle, SortingMode.None, GameState.Game, Point.Zero, Color.Black, Color.White);
             winMainMenuButton.ActiveState = GameState.Game;
             winMainMenuButton.Deactivate();
 
             //Next level button (part of win menu)
-            UIButton winNextButton = new UIButton("WinNextButton", "Next Level", font, Textures["WhiteBlock"], Anchor.LowerMiddle, SortingMode.None, GameState.Game, Point.Zero, Color.White, buttonBackColor);
+            UIButton winNextButton = new UIButton("WinNextButton", "Next Level", font, Textures["Button"], Anchor.LowerMiddle, SortingMode.None, GameState.Game, Point.Zero, Color.Black, Color.White);
             winNextButton.ActiveState = GameState.Game;
             winNextButton.Deactivate();
 
@@ -324,7 +329,7 @@ namespace Current
             {
 
                 //Load in the Background
-                Background b = new Background("bg1", Textures["Background"], new Rectangle(0, 0, TargetWidth, TargetHeight), GameState.Game);
+                ParallaxBackground b = new ParallaxBackground("ParallaxBG1", Textures["Background"], new Rectangle(0, 0, TargetWidth, TargetHeight), GameState.Game, 1, null);
 
                 //Generate tiles
                 GenerateTiles(levelFile);
@@ -359,6 +364,10 @@ namespace Current
 
             //Create the Camera
             MainCamera = new Camera("MainCamera", new Rectangle(0, 0, 0, 0), player);
+
+            //Setup parallax bg
+            ParallaxBackground p = (ParallaxBackground)(GameManager.Get("ParallaxBG1"));
+            p.Target = player;
 
 
 

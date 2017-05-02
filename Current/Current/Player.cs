@@ -233,27 +233,38 @@ namespace Current
         /// </summary>
         public void Swim(int speed)
         {
-            if (InputManager.GetButtonDown("Right") )
+
+            int horz = 0;
+            int vert = 0;
+
+            if (InputManager.GetButton("Right") )
             {
-                Velocity = new Vector2(speed, 0);
+                horz = 1;
                 SpriteFX = SpriteEffects.FlipHorizontally;
-                direction = Direction.Right;
             }
-            if (InputManager.GetButtonDown("Left"))
+            if (InputManager.GetButton("Left"))
             {
-                Velocity = new Vector2(-speed, 0);
+                horz = -1;
                 SpriteFX = SpriteEffects.None;
-                direction = Direction.Left;
-            }   
-            if (InputManager.GetButtonDown("Up"))
-            {
-                Velocity.Y = -speed;
+
             }
-            if (InputManager.GetButtonDown("Down"))
+            if (InputManager.GetButton("Up"))
             {
-                Velocity.Y = speed;
+                vert = 1;
+            }
+            if (InputManager.GetButton("Down"))
+            {
+                vert = -1;
             }
 
+            if (horz != 0 || vert != 0)
+            {
+                Velocity = new Vector2(horz * speed, -vert * speed);
+            }
+
+  
+                
+            
             //Check for collisions and stop appropriate component of velocity while swimming
             if (CollLeft.CollidingWith<Platform>() && Velocity.X < 0)
                 Velocity.X = 0;
