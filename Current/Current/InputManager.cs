@@ -48,7 +48,8 @@ namespace Current
                 {"Left", new Keys[] {Keys.A, Keys.Left} },
                 {"Up", new Keys[] {Keys.W, Keys.Up} },
                 {"Down", new Keys[] {Keys.S, Keys.Down} },
-                {"Jump", new Keys[] {Keys.Space} },
+                {"Jump", new Keys[] {Keys.Space, Keys.X} },
+                {"Fire", new Keys[] {Keys.LeftShift, Keys.Z} },
                 {"Cancel", new Keys[] {Keys.Escape, Keys.Back } },
                 {"Fullscreen", new Keys[] {Keys.Enter} }
             };

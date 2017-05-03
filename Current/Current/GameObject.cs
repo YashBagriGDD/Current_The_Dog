@@ -27,6 +27,15 @@ namespace Current
         //What color to draw this object
         public Color DrawColor { get; set; }
             = Color.White;
+
+        /// <summary>
+        /// Origin to draw at
+        /// </summary>
+        public Vector2? Origin { get; protected set; } = null;
+        /// <summary>
+        /// Rotation
+        /// </summary>
+        public float Rotation { get; protected set; } = 0;
         //Should this sprite be flipped in any direction?
         public SpriteEffects SpriteFX { get; set; }
             = SpriteEffects.None;
@@ -281,6 +290,8 @@ namespace Current
         /// <param name="gameTime">gameTime</param>
         /// <param name="spriteBatch">Active spriteBatch</param>
         /// <param name="depth">Optional depth specification</param>
+        /// <param name="origin">Sprite origin point. Default null</param>
+        /// <param name="rotation">Rotation</param>
         public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             //Don't draw if outside camera's bounds
@@ -296,9 +307,10 @@ namespace Current
                 return;
 
             if (AnimationData == null || !AnimationData.ContainsKey(currentAnimation))
-                spriteBatch.Draw(Texture, destinationRectangle: Location, color: DrawColor, effects: SpriteFX);
+                spriteBatch.Draw(Texture, destinationRectangle: Location, color: DrawColor, effects: SpriteFX, origin:Origin, rotation:Rotation);
             else
                 AnimationData[currentAnimation].Draw(spriteBatch);
+
         }
 
     }

@@ -107,7 +107,7 @@ namespace Current
             //spriteBatch.Draw(Texture, destinationRectangle, sourceRectangle, Color.White);
 
 
-            spriteBatch.Draw(Texture, destinationRectangle: destinationRectangle, sourceRectangle: sourceRectangle, color: Parent.DrawColor, effects: Parent.SpriteFX);
+            spriteBatch.Draw(Texture, destinationRectangle: destinationRectangle, sourceRectangle: sourceRectangle, color: Parent.DrawColor, effects: Parent.SpriteFX, origin:Parent.Origin, rotation:Parent.Rotation);
 
 
         }

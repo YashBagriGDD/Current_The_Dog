@@ -81,7 +81,7 @@ namespace Current
 
             HasLaser = true;
 
-            LaserReference = new Laser(name + "_laser", laserTex, new Rectangle(location.X, location.Y, Game1.TargetWidth, 20), this);
+            LaserReference = new Laser(name + "_laser", laserTex, this, new Point(Location.Width, Location.Height/2));
 
             //For the sake of physics
             Acceleration = airAcceleration;
@@ -115,6 +115,7 @@ namespace Current
                     Move(MoveSpeed);
                     CheckForWaterWhenNotSwimming();
                     CheckIfDead();
+                    LaserUpdate();
                     if (Velocity == Vector2.Zero)
                         ChangeAnimation("CurrentIdle");
                     else
@@ -126,11 +127,13 @@ namespace Current
                     CheckForWaterWhenNotSwimming();
                     CheckIfDead();
                     ChangeAnimation("CurrentWalk");//Temporary
+                    LaserUpdate();
                     break;
                 case PlayerState.InWater:
                     Swim(MoveSpeed);
                     CheckIfDead();
                     ChangeAnimation("CurrentSwim");
+                    LaserUpdate();
                     break;
                 case PlayerState.IsDead:
                     //Respawn
@@ -168,6 +171,9 @@ namespace Current
 
                 //Play a sound effect
                 GameManager.PlaySFX("Hurt");
+
+                //Turn off the laser
+                LaserReference.Deactivate();
 
                 //Show a message
                 GameManager.Get("GameoverText").Activate();
@@ -241,11 +247,13 @@ namespace Current
             {
                 horz = 1;
                 SpriteFX = SpriteEffects.FlipHorizontally;
+                direction = Direction.Right;
             }
             if (InputManager.GetButton("Left"))
             {
                 horz = -1;
                 SpriteFX = SpriteEffects.None;
+                direction = Direction.Left;
 
             }
             if (InputManager.GetButton("Up"))
@@ -298,7 +306,21 @@ namespace Current
         /// </summary>
         public void LaserUpdate()
         {
-            
+            if (InputManager.GetButtonDown("Fire"))
+            {
+                LaserReference.Activate();
+            }
+            if (InputManager.GetButtonUp("Fire"))
+            {
+                LaserReference.Deactivate();
+            }
+
+
+            if (direction == Direction.Right)
+                LaserReference.Offset = new Point(Location.Width, Location.Height / 2);
+            else
+                LaserReference.Offset = new Point(-LaserReference.Location.Width, Location.Height / 2);
+
         }
 
         /// <summary>

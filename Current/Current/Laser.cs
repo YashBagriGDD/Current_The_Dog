@@ -19,10 +19,19 @@ namespace Current
         /// </summary>
         GameObject Parent;
 
-        public Laser(string name, Texture2D texture, Rectangle location, GameObject Parent) : base(name, texture, location)
+        /// <summary>
+        /// Offset between parent and laser position
+        /// </summary>
+        public Point Offset;
+
+        public Laser(string name, Texture2D texture, GameObject Parent, Point offset) : base(name, texture, Rectangle.Empty)
         {
             this.Parent = Parent;
+            Location = new Rectangle(0,0, Game1.TargetWidth, 20);
+            Offset = offset;
             Deactivate();
+
+            Rotation = 0;
         }
 
         public override void Update(GameTime gameTime)
@@ -32,7 +41,9 @@ namespace Current
             //Snap to parent location
             if (Active)
             {
-                Location = Parent.Location;
+                Location.X = Parent.Location.X + Offset.X;
+                Location.Y = Parent.Location.Y + Offset.Y;
+
             }
         }
 
