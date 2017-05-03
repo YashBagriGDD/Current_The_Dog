@@ -187,7 +187,7 @@ namespace Current
             int bWidth = 400, bHeight = 100;
 
             //Create the Main Menu
-            Background bMainMenu = new Background("bgMainMenu", Textures["Background"], new Rectangle(0, 0, TargetWidth, TargetHeight), GameState.MainMenu);
+            UIImage bMainMenu = new UIImage("bgMainMenu", Textures["Background"], new Point( TargetWidth, TargetHeight), Anchor.UpperLeft, SortingMode.None, GameState.MainMenu, Point.Zero, Color.White);
 
             //Main Menu Substate
             UIText title = new UIText("Title", "Current", titleFont, Anchor.UpperMiddle, SortingMode.None, GameState.MainMenu, Point.Zero, Color.White);
@@ -211,7 +211,7 @@ namespace Current
 
 
             //Setup the pause menu
-            Background bgPause = new Background("bgPause", Textures["Background"], new Rectangle(0, 0, TargetWidth, TargetHeight), GameState.Game);
+            UIImage bgPause = new UIImage("bgPause", Textures["Background"], new Point(TargetWidth, TargetHeight), Anchor.UpperLeft, SortingMode.None, GameState.Game, Point.Zero, Color.White);
             bgPause.ActiveGameplayState = GameplayState.Paused;
 
 
@@ -518,6 +518,9 @@ namespace Current
             if (MainCamera != null)
             {
                 spriteBatchGameplay.Begin(transformMatrix: MainCamera.TransformMatrix);
+                //Draw the background(s) first
+
+
                 //Draw all the gameobjects using the translation matrix
                 foreach (GameObject g in GameManager.NonUIObjects)
                 {
