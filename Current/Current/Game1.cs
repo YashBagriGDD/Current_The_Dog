@@ -248,10 +248,13 @@ namespace Current
 
 
             //Setup win level message
-            UIText winText = new UIText("WinText", "Current completed the level!", titleFont, Anchor.CenterMiddle, SortingMode.None, GameState.Game, Point.Zero, Color.White);
+            UIText winText = new UIText("WinText", "Current completed the level!", titleFont, Anchor.CenterMiddle, SortingMode.Below, GameState.Game, Point.Zero, Color.White);
             winText.ActiveState = GameState.Game;
             winText.Deactivate();
 
+            HighscoreDisplay highscore = new HighscoreDisplay("Highscore", font, Anchor.LowerRight, SortingMode.None, GameState.Game, Point.Zero, Color.White);
+            highscore.ActiveState = GameState.Game;
+            highscore.Deactivate();
 
             //Setup win game message
             UIText winGameText = new UIText("WinGameText", "Current was victorious!", titleFont, Anchor.CenterMiddle, SortingMode.None, GameState.Game, Point.Zero, Color.White);
@@ -278,6 +281,7 @@ namespace Current
                 winNextButton.Deactivate();
                 winText.Deactivate();
                 winGameText.Deactivate();
+                highscore.Deactivate();
 
                 if (GameManager.CompletedAllLevels)
                     GameManager.CurrentLevel = 0;
@@ -345,8 +349,8 @@ namespace Current
 
 
                 //Enemies
-                Catfish c1 = new Catfish("Catfish1", Textures["catfish"], new Rectangle(1997, 1000, 200, 100));
-                Catfish c2 = new Catfish("Catfish2", Textures["catfish"], new Rectangle(2500, 1000, 200, 100));
+                Catfish c1 = new Catfish("Catfish1", Textures["catfish"], new Rectangle(1997, 1000, 100, 50));
+                Catfish c2 = new Catfish("Catfish2", Textures["catfish"], new Rectangle(2500, 1000, 100, 50));
 
 
                 //Drop in a goal

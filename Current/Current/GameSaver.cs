@@ -17,25 +17,13 @@ namespace Current
         StreamReader loader;
         
         
-        public GameSaver(int score , string name, int progress)
+        public GameSaver(int score , string name, int progress, int highscore)
         {
-            data = new SavedData(score, name, progress);
+            data = new SavedData(score, name, progress, highscore);
 
         }
         public void Save()
         {
-            int fileNum = 0;
-            if (Directory.Exists("savedata") == true);
-            {
-                Directory.Delete("savedata");
-                /*
-                while (Directory.Exists("savedata" + fileNum) == true)
-                {
-
-                    fileNum++;
-                }
-                */
-            }
             string sData = null;
             saver = new StreamWriter("savedata.txt");
             
@@ -45,18 +33,24 @@ namespace Current
         }
         public SavedData Load()
         {
-            if(Directory.Exists("savedata"))
+            if (!File.Exists("savedata.txt"))
+                return null;
+
+            string lData = null;
+            loader = new StreamReader("savedata.txt");
+            lData = loader.ReadLine();
+
+            if (lData == null)
             {
-                string lData = null;
-                loader = new StreamReader("savedata");
-                lData = loader.ReadLine();
-                data = JsonConvert.DeserializeObject<SavedData>(lData);
-                return data;
-            }
-            else
-            {
+                loader.Close();
                 return null;
             }
+                
+
+            data = JsonConvert.DeserializeObject<SavedData>(lData);
+            loader.Close();
+            return data;
+
         }
        
 

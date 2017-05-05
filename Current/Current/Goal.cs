@@ -50,7 +50,19 @@ namespace Current
                 else
                 {
                     GameManager.Get("WinGameText").Activate();
+                    GameManager.Get("Highscore").Activate();
+                    //Also reset current level so they can play again
+                    GameManager.CurrentLevel = 0;
+
+                    if (GameManager.Score > GameManager.HighScore)
+                        GameManager.HighScore = GameManager.Score;
+
+                    GameManager.Score = 0;
                 }
+
+
+                //Save data
+                GameManager.Save();
 
                 //Stop everyone from updating.
                 GameManager.StopNonUIUpdates();

@@ -79,7 +79,7 @@ namespace Current
 
             Health = startHealth;
 
-            HasLaser = false;
+            HasLaser = true;
             //Create the laser, and add it's animation
             LaserReference = new Laser(name + "_laser", laserTex, new Rectangle(0,0,Game1.TargetWidth, 20), this, new Point(Location.Width, Location.Height/2));
             LaserReference.AddAnimation(new Animate(laserTex, 25, 1, Animate.ONESIXTIETHSECPERFRAME, LaserReference));
@@ -296,7 +296,9 @@ namespace Current
             {
                 state = PlayerState.InAir;
                 Acceleration = airAcceleration;
-                Velocity.Y = .5f * jumpVelocity.Y;
+
+                if (Velocity.Y <= 0)
+                    Velocity.Y = .5f * jumpVelocity.Y;
 
                 //Turn back to normal color
                 DrawColor = Color.White;
