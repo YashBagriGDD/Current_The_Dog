@@ -345,8 +345,8 @@ namespace Current
 
 
                 //Enemies
-                Catfish c1 = new Catfish("Catfish1", Textures["catfish"], new Rectangle(1997, 1000, 200, 100));
-                Catfish c2 = new Catfish("Catfish2", Textures["catfish"], new Rectangle(2500, 1000, 200, 100));
+                Catfish c1 = new Catfish("Catfish1", Textures["catfish"], new Rectangle(1997, 1000, 100, 50));
+                Catfish c2 = new Catfish("Catfish2", Textures["catfish"], new Rectangle(2500, 1000, 100, 50));
 
 
                 //Drop in a goal
