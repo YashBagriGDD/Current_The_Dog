@@ -297,7 +297,7 @@ namespace Current
                 state = PlayerState.InAir;
                 Acceleration = airAcceleration;
 
-                if (Velocity.Y < 0)
+                if (Velocity.Y <= 0)
                     Velocity.Y = .5f * jumpVelocity.Y;
 
                 //Turn back to normal color
