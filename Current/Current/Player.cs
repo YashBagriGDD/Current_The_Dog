@@ -79,9 +79,13 @@ namespace Current
 
             Health = startHealth;
 
-            HasLaser = true;
+            HasLaser = false;
+            //Create the laser, and add it's animation
+            LaserReference = new Laser(name + "_laser", laserTex, new Rectangle(0,0,Game1.TargetWidth, 20), this, new Point(Location.Width, Location.Height/2));
+            LaserReference.AddAnimation(new Animate(laserTex, 25, 1, Animate.ONESIXTIETHSECPERFRAME, LaserReference));
+            LaserReference.ChangeAnimation("Laser");
 
-            LaserReference = new Laser(name + "_laser", laserTex, this, new Point(Location.Width, Location.Height/2));
+
 
             //For the sake of physics
             Acceleration = airAcceleration;
@@ -139,7 +143,7 @@ namespace Current
                     //Respawn
                     if (InputManager.GetButtonDown("Jump"))
                     {
-                        Respawn();
+                        GameManager.RespawnAllNonUIObjects();
                         //Let everyone else resume updating.
                         GameManager.ResumeNonUIUpdates();
                     }
@@ -174,6 +178,7 @@ namespace Current
 
                 //Turn off the laser
                 LaserReference.Deactivate();
+                GameManager.StopSFX("Laser");
 
                 //Show a message
                 GameManager.Get("GameoverText").Activate();
@@ -306,20 +311,26 @@ namespace Current
         /// </summary>
         public void LaserUpdate()
         {
+
+            if (!HasLaser)
+                return;
+
             if (InputManager.GetButtonDown("Fire"))
             {
                 LaserReference.Activate();
+                GameManager.LoopSFX("Laser");
             }
             if (InputManager.GetButtonUp("Fire"))
             {
                 LaserReference.Deactivate();
+                GameManager.StopSFX("Laser");
             }
 
 
             if (direction == Direction.Right)
-                LaserReference.Offset = new Point(Location.Width, Location.Height / 2);
+                LaserReference.Offset = new Point(3*Location.Width/4, Location.Height / 2);
             else
-                LaserReference.Offset = new Point(-LaserReference.Location.Width, Location.Height / 2);
+                LaserReference.Offset = new Point(-LaserReference.Location.Width + Location.Width/4, Location.Height / 2);
 
         }
 

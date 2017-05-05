@@ -18,5 +18,14 @@ namespace Current
         public Enemy(string name, Texture2D tex, Rectangle location) : base(name, tex, location)
         {
         }
+
+        /// <summary>
+        /// Respawns and reactivates the enemy
+        /// </summary>
+        public override void Respawn()
+        {
+            base.Respawn();
+            Activate();
+        }
     }
 }

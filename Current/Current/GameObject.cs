@@ -219,7 +219,7 @@ namespace Current
         }
 
         /// <summary>
-        /// Respawns this gameobject at SpawnLocation, and resets states to default.
+        /// Respawns this gameobject at SpawnLocation, and activates again if necessary.
         /// </summary>
         public virtual void Respawn()
         {

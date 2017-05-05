@@ -24,10 +24,9 @@ namespace Current
         /// </summary>
         public Point Offset;
 
-        public Laser(string name, Texture2D texture, GameObject Parent, Point offset) : base(name, texture, Rectangle.Empty)
+        public Laser(string name, Texture2D texture, Rectangle location, GameObject Parent, Point offset) : base(name, texture, location)
         {
             this.Parent = Parent;
-            Location = new Rectangle(0,0, Game1.TargetWidth, 20);
             Offset = offset;
             Deactivate();
 
@@ -55,6 +54,13 @@ namespace Current
 
         protected override void HandleCollisionEnter(object sender, EventArgs e)
         {
+            Collider other = (Collider)sender;
+            if (other.Host is Enemy)
+            {
+                Enemy enemy = (Enemy)(other.Host);
+                if (enemy.Active)
+                    enemy.Deactivate();
+            }
         }
 
         protected override void HandleCollisionExit(object sender, EventArgs e)

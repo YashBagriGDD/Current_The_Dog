@@ -61,6 +61,8 @@
     <Compile Include="InputManager.cs" />
     <Compile Include="Landcat.cs" />
     <Compile Include="Laser.cs" />
+    <Compile Include="LaserPickup.cs" />
+    <Compile Include="LevelDisplay.cs" />
     <Compile Include="MovingPlatform.cs" />
     <Compile Include="ParallaxBackground.cs" />
     <Compile Include="Pickup.cs" />
@@ -82,6 +84,7 @@
     <Compile Include="Volume.cs" />
     <Compile Include="Water.cs" />
     <Compile Include="WaterCurrent.cs" />
+    <Compile Include="WorldText.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
@@ -97,7 +100,7 @@
   <ItemGroup>
     <Content Include="bin\Windows\x86\Debug\Text\level1.txt" />
     <Content Include="Icon.ico" />
-    <Content Include="Text\level.txt">
+    <Content Include="Text\level1.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Text\level0000.txt">

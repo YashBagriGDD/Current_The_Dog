@@ -139,7 +139,9 @@ namespace Current
                 {"sand tile", Content.Load<Texture2D>("Textures/Tiles/sand tile")},
                 {"shore tile", Content.Load<Texture2D>("Textures/Tiles/shore tile")},
                 {"upper water tile", Content.Load<Texture2D>("Textures/Tiles/upper water tile")},
-                {"Button", Content.Load<Texture2D>("Textures/HUD/Button") }
+                {"Button", Content.Load<Texture2D>("Textures/HUD/Button") },
+                {"Laser", Content.Load<Texture2D>("Textures/Items/Laser") }
+                
             };
 
 
@@ -160,7 +162,8 @@ namespace Current
                 {"Pickup", Content.Load<SoundEffect>("Audio/Pickup")},
                 {"Select",  Content.Load<SoundEffect>("Audio/Select") },
                 {"WaterLoop",  Content.Load<SoundEffect>("Audio/WaterLoop")},
-                {"Win", Content.Load<SoundEffect>("Audio/Win")}
+                {"Win", Content.Load<SoundEffect>("Audio/Win")},
+                {"Laser", Content.Load<SoundEffect>("Audio/Laser") }
             };
 
 
@@ -205,8 +208,8 @@ namespace Current
 
             //Setup HUD
             HealthBar bar = new HealthBar("HealthBar", Textures["Crossbone"], new Point(100, 66));
-            Score score = new Score("Score", hudFont, Anchor.UpperRight, SortingMode.None, GameState.Game, Point.Zero, Color.White);
-
+            Score score = new Score("Score", hudFont, Anchor.UpperRight, SortingMode.Below, GameState.Game, Point.Zero, Color.White);
+            LevelDisplay curlevel = new LevelDisplay("LevelDisplay", hudFont, Anchor.UpperRight, SortingMode.Below, GameState.Game, Point.Zero, Color.White);
 
 
 
@@ -257,18 +260,19 @@ namespace Current
 
 
             //Setup win level buttons
-            UIButton winMainMenuButton = new UIButton("WinMainMenuButton", "Back to Main Menu", font, Textures["Button"], Anchor.LowerMiddle, SortingMode.None, GameState.Game, Point.Zero, Color.Black, Color.White);
+            UIButton winMainMenuButton = new UIButton("WinMainMenuButton", "Back to Main Menu", font, Textures["Button"], Anchor.LowerLeft, SortingMode.None, GameState.Game, Point.Zero, Color.Black, Color.White);
             winMainMenuButton.ActiveState = GameState.Game;
             winMainMenuButton.Deactivate();
 
             //Next level button (part of win menu)
-            UIButton winNextButton = new UIButton("WinNextButton", "Next Level", font, Textures["Button"], Anchor.LowerMiddle, SortingMode.None, GameState.Game, Point.Zero, Color.Black, Color.White);
+            UIButton winNextButton = new UIButton("WinNextButton", "Next Level", font, Textures["Button"], Anchor.LowerRight, SortingMode.None, GameState.Game, Point.Zero, Color.Black, Color.White);
             winNextButton.ActiveState = GameState.Game;
             winNextButton.Deactivate();
 
             //Back to main menu logic
             winMainMenuButton.Click += () =>
             {
+                
                 LoadMainMenu();
                 winMainMenuButton.Deactivate();
                 winNextButton.Deactivate();
@@ -281,6 +285,10 @@ namespace Current
 
             winNextButton.Click += () =>
             {
+                winMainMenuButton.Deactivate();
+                winNextButton.Deactivate();
+                winText.Deactivate();
+                winGameText.Deactivate();
                 LoadCurrentLevel();
             };
 
@@ -296,7 +304,7 @@ namespace Current
             GameManager.gameplayState = GameplayState.Normal;
             GameManager.gameState = GameState.MainMenu;
             GameManager.mainMenuState = MainMenuState.MainMenu;
-            GameManager.ResetAll();
+            //GameManager.ResetAll();
         }
 
         /// <summary>
@@ -324,17 +332,16 @@ namespace Current
         /// <param name="levelFile">Path to level txt file (With extension) </param>
         public void LoadLevel(int level, string levelFile)
         {
+            //Load in the Background
+            ParallaxBackground b = new ParallaxBackground("ParallaxBG1", Textures["Background"], new Rectangle(0, 0, TargetWidth, TargetHeight), GameState.Game, 1, null);
+
+            //Generate tiles
+            GenerateTiles(levelFile);
+
+
 
             if (level == 0)
             {
-
-                //Load in the Background
-                ParallaxBackground b = new ParallaxBackground("ParallaxBG1", Textures["Background"], new Rectangle(0, 0, TargetWidth, TargetHeight), GameState.Game, 1, null);
-
-                //Generate tiles
-                GenerateTiles(levelFile);
-
-
 
 
                 //Enemies
@@ -352,12 +359,17 @@ namespace Current
 
                 //Add a checkpoint
                 CheckPoint checkPoint = new CheckPoint("Checkpoint", Textures["WhiteBlock"], new Rectangle(2270, -400, 50, 100));
+
+                //Add in tutorial text
+                WorldText tut1 = new WorldText("Tutorial1", "W,A,S,D = Move", font, new Vector2(200, 200));
+                WorldText tut2 = new WorldText("Tutorial2", "Space = Jump", font, new Vector2(200, 300));
+                
             }
 
 
 
             //Create the player regardless of level
-            Player player = new Player("Current", Textures["CurrentIdle"], Textures["WhiteBlock"], new Rectangle(100, 0, 100, 100));
+            Player player = new Player("Current", Textures["CurrentIdle"], Textures["Laser"], new Rectangle(100, 0, 100, 100));
             player.AddAnimation(new Animate(Textures["CurrentIdle"], 1, 1, Animate.ONESIXTIETHSECPERFRAME, player));
             player.AddAnimation(new Animate(Textures["CurrentSwim"], 4, 3, Animate.ONESIXTIETHSECPERFRAME*5, player));
             player.AddAnimation(new Animate(Textures["CurrentWalk"], 4, 3, Animate.ONESIXTIETHSECPERFRAME, player));

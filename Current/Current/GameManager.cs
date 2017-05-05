@@ -91,7 +91,7 @@ namespace Current
         /// <summary>
         /// Total number of levels. Read only.
         /// </summary>
-        public static int TotalLevels { get; private set; } = 1;
+        public static int TotalLevels { get; private set; } = 2;
 
         //Various states for the game
         public static GameState gameState = GameState.MainMenu;
@@ -166,7 +166,7 @@ namespace Current
             SFXWrapper clip = (SFXWrapper)(Get(clipName));
             clip.Play();
         }
-        
+
         /// <summary>
         /// Loop the sound effect.
         /// </summary>
@@ -235,7 +235,7 @@ namespace Current
             if (Objects.ContainsKey(name))
                 return Objects[name];
             else
-                return null; 
+                return null;
         }
         /// <summary>
         /// Get all of the known GameObjects in the game as a Dictionary
@@ -276,7 +276,7 @@ namespace Current
 
 
         /// <summary>
-        /// Reset all active GameObjects
+        /// Reset all GameObjects. Typically, you won't need to call this. See RespawnAll instead. 
         /// </summary>
         public static void ResetAll()
         {
@@ -287,6 +287,17 @@ namespace Current
             }
         }
 
+        /// <summary>
+        /// Respawn all Non-UI Gameobjects. 
+        /// This should be used on respawning objects in a level and maintaining some data, rather than resetting completely.
+        /// </summary>
+        public static void RespawnAllNonUIObjects()
+        {
+            foreach (GameObject g in NonUIObjects)
+            {
+                g.Respawn();
+            }
+        }
 
         /// <summary>
         /// Stop all non-ui objects from updating
