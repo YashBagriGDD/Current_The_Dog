@@ -29,6 +29,7 @@ namespace Current
         public double TotalElapsedSeconds { get; set; } = 0;
 
         private double delayTimer = 0;
+        private bool collActive; //For disabling and enabling collisions in certain states
         private GameTime gameTime;
 
 
@@ -43,6 +44,7 @@ namespace Current
             IsAlive = true;
             SetSpeed();
             HomePoint = new Vector2(Location.X, Location.Y);
+            collActive = true;
 
             //Make it blend in with water
             DrawColor = Color.Blue;
@@ -98,11 +100,13 @@ namespace Current
                     }
                     break;
                 case EnemyState.Waiting:
+                    collActive = false; //disable collisions
                     delayTimer += gameTime.ElapsedGameTime.TotalMilliseconds;
                     if (delayTimer >= 1500)
                     {
                         state = EnemyState.PlayerDetected;
                         delayTimer = 0;
+                        collActive = true; //re-enable collisions
                     }
                     break;
                 default:
@@ -128,8 +132,10 @@ namespace Current
             //Cast to a Collider
             Collider other = (Collider)sender;
 
-            //Player Collision
-            if (other.Host is Player) {
+            //Only do collisions when active
+            if (collActive == true) {
+                //Player Collision
+                if (other.Host is Player) {
                 //Move enemy after collision
                 Location.X += 5;
                 Location.Y += 5;
@@ -140,13 +146,14 @@ namespace Current
                 //Hurt the player's feelings
                 Player p = (Player)(other.Host);
                 p.Hurt();
-            }
+                }
 
-            //Coral Collision
-            if (other.Host is Coral) {
-                Health--;
-                Location.X += (int)-Speed;
-                Location.Y += (int)-Speed;
+                //Coral Collision
+                if (other.Host is Coral) {
+                    Health--;
+                    Location.X += (int)-Speed;
+                    Location.Y += (int)-Speed;
+                }
             }
         }
 
