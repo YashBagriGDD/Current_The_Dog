@@ -57,6 +57,7 @@
     <Compile Include="Goal.cs" />
     <Compile Include="HealthBar.cs" />
     <Compile Include="HealthPickup.cs" />
+    <Compile Include="HighscoreDisplay.cs" />
     <Compile Include="HUD.cs" />
     <Compile Include="InputManager.cs" />
     <Compile Include="Landcat.cs" />

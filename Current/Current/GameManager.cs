@@ -69,6 +69,9 @@ namespace Current
         //The current score of the game
         public static int Score { get; set; }
             = 0;
+
+        public static int HighScore { get; set; } = 0;
+
         //Time of the game. (Not gameTime, just for like score and stuff)
         public static float Time { get; set; }
 
@@ -91,7 +94,7 @@ namespace Current
         /// <summary>
         /// Total number of levels. Read only.
         /// </summary>
-        public static int TotalLevels { get; private set; } = 2;
+        public static int TotalLevels { get; private set; } = 1;
 
         //Various states for the game
         public static GameState gameState = GameState.MainMenu;
@@ -123,6 +126,8 @@ namespace Current
         public static bool IsLoading { get; set; } = false;
 
 
+        private static GameSaver saver;
+
 
 
 
@@ -152,7 +157,12 @@ namespace Current
             }
             MaxLevelLocation = max;
 
+            //Load data
+            LoadSavedData();
+
             IsLoading = false;
+
+            
         }
 
 
@@ -337,6 +347,32 @@ namespace Current
             foreach (SFXWrapper wrap in SoundEffects)
                 Objects.Add(wrap.Name, wrap);
 
+        }
+
+        /// <summary>
+        /// Using the GameSaver, save the game
+        /// </summary>
+        public static void Save()
+        {
+            saver = new GameSaver(Score, "Current", CurrentLevel, HighScore);
+            saver.Save();
+        }
+
+        /// <summary>
+        /// Assuming we have saved before, load up saved data.
+        /// If we haven't saved before, load nothing.
+        /// </summary>
+        public static void LoadSavedData()
+        {
+
+            saver = new GameSaver(0, "", 0, 0);
+            SavedData data = saver.Load();
+
+            if (data == null)
+                return;
+            Score = data.score;
+            CurrentLevel = data.progress;
+            HighScore = data.highscore;
         }
 
         /// <summary>

@@ -248,10 +248,13 @@ namespace Current
 
 
             //Setup win level message
-            UIText winText = new UIText("WinText", "Current completed the level!", titleFont, Anchor.CenterMiddle, SortingMode.None, GameState.Game, Point.Zero, Color.White);
+            UIText winText = new UIText("WinText", "Current completed the level!", titleFont, Anchor.CenterMiddle, SortingMode.Below, GameState.Game, Point.Zero, Color.White);
             winText.ActiveState = GameState.Game;
             winText.Deactivate();
 
+            HighscoreDisplay highscore = new HighscoreDisplay("Highscore", font, Anchor.LowerRight, SortingMode.None, GameState.Game, Point.Zero, Color.White);
+            highscore.ActiveState = GameState.Game;
+            highscore.Deactivate();
 
             //Setup win game message
             UIText winGameText = new UIText("WinGameText", "Current was victorious!", titleFont, Anchor.CenterMiddle, SortingMode.None, GameState.Game, Point.Zero, Color.White);
@@ -278,6 +281,7 @@ namespace Current
                 winNextButton.Deactivate();
                 winText.Deactivate();
                 winGameText.Deactivate();
+                highscore.Deactivate();
 
                 if (GameManager.CompletedAllLevels)
                     GameManager.CurrentLevel = 0;

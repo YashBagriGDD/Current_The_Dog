@@ -13,11 +13,14 @@ namespace Current
         public string name { get; set; }
         public int progress { get; set; }
 
-        public SavedData(int sc , string nm, int pr)
+        public int highscore { get; set; }
+
+        public SavedData(int sc , string nm, int pr, int hs)
         {
             score = sc;
             name = nm;
             progress = pr;
+            highscore = hs;
         }
 
     }
