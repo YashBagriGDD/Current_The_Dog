@@ -89,7 +89,12 @@ namespace Current
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            
+
+
+
+            //Load data
+            GameManager.LoadSavedData();
+
             //Set window size
             graphics.PreferredBackBufferWidth = TargetWidth;
             graphics.PreferredBackBufferHeight = TargetHeight;
@@ -343,6 +348,7 @@ namespace Current
             GenerateTiles(levelFile);
 
 
+            Player player = null;
 
             if (level == 0)
             {
@@ -367,13 +373,18 @@ namespace Current
                 //Add in tutorial text
                 WorldText tut1 = new WorldText("Tutorial1", "W,A,S,D = Move", font, new Vector2(200, 200));
                 WorldText tut2 = new WorldText("Tutorial2", "Space = Jump", font, new Vector2(200, 300));
-                
+
+                player = new Player("Current", Textures["CurrentIdle"], Textures["Laser"], new Rectangle(100, 0, 100, 100));
+            }
+            else if (level == 1)
+            {
+                player = new Player("Current", Textures["CurrentIdle"], Textures["Laser"], new Rectangle(10, -244, 100, 100));
+
             }
 
 
 
             //Create the player regardless of level
-            Player player = new Player("Current", Textures["CurrentIdle"], Textures["Laser"], new Rectangle(100, 0, 100, 100));
             player.AddAnimation(new Animate(Textures["CurrentIdle"], 1, 1, Animate.ONESIXTIETHSECPERFRAME, player));
             player.AddAnimation(new Animate(Textures["CurrentSwim"], 4, 3, Animate.ONESIXTIETHSECPERFRAME*5, player));
             player.AddAnimation(new Animate(Textures["CurrentWalk"], 4, 3, Animate.ONESIXTIETHSECPERFRAME, player));

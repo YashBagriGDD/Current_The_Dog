@@ -283,7 +283,7 @@ namespace Current
                 Velocity.X = 0;
             if (CollRight.CollidingWith<Platform>() && Velocity.X > 0)
                 Velocity.X = 0;
-            if (CollAbove.CollidingWith<Platform>() && Velocity.Y < 0 )
+            if (CollAbove.CollidingWith<Platform>() && Velocity.Y < 0) 
                 Velocity.Y = 0;
             if (CollBelow.CollidingWith<Platform>() && Velocity.Y > 0)
                 Velocity.Y = 0;
