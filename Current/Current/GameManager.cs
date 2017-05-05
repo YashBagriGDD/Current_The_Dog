@@ -75,7 +75,7 @@ namespace Current
         /// <summary>
         /// The current level. Or Current's level.  
         /// </summary>
-        public static int CurrentLevel { get; set; } = 0;
+        public static int CurrentLevel { get; set; } = 2;
 
         /// <summary>
         /// Have we completed all levels?

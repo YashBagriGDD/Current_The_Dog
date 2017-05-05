@@ -100,13 +100,16 @@
   <ItemGroup>
     <Content Include="bin\Windows\x86\Debug\Text\level1.txt" />
     <Content Include="Icon.ico" />
+    <Content Include="Text\level0.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Text\level1.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Text\level0000.txt">
+    <Content Include="Text\level2.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Text\level0.txt">
+    <Content Include="Text\level3.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

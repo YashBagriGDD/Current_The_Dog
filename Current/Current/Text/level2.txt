@@ -1,0 +1,757 @@
+[
+  {
+    "X": 100.0,
+    "Y": 200.0,
+    "TextureName": "grass tile"
+  },
+  {
+    "X": 200.0,
+    "Y": 200.0,
+    "TextureName": "grass tile"
+  },
+  {
+    "X": 300.0,
+    "Y": 200.0,
+    "TextureName": "upper water tile"
+  },
+  {
+    "X": 400.0,
+    "Y": 200.0,
+    "TextureName": "upper water tile"
+  },
+  {
+    "X": 300.0,
+    "Y": 300.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 400.0,
+    "Y": 200.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 400.0,
+    "Y": 300.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 400.0,
+    "Y": 400.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 300.0,
+    "Y": 400.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 300.0,
+    "Y": 500.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 500.0,
+    "Y": 500.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 400.0,
+    "Y": 500.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 600.0,
+    "Y": 500.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 700.0,
+    "Y": 500.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 800.0,
+    "Y": 500.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 800.0,
+    "Y": 400.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 800.0,
+    "Y": 400.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 900.0,
+    "Y": 400.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 400.0,
+    "Y": 400.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 600.0,
+    "Y": 400.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 500.0,
+    "Y": 400.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 700.0,
+    "Y": 400.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 900.0,
+    "Y": 300.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 1000.0,
+    "Y": 300.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 1000.0,
+    "Y": 200.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 1100.0,
+    "Y": 200.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 900.0,
+    "Y": 200.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 800.0,
+    "Y": 300.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 1000.0,
+    "Y": 100.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 1100.0,
+    "Y": 100.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 1200.0,
+    "Y": 100.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 1200.0,
+    "Y": 200.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 1300.0,
+    "Y": 100.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 1300.0,
+    "Y": 200.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 1300.0,
+    "Y": 300.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 1200.0,
+    "Y": 300.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 1200.0,
+    "Y": 400.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 1300.0,
+    "Y": 400.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 1200.0,
+    "Y": 500.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 1300.0,
+    "Y": 500.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 1400.0,
+    "Y": 500.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 1500.0,
+    "Y": 500.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 1500.0,
+    "Y": 500.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 1600.0,
+    "Y": 500.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 1600.0,
+    "Y": 500.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 1700.0,
+    "Y": 500.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 1700.0,
+    "Y": 500.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 1800.0,
+    "Y": 500.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 1900.0,
+    "Y": 400.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 1800.0,
+    "Y": 400.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 1900.0,
+    "Y": 300.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 1900.0,
+    "Y": 200.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 2000.0,
+    "Y": 100.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 1900.0,
+    "Y": 100.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 2100.0,
+    "Y": 100.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 2200.0,
+    "Y": 100.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 2300.0,
+    "Y": 100.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 2500.0,
+    "Y": 300.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 2600.0,
+    "Y": 300.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 2700.0,
+    "Y": 300.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 2800.0,
+    "Y": 200.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 2700.0,
+    "Y": 200.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 2800.0,
+    "Y": 100.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 2800.0,
+    "Y": 0.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 2800.0,
+    "Y": -100.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 2700.0,
+    "Y": -100.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 2700.0,
+    "Y": -200.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 2700.0,
+    "Y": -300.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 2800.0,
+    "Y": -400.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 2700.0,
+    "Y": -400.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 2800.0,
+    "Y": -500.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 2900.0,
+    "Y": -500.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 3000.0,
+    "Y": -500.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 3000.0,
+    "Y": -400.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 3100.0,
+    "Y": -400.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 3100.0,
+    "Y": -500.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 3200.0,
+    "Y": -500.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 3200.0,
+    "Y": -400.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 3300.0,
+    "Y": -500.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 3300.0,
+    "Y": -400.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 3500.0,
+    "Y": -300.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 3600.0,
+    "Y": -300.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 3600.0,
+    "Y": -200.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 3500.0,
+    "Y": -200.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 3900.0,
+    "Y": -100.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 4000.0,
+    "Y": 0.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 3900.0,
+    "Y": 0.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 4000.0,
+    "Y": -100.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 3800.0,
+    "Y": 500.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 3900.0,
+    "Y": 400.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 4300.0,
+    "Y": -400.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 5700.0,
+    "Y": 0.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 5300.0,
+    "Y": -300.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 3800.0,
+    "Y": 400.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 3900.0,
+    "Y": 500.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 4100.0,
+    "Y": -100.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 4200.0,
+    "Y": -100.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 4300.0,
+    "Y": -100.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 4400.0,
+    "Y": -100.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 4700.0,
+    "Y": -100.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 4400.0,
+    "Y": 100.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 4500.0,
+    "Y": 100.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 4700.0,
+    "Y": 300.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 4800.0,
+    "Y": 300.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 4600.0,
+    "Y": 300.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 4900.0,
+    "Y": 300.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 5000.0,
+    "Y": 300.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 5100.0,
+    "Y": 200.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 5000.0,
+    "Y": 200.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 5100.0,
+    "Y": 100.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 5200.0,
+    "Y": 0.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 5100.0,
+    "Y": 0.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 5200.0,
+    "Y": -100.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 5200.0,
+    "Y": -200.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 5300.0,
+    "Y": -200.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 5300.0,
+    "Y": -400.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 5300.0,
+    "Y": -500.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 5300.0,
+    "Y": -600.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 5300.0,
+    "Y": -700.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 5300.0,
+    "Y": -900.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 5300.0,
+    "Y": -800.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 5300.0,
+    "Y": -1000.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 5300.0,
+    "Y": -1200.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 5300.0,
+    "Y": -1100.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 5300.0,
+    "Y": -1300.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 5200.0,
+    "Y": -1300.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 5100.0,
+    "Y": -1400.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 5000.0,
+    "Y": -1500.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 4900.0,
+    "Y": -1600.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 4800.0,
+    "Y": -1600.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 4700.0,
+    "Y": -1600.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 4500.0,
+    "Y": -1600.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 4600.0,
+    "Y": -1600.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 4400.0,
+    "Y": -1600.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 4300.0,
+    "Y": -1500.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 4200.0,
+    "Y": -1400.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 4100.0,
+    "Y": -1300.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 4000.0,
+    "Y": -1200.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 4000.0,
+    "Y": -1100.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 4000.0,
+    "Y": -1000.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 4200.0,
+    "Y": -1000.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 4100.0,
+    "Y": -1000.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 4300.0,
+    "Y": -1000.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 4400.0,
+    "Y": -1000.0,
+    "TextureName": "deep water tile"
+  },
+  {
+    "X": 4500.0,
+    "Y": -1000.0,
+    "TextureName": "grass tile"
+  },
+  {
+    "X": 4500.0,
+    "Y": -1000.0,
+    "TextureName": "grass tile"
+  },
+  {
+    "X": 4600.0,
+    "Y": -1000.0,
+    "TextureName": "grass tile"
+  },
+  {
+    "X": 4600.0,
+    "Y": -1000.0,
+    "TextureName": "grass tile"
+  },
+  {
+    "X": 4700.0,
+    "Y": -1000.0,
+    "TextureName": "grass tile"
+  },
+  {
+    "X": 4700.0,
+    "Y": -1000.0,
+    "TextureName": "grass tile"
+  },
+  {
+    "X": 4800.0,
+    "Y": -1000.0,
+    "TextureName": "grass tile"
+  }
+]
