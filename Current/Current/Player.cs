@@ -91,8 +91,14 @@ namespace Current
             Acceleration = airAcceleration;
             Velocity = new Vector2(0, 0);
 
+            //Add it's animations
+            AddAnimation(new Animate(Game1.Textures["CurrentIdle"], 1, 1, Animate.ONESIXTIETHSECPERFRAME, this));
+            AddAnimation(new Animate(Game1.Textures["CurrentSwim"], 4, 3, Animate.ONESIXTIETHSECPERFRAME * 5, this));
+            AddAnimation(new Animate(Game1.Textures["CurrentWalk"], 4, 3, Animate.ONESIXTIETHSECPERFRAME, this));
+
+
         }
-        
+
         /// <summary>
         /// Draws the Player
         /// </summary>

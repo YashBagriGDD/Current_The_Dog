@@ -137,7 +137,8 @@ namespace Current
                 {"WhiteBlock",  Content.Load<Texture2D>("Textures/WhiteBlock")},
                 {"Background", Content.Load<Texture2D>("Textures/Backgrounds/Sunset") },
                 {"Crossbone", Content.Load<Texture2D>("Textures/HUD/Crossbone") },
-                {"catfish", Content.Load<Texture2D>("Textures/Enemies/catfish") },
+                {"Catfish", Content.Load<Texture2D>("Textures/Enemies/Catfish") },
+                {"Landcat", Content.Load<Texture2D>("Textures/Enemies/Landcat") },
                 {"deep water tile", Content.Load<Texture2D>("Textures/Tiles/deep water tile")},
                 {"grass tile", Content.Load<Texture2D>("Textures/Tiles/grass tile")},
                 {"grass to sand tile", Content.Load<Texture2D>("Textures/Tiles/grass to sand tile")},
@@ -355,8 +356,10 @@ namespace Current
 
 
                 //Enemies
-                Catfish c1 = new Catfish("Catfish1", Textures["catfish"], new Rectangle(1997, 1000, 100, 50));
-                Catfish c2 = new Catfish("Catfish2", Textures["catfish"], new Rectangle(2500, 1000, 100, 50));
+                Catfish c1 = new Catfish("Catfish1", Textures["Catfish"], new Rectangle(1997, 1000, 100, 50));
+                Catfish c2 = new Catfish("Catfish2", Textures["Catfish"], new Rectangle(2500, 1000, 100, 50));
+
+
 
 
                 //Drop in a goal
@@ -381,13 +384,6 @@ namespace Current
                 player = new Player("Current", Textures["CurrentIdle"], Textures["Laser"], new Rectangle(10, -244, 100, 100));
 
             }
-
-
-
-            //Create the player regardless of level
-            player.AddAnimation(new Animate(Textures["CurrentIdle"], 1, 1, Animate.ONESIXTIETHSECPERFRAME, player));
-            player.AddAnimation(new Animate(Textures["CurrentSwim"], 4, 3, Animate.ONESIXTIETHSECPERFRAME*5, player));
-            player.AddAnimation(new Animate(Textures["CurrentWalk"], 4, 3, Animate.ONESIXTIETHSECPERFRAME, player));
 
             //Create the Camera
             MainCamera = new Camera("MainCamera", new Rectangle(0, 0, 0, 0), player);

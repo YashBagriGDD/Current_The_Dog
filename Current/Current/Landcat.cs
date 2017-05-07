@@ -38,6 +38,10 @@ namespace Current
             SetSpeed();
             HomePoint = new Vector2(Location.X, Location.Y);
             collActive = true;
+
+            //Add it's animation
+            AddAnimation(new Animate(Game1.Textures["Landcat"], 2, 2, Animate.ONESIXTIETHSECPERFRAME * 5, this));
+            ChangeAnimation("Landcat");
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)

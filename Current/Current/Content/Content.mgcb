@@ -217,18 +217,6 @@
 /processorParam:Quality=Best
 /build:Audio/Win.wav
 
-#begin Textures/Enemies/catfish.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Textures/Enemies/catfish.png
-
 #begin Textures\Current\CurrentSwim.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -306,4 +294,28 @@
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:Audio/Laser.wav
+
+#begin Textures\Enemies\Landcat.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Textures\Enemies\Landcat.png
+
+#begin Textures\Enemies\Catfish.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Textures\Enemies\Catfish.png
 

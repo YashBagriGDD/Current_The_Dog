@@ -48,6 +48,10 @@ namespace Current
 
             //Make it blend in with water
             DrawColor = Color.Blue;
+
+            //Add it's animation
+            AddAnimation(new Animate(Game1.Textures["Catfish"], 3, 1, Animate.ONESIXTIETHSECPERFRAME * 10, this));
+            ChangeAnimation("Catfish");
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
