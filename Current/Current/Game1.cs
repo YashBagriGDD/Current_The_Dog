@@ -392,12 +392,20 @@ namespace Current
                 ScorePickup scorePickup = new ScorePickup("ScorePickup1", Textures["WhiteBlock"], new Rectangle(2500, 50, 100, 100), 10);
                 ScorePickup scorePickup2  = new ScorePickup("ScorePickup2", Textures["WhiteBlock"], new Rectangle(7500, -2100, 100, 100), 10);
 
+                //drop in goal
                 Goal goal = new Goal("Goal1", Textures["WhiteBlock"], new Rectangle(7707, -1594, 100, 300));
             }
             else if(level == 3)
             {
+                //score bloacks
+                ScorePickup scorePickup = new ScorePickup("ScorePickup1", Textures["WhiteBlock"], new Rectangle(4300, -2077, 100, 100), 10);
+
+                //enemy 
+                LandCat kitty = new LandCat("Cat1", Textures["Landcat"], new Rectangle(3744,-94, 100, 100));
                 player = new Player("Current", Textures["CurrentIdle"], Textures["Laser"], new Rectangle(238, 205, 100, 100));
 
+                Goal goal = new Goal("Goal1", Textures["WhiteBlock"], new Rectangle(9655, -2944, 100, 300)); 
+                
             }
 
             //Create the Camera
