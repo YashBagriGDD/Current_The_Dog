@@ -168,6 +168,10 @@ namespace Current
             }
 
             this.Location.X += (int)Speed;
+            if (Speed <= 0)
+                SpriteFX = SpriteEffects.FlipHorizontally;
+            else
+                SpriteFX = SpriteEffects.None;
         }
 
         /// <summary>
@@ -178,12 +182,10 @@ namespace Current
                 case Direction.Left:
                     //Change  direction
                     direction = Direction.Right;
-                    SpriteFX = SpriteEffects.None;
                     break;
                 case Direction.Right:
                     //Change Direction
                     direction = Direction.Left;
-                    SpriteFX = SpriteEffects.FlipHorizontally;
                     break;
                 default:
                     break;
@@ -204,7 +206,6 @@ namespace Current
                     else {
                         Speed = (float)(-.25 * MAX_SPEED);
                     }
-                    SpriteFX = SpriteEffects.FlipHorizontally;
 
                     break;
                 case Direction.Right:
@@ -215,7 +216,6 @@ namespace Current
                     else {
                         Speed = (float)(.25 * MAX_SPEED);
                     }
-                    SpriteFX = SpriteEffects.None;
 
                     break;
                 default:
@@ -247,6 +247,11 @@ namespace Current
                     SetSpeed();
                 }
                 Location.X += (int)Speed;
+
+                if (Speed <= 0)
+                    SpriteFX = SpriteEffects.FlipHorizontally;
+                else
+                    SpriteFX = SpriteEffects.None;
             }
         }
 
@@ -269,7 +274,10 @@ namespace Current
                     SetSpeed();
                 }
                 Location.X += (int)Speed;
-
+                if (Speed <= 0)
+                    SpriteFX = SpriteEffects.FlipHorizontally;
+                else
+                    SpriteFX = SpriteEffects.None;
                 //Update distances
                 distX = Location.X - (int)HomePoint.X;
             }

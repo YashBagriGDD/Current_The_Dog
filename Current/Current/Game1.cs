@@ -393,10 +393,8 @@ namespace Current
                 LaserPickup laser = new LaserPickup("LaserPickup", Textures["LaserPickup"], new Rectangle(550,300, 100, 100), 0);
 
                 LandCat landCat = new LandCat("Landcat", Textures["Landcat"], new Rectangle(3337, 55, 200, 125));
-                LandCat landCat2 = new LandCat("Landcat2", Textures["Landcat"], new Rectangle(3705, -94, 200, 125));
                 LandCat landCat4 = new LandCat("Landcat4", Textures["Landcat"], new Rectangle(7866, -844, 200, 125));
                 LandCat landCat5 = new LandCat("Landcat5", Textures["Landcat"], new Rectangle(8966, -1444, 200, 125));
-                LandCat landCat6 = new LandCat("Landcat6", Textures["Landcat"], new Rectangle(9999, -1594, 200, 125));
                 Goal goal = new Goal("Goal", Textures["Crossbone"], new Rectangle(14378, -2794, 200, 100));
 
 
@@ -411,7 +409,7 @@ namespace Current
                 ScorePickup scorePickup = new ScorePickup("ScorePickup1", Textures["ScorePickup"], new Rectangle(2500, 50, 100, 100), 10);
                 ScorePickup scorePickup2  = new ScorePickup("ScorePickup2", Textures["ScorePickup"], new Rectangle(7500, -2100, 100, 100), 10);
 
-                Goal goal = new Goal("Goal1", Textures["Crossbone"], new Rectangle(7707, -1594, 200, 100));
+                Goal goal = new Goal("Goal1", Textures["Crossbone"], new Rectangle(7607, -1594, 200, 100));
 
             }
             else if(level == 3)
@@ -423,7 +421,7 @@ namespace Current
                 LandCat kitty = new LandCat("Cat1", Textures["Landcat"], new Rectangle(3744,-94, 200, 125));
                 player = new Player("Current", Textures["CurrentIdle"], Textures["Laser"], new Rectangle(238, 205, 100, 100));
 
-                Goal goal = new Goal("Goal1", Textures["Crossbone"], new Rectangle(9655, -2944, 200, 100)); 
+                Goal goal = new Goal("Goal1", Textures["Crossbone"], new Rectangle(9555, -2944, 200, 100)); 
                 
             }
 
@@ -605,9 +603,9 @@ namespace Current
                     ui.Draw(gameTime, spriteBatchUI);
                 }
 
-            Player p = GameManager.Get("Current") as Player;
-            if (p != null)
-                spriteBatchUI.DrawString(font, p.Location.X + ", " + p.Location.Y, new Vector2(0, 50), Color.White);
+            //Player p = GameManager.Get("Current") as Player;
+            //if (p != null)
+            //    spriteBatchUI.DrawString(font, p.Location.X + ", " + p.Location.Y, new Vector2(0, 50), Color.White);
 
 
             spriteBatchUI.End();
