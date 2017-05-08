@@ -268,7 +268,7 @@ namespace Current
             highscore.Deactivate();
 
             //Setup win game message
-            UIText winGameText = new UIText("WinGameText", "Current was victorious!", titleFont, Anchor.CenterMiddle, SortingMode.None, GameState.Game, Point.Zero, Color.White);
+            UIText winGameText = new UIText("WinGameText", "Current Completed His Journey!", titleFont, Anchor.CenterMiddle, SortingMode.None, GameState.Game, Point.Zero, Color.White);
             winGameText.ActiveState = GameState.Game;
             winGameText.Deactivate();
 
@@ -368,7 +368,7 @@ namespace Current
 
 
                 //Drop in a goal
-                Goal goal = new Goal("Goal1", Textures["Crossbone"], new Rectangle(5655, -244, 200, 100));
+                Goal goal = new Goal("Goal1", Textures["Crossbone"], new Rectangle(5400, -244, 200, 100));
 
                 //Add pickups
                 ScorePickup scorePickup = new ScorePickup("ScorePickup1", Textures["ScorePickup"], new Rectangle(1063, 505, 100, 100), 10);
@@ -388,14 +388,17 @@ namespace Current
             {
                 player = new Player("Current", Textures["CurrentIdle"], Textures["Laser"], new Rectangle(368, 355, 100, 100));
                 ScorePickup scorePickup = new ScorePickup("ScorePickup", Textures["ScorePickup"], new Rectangle(-4688, -1144, 100, 100), 10);
+
+                WorldText laserInstr = new WorldText("LaserInstruction", "Shift=Laser", font, new Vector2(550, 200));
+                LaserPickup laser = new LaserPickup("LaserPickup", Textures["LaserPickup"], new Rectangle(550,300, 100, 100), 0);
+
                 LandCat landCat = new LandCat("Landcat", Textures["Landcat"], new Rectangle(3337, 55, 200, 125));
                 LandCat landCat2 = new LandCat("Landcat2", Textures["Landcat"], new Rectangle(3705, -94, 200, 125));
-                LandCat landCat3 = new LandCat("Landcat3", Textures["Landcat"], new Rectangle(6801, -844, 200, 125));
                 LandCat landCat4 = new LandCat("Landcat4", Textures["Landcat"], new Rectangle(7866, -844, 200, 125));
                 LandCat landCat5 = new LandCat("Landcat5", Textures["Landcat"], new Rectangle(8966, -1444, 200, 125));
                 LandCat landCat6 = new LandCat("Landcat6", Textures["Landcat"], new Rectangle(9999, -1594, 200, 125));
-                LaserPickup laser = new LaserPickup("LaserPickup", Textures["LaserPickup"], new Rectangle(10246, -2794, 100, 100), 0);
-                Goal goal = new Goal("Goal", Textures["Crossbone"], new Rectangle(14428, -2794, 200, 100));
+                Goal goal = new Goal("Goal", Textures["Crossbone"], new Rectangle(14378, -2794, 200, 100));
+
 
 
 
@@ -413,14 +416,14 @@ namespace Current
             }
             else if(level == 3)
             {
-                //score bloacks
-                ScorePickup scorePickup = new ScorePickup("ScorePickup1", Textures["WhiteBlock"], new Rectangle(4300, -2077, 100, 100), 10);
+                //score blocks
+                ScorePickup scorePickup = new ScorePickup("ScorePickup1", Textures["ScorePickup"], new Rectangle(4300, -2077, 100, 100), 10);
 
                 //enemy 
-                LandCat kitty = new LandCat("Cat1", Textures["Landcat"], new Rectangle(3744,-94, 100, 100));
+                LandCat kitty = new LandCat("Cat1", Textures["Landcat"], new Rectangle(3744,-94, 200, 125));
                 player = new Player("Current", Textures["CurrentIdle"], Textures["Laser"], new Rectangle(238, 205, 100, 100));
 
-                Goal goal = new Goal("Goal1", Textures["WhiteBlock"], new Rectangle(9655, -2944, 100, 300)); 
+                Goal goal = new Goal("Goal1", Textures["Crossbone"], new Rectangle(9655, -2944, 200, 100)); 
                 
             }
 
@@ -459,6 +462,8 @@ namespace Current
                 switch (type)
                 {
                     case "Water":
+                        if (tile.TextureName == "upper water tile")
+                            loc.Width = 3 * loc.Width / 2;
                         Water w = new Water("Water" + numWater, tex, loc, Vector2.Zero);
                         //Weed out duplicates
                         if (tileDirectory.ContainsKey(check))

@@ -348,7 +348,7 @@ namespace Current
         /// <param name="other">Collider to check with</param>
         private void CheckForWaterWhenNotSwimming()
         {
-            if (Coll.CollidingWith<Water>() && !CollBelow.CollidingWith<Platform>())
+            if (Coll.CollidingWith<Water>())
             {
                 state = PlayerState.InWater;
                 Acceleration = .05f * airAcceleration;
