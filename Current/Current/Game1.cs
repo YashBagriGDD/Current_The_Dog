@@ -384,6 +384,21 @@ namespace Current
                 player = new Player("Current", Textures["CurrentIdle"], Textures["Laser"], new Rectangle(10, -244, 100, 100));
 
             }
+            else if(level == 2)
+            {
+                player = new Player("Current", Textures["CurrentIdle"], Textures["Laser"], new Rectangle(200, 205, 100, 100));
+
+                //Add pickups
+                ScorePickup scorePickup = new ScorePickup("ScorePickup1", Textures["WhiteBlock"], new Rectangle(2500, 50, 100, 100), 10);
+                ScorePickup scorePickup2  = new ScorePickup("ScorePickup2", Textures["WhiteBlock"], new Rectangle(7500, -2100, 100, 100), 10);
+
+                Goal goal = new Goal("Goal1", Textures["WhiteBlock"], new Rectangle(7707, -1594, 100, 300));
+            }
+            else if(level == 3)
+            {
+                player = new Player("Current", Textures["CurrentIdle"], Textures["Laser"], new Rectangle(238, 205, 100, 100));
+
+            }
 
             //Create the Camera
             MainCamera = new Camera("MainCamera", new Rectangle(0, 0, 0, 0), player);

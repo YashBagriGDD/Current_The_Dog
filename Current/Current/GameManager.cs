@@ -78,7 +78,7 @@ namespace Current
         /// <summary>
         /// The current level. Or Current's level.  
         /// </summary>
-        public static int CurrentLevel { get; set; } = 0;
+        public static int CurrentLevel { get; set; } = 2;
 
         /// <summary>
         /// Have we completed all levels?
@@ -94,7 +94,7 @@ namespace Current
         /// <summary>
         /// Total number of levels. Read only.
         /// </summary>
-        public static int TotalLevels { get; private set; } = 4;
+        public static int TotalLevels { get; private set; } = 8;
 
         //Various states for the game
         public static GameState gameState = GameState.MainMenu;
