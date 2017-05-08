@@ -178,10 +178,12 @@ namespace Current
                 case Direction.Left:
                     //Change  direction
                     direction = Direction.Right;
+                    SpriteFX = SpriteEffects.None;
                     break;
                 case Direction.Right:
                     //Change Direction
                     direction = Direction.Left;
+                    SpriteFX = SpriteEffects.FlipHorizontally;
                     break;
                 default:
                     break;
@@ -202,6 +204,8 @@ namespace Current
                     else {
                         Speed = (float)(-.25 * MAX_SPEED);
                     }
+                    SpriteFX = SpriteEffects.FlipHorizontally;
+
                     break;
                 case Direction.Right:
                     //sets speed for new direction depending on state
@@ -211,6 +215,8 @@ namespace Current
                     else {
                         Speed = (float)(.25 * MAX_SPEED);
                     }
+                    SpriteFX = SpriteEffects.None;
+
                     break;
                 default:
                     break;

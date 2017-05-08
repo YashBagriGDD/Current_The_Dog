@@ -146,7 +146,12 @@ namespace Current
                 {"shore tile", Content.Load<Texture2D>("Textures/Tiles/shore tile")},
                 {"upper water tile", Content.Load<Texture2D>("Textures/Tiles/upper water tile")},
                 {"Button", Content.Load<Texture2D>("Textures/HUD/Button") },
-                {"Laser", Content.Load<Texture2D>("Textures/Items/Laser") }
+                {"Laser", Content.Load<Texture2D>("Textures/Items/Laser") },
+                {"Checkpoint", Content.Load<Texture2D>("Textures/Items/Checkpoint") },
+                {"CheckpointHit", Content.Load<Texture2D>("Textures/Items/CheckpointHit") },
+                {"HealthPickup", Content.Load<Texture2D>("Textures/Items/HealthPickup") },
+                {"LaserPickup", Content.Load<Texture2D>("Textures/Items/LaserPickup") },
+                {"ScorePickup", Content.Load<Texture2D>("Textures/Items/ScorePickup") }
                 
             };
 
@@ -187,8 +192,8 @@ namespace Current
             }
 
             //Play background music
-            //MediaPlayer.Play(songBg);
-            //MediaPlayer.IsRepeating = true;
+            MediaPlayer.Play(songBg);
+            MediaPlayer.IsRepeating = true;
 
 
 
@@ -254,7 +259,7 @@ namespace Current
 
 
             //Setup win level message
-            UIText winText = new UIText("WinText", "Current completed the level!", titleFont, Anchor.CenterMiddle, SortingMode.Below, GameState.Game, Point.Zero, Color.White);
+            UIText winText = new UIText("WinText", "Current completed the level!", titleFont, Anchor.CenterMiddle, SortingMode.None, GameState.Game, Point.Zero, Color.Black);
             winText.ActiveState = GameState.Game;
             winText.Deactivate();
 
@@ -363,15 +368,15 @@ namespace Current
 
 
                 //Drop in a goal
-                Goal goal = new Goal("Goal1", Textures["WhiteBlock"], new Rectangle(5655, -244, 100, 300));
+                Goal goal = new Goal("Goal1", Textures["Crossbone"], new Rectangle(5655, -244, 200, 100));
 
                 //Add pickups
-                ScorePickup scorePickup = new ScorePickup("ScorePickup1", Textures["WhiteBlock"], new Rectangle(1063, 505, 100, 100), 10);
-                HealthPickup healthPickup = new HealthPickup("HealthPickup1", Textures["WhiteBlock"], new Rectangle(1391, 55, 100, 100), 1);
+                ScorePickup scorePickup = new ScorePickup("ScorePickup1", Textures["ScorePickup"], new Rectangle(1063, 505, 100, 100), 10);
+                HealthPickup healthPickup = new HealthPickup("HealthPickup1", Textures["HealthPickup"], new Rectangle(1391, 55, 100, 100), 1);
                 healthPickup.DrawColor = Color.Red;
 
                 //Add a checkpoint
-                CheckPoint checkPoint = new CheckPoint("Checkpoint", Textures["WhiteBlock"], new Rectangle(2270, -400, 50, 100));
+                CheckPoint checkPoint = new CheckPoint("Checkpoint", Textures["Checkpoint"], new Rectangle(2270, -400, 50, 100));
 
                 //Add in tutorial text
                 WorldText tut1 = new WorldText("Tutorial1", "W,A,S,D = Move", font, new Vector2(200, 200));
@@ -381,7 +386,18 @@ namespace Current
             }
             else if (level == 1)
             {
-                player = new Player("Current", Textures["CurrentIdle"], Textures["Laser"], new Rectangle(10, -244, 100, 100));
+                player = new Player("Current", Textures["CurrentIdle"], Textures["Laser"], new Rectangle(368, 355, 100, 100));
+                ScorePickup scorePickup = new ScorePickup("ScorePickup", Textures["ScorePickup"], new Rectangle(-4688, -1144, 100, 100), 10);
+                LandCat landCat = new LandCat("Landcat", Textures["Landcat"], new Rectangle(3337, 55, 200, 125));
+                LandCat landCat2 = new LandCat("Landcat2", Textures["Landcat"], new Rectangle(3705, -94, 200, 125));
+                LandCat landCat3 = new LandCat("Landcat3", Textures["Landcat"], new Rectangle(6801, -844, 200, 125));
+                LandCat landCat4 = new LandCat("Landcat4", Textures["Landcat"], new Rectangle(7866, -844, 200, 125));
+                LandCat landCat5 = new LandCat("Landcat5", Textures["Landcat"], new Rectangle(8966, -1444, 200, 125));
+                LandCat landCat6 = new LandCat("Landcat6", Textures["Landcat"], new Rectangle(9999, -1594, 200, 125));
+                LaserPickup laser = new LaserPickup("LaserPickup", Textures["LaserPickup"], new Rectangle(10246, -2794, 100, 100), 0);
+                Goal goal = new Goal("Goal", Textures["Crossbone"], new Rectangle(14428, -2794, 200, 100));
+
+
 
             }
             else if(level == 2)
@@ -389,10 +405,11 @@ namespace Current
                 player = new Player("Current", Textures["CurrentIdle"], Textures["Laser"], new Rectangle(200, 205, 100, 100));
 
                 //Add pickups
-                ScorePickup scorePickup = new ScorePickup("ScorePickup1", Textures["WhiteBlock"], new Rectangle(2500, 50, 100, 100), 10);
-                ScorePickup scorePickup2  = new ScorePickup("ScorePickup2", Textures["WhiteBlock"], new Rectangle(7500, -2100, 100, 100), 10);
+                ScorePickup scorePickup = new ScorePickup("ScorePickup1", Textures["ScorePickup"], new Rectangle(2500, 50, 100, 100), 10);
+                ScorePickup scorePickup2  = new ScorePickup("ScorePickup2", Textures["ScorePickup"], new Rectangle(7500, -2100, 100, 100), 10);
 
-                Goal goal = new Goal("Goal1", Textures["WhiteBlock"], new Rectangle(7707, -1594, 100, 300));
+                Goal goal = new Goal("Goal1", Textures["Crossbone"], new Rectangle(7707, -1594, 200, 100));
+
             }
             else if(level == 3)
             {

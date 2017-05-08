@@ -79,7 +79,7 @@ namespace Current
 
             Health = startHealth;
 
-            HasLaser = true;
+            HasLaser = false;
             //Create the laser, and add it's animation
             LaserReference = new Laser(name + "_laser", laserTex, new Rectangle(0,0,Game1.TargetWidth, 20), this, new Point(Location.Width, Location.Height/2));
             LaserReference.AddAnimation(new Animate(laserTex, 25, 1, Animate.ONESIXTIETHSECPERFRAME, LaserReference));
