@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Current
 {
-    abstract class Enemy : CollidableObject
+    abstract class Enemy : ComplexCollidableObject
     {
         public int Health { get; set; }
         public float Speed { get; set; }

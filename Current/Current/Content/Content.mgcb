@@ -379,3 +379,9 @@
 /processorParam:TextureFormat=Color
 /build:Textures\Items\ScorePickup.png
 
+#begin Fonts/TeamFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:TextureFormat=Compressed
+/build:Fonts/TeamFont.spritefont
+

@@ -13,12 +13,12 @@ namespace Current
     /// </summary>
     abstract class ComplexCollidableObject : CollidableObject
     {
-        //These colliders are used for detecting collisions above, below, left, and right of objects
+        //These colliders are used for detecting collisions above, below, left, right, and center of objects
         protected  Collider CollAbove { get; set; }
         protected Collider CollBelow { get; set; }
         protected Collider CollLeft { get; set; }
         protected Collider CollRight { get; set; }
-
+        protected Collider CollCenter { get; set; }
         /// <summary>
         /// Draw rectangles where the colliders are?
         /// </summary>
@@ -41,6 +41,10 @@ namespace Current
             //The width and height of the new vertical rectangles
             int vWidth = (int)(Location.Width * minMod);
             int vHeight = (int)(Location.Height * maxMod);
+            //Width and height of center rectangle
+            int cWidth = Location.Width / 4;
+            int cHeight = Location.Height / 4;
+
 
             //Construct rectangles centered at the top, bottom, left, and right of object.
             //Note: (0,0) is replaced with (Location.X, Location.Y) in these calculations because 
@@ -53,12 +57,14 @@ namespace Current
                 vWidth, vHeight);
             Rectangle rRight = new Rectangle(Location.Width-vWidth, (int)(.5f * Location.Height - .5f * vHeight),
                 vWidth, vHeight);
+            Rectangle rCenter = new Rectangle(Location.Width / 2 - cWidth / 2, Location.Height / 2 - cHeight / 2, cWidth, cHeight);
 
             //Actually make the colliders
             CollAbove = new Collider(this, rAbove);
             CollBelow = new Collider(this, rBelow);
             CollLeft = new Collider(this, rLeft);
             CollRight = new Collider(this, rRight);
+            CollCenter = new Collider(this, rCenter);
 
             DebugDraw = false;
 
@@ -72,6 +78,7 @@ namespace Current
             CollBelow.Update(gameTime);
             CollLeft.Update(gameTime);
             CollRight.Update(gameTime);
+            CollCenter.Update(gameTime);
             base.Update(gameTime);
         }
 
@@ -84,6 +91,8 @@ namespace Current
                 spriteBatch.Draw(Game1.Textures["WhiteBlock"], CollBelow.Hitbox, Color.White);
                 spriteBatch.Draw(Game1.Textures["WhiteBlock"], CollRight.Hitbox, Color.White);
                 spriteBatch.Draw(Game1.Textures["WhiteBlock"], CollLeft.Hitbox, Color.White);
+                spriteBatch.Draw(Game1.Textures["WhiteBlock"], CollCenter.Hitbox, Color.White);
+
             }
 
 

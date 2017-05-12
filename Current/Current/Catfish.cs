@@ -85,7 +85,7 @@ namespace Current
                     ChasePlayer();
 
                     //Checks if player is still withing detection range
-                    if (Math.Abs(distX) > MAX_DETECTION || Math.Abs(distY) > MAX_DETECTION) {
+                    if (Math.Abs(distX) > MAX_DETECTION || Math.Abs(distY) > MAX_DETECTION || Coll.CollidingWith<Platform>()) {
                         state = EnemyState.Returning;
                     }
                     break;
@@ -240,6 +240,8 @@ namespace Current
         /// Once player exits range method ends
         /// </summary>
         public void ChasePlayer() {
+
+
             GameObject player = GameManager.Get("Current");
 
             //store the distance between
