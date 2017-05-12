@@ -134,6 +134,7 @@ namespace Current
                 {"CurrentSwim", Content.Load<Texture2D>("Textures/Current/CurrentSwim")},
                 {"CurrentWalk", Content.Load<Texture2D>("Textures/Current/CurrentWalk") },
                 {"CurrentIdle", Content.Load<Texture2D>("Textures/Current/CurrentIdle") },
+                {"CurrentJump", Content.Load<Texture2D>("Textures/Current/CurrentJump") },
                 {"WhiteBlock",  Content.Load<Texture2D>("Textures/WhiteBlock")},
                 {"Background", Content.Load<Texture2D>("Textures/Backgrounds/Sunset") },
                 {"Crossbone", Content.Load<Texture2D>("Textures/HUD/Crossbone") },
