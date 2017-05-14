@@ -52,6 +52,11 @@ namespace Current
         /// A set of the current collisions
         /// </summary>
         public HashSet<Collider> CurrentCollisions { get; private set; }
+        /// <summary>
+        /// Should this collider actually do the checking of collisions?
+        /// Included for performance optimization.
+        /// </summary>
+        public bool ChecksCollisions { get; set; } = true;
 
 
         /// <summary>
@@ -172,8 +177,14 @@ namespace Current
                 return;
 
             UpdateHitbox();
-            foreach (CollidableObject c in GameManager.CollidableObjects)
+
+            if (!ChecksCollisions)
+                return;
+
+            foreach (CollidableObject c in GameManager.CollidableObjectsInView)
             {
+                if (!c.Active)
+                    continue;
                 //Don't check collisions with yourself!
                 if (c.Name == Host.Name)
                     continue;

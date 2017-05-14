@@ -269,6 +269,7 @@ namespace Current
             if (!Active || !CanUpdate)
                 return;
 
+
             //Change the velocity by acceleration
             Velocity.X += Acceleration.X;
             Velocity.Y += Acceleration.Y;
@@ -282,6 +283,14 @@ namespace Current
                 return;
             if (AnimationData.ContainsKey(currentAnimation))
                 AnimationData[currentAnimation].Update(gameTime);
+        }
+        
+        /// <summary>
+        /// Completely removes this gameobject form existence. 
+        /// </summary>
+        public void Delete()
+        {
+            GameManager.DeleteObject(Name);
         }
 
         /// <summary>   

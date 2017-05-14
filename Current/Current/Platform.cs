@@ -13,7 +13,7 @@ namespace Current
 
         public Platform(string name, Texture2D tex, Rectangle location) : base(name, tex, location)
         {
-
+            Coll.ChecksCollisions = false;
         }
 
 

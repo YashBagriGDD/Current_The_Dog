@@ -51,6 +51,27 @@ namespace Current
         public static List<CollidableObject> CollidableObjects { get; }
             = new List<CollidableObject>();
 
+        //This should hold all active collidable objects in the game
+        public static List<CollidableObject> CollidableObjectsInView {
+            get
+            {
+                List<CollidableObject> actives = new List<CollidableObject>();
+                //Don't draw if outside camera's bounds
+                Camera cam = Get("MainCamera") as Camera;
+                if (cam != null)
+                {
+                    foreach (CollidableObject c in CollidableObjects)
+                        if (cam.Bounds.Intersects(c.Location))
+                            actives.Add(c);
+                    return actives;
+                }
+                else
+                {
+                    return new List<CollidableObject>();
+                }
+            }
+        }
+
         //This should hold all UI objects
         public static List<UIObject> UIObjects { get; }
             = new List<UIObject>();
@@ -345,6 +366,25 @@ namespace Current
             foreach (SFXWrapper wrap in SoundEffects)
                 Objects.Add(wrap.Name, wrap);
 
+        }
+
+        /// <summary>
+        /// Delete the object named key from existence.
+        /// </summary>
+        public static void DeleteObject(string key)
+        {
+            if (!Objects.ContainsKey(key))
+                return;
+            GameObject del = (CollidableObject)Objects[key];
+            if (CollidableObjects.Contains(del))
+                CollidableObjects.Remove((CollidableObject)del);
+            if (UIObjects.Contains(del))
+                UIObjects.Remove((UIObject)del);
+            if (NonUIObjects.Contains(del))
+                NonUIObjects.Remove(del);
+            if (Backgrounds.Contains(del))
+                Backgrounds.Remove((Background)(del));
+            Objects.Remove(key);
         }
 
         /// <summary>
