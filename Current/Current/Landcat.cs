@@ -161,12 +161,13 @@ namespace Current
         public void Wander(GameTime gameTime) {
             TotalElapsedSeconds += gameTime.ElapsedGameTime.TotalSeconds;
 
-            if (TotalElapsedSeconds >= MoveChangeTime || !CollBelow.CollidingWith<Platform>() || (Speed > 0 && CollRight.CollidingWith<Platform>()) || (Speed < 0 && CollLeft.CollidingWith<Platform>())) {
+            if (TotalElapsedSeconds >= MoveChangeTime || !CollBelow.CollidingWith<Platform>()) {
                 TotalElapsedSeconds -= MoveChangeTime;
                 ChangeDirection();
                 SetSpeed();
             }
-            this.Location.X += (int)Speed;
+            if ((Speed > 0 && !CollRight.CollidingWith<Platform>()) || (Speed < 0 && !CollLeft.CollidingWith<Platform>())) 
+                this.Location.X += (int)Speed;
             if (Speed <= 0)
                 SpriteFX = SpriteEffects.FlipHorizontally;
             else

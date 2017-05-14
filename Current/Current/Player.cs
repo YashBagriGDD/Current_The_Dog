@@ -93,8 +93,6 @@ namespace Current
             AddAnimation(new Animate(Game1.Textures["CurrentIdle"], 1, 1, Animate.ONESIXTIETHSECPERFRAME, this));
             AddAnimation(new Animate(Game1.Textures["CurrentSwim"], 4, 3, Animate.ONESIXTIETHSECPERFRAME * 5, this));
             AddAnimation(new Animate(Game1.Textures["CurrentWalk"], 4, 3, Animate.ONESIXTIETHSECPERFRAME, this));
-            AddAnimation(new Animate(Game1.Textures["CurrentJump"], 1, 1, Animate.ONESIXTIETHSECPERFRAME, this));
-
 
 
         }
@@ -136,7 +134,7 @@ namespace Current
                     Move(3 * MoveSpeed / 4);
                     CheckForWaterWhenNotSwimming();
                     CheckIfDead();
-                    ChangeAnimation("CurrentJump");
+                    ChangeAnimation("CurrentWalk");//Temporary
                     LaserUpdate();
                     break;
                 case PlayerState.InWater:
