@@ -161,12 +161,11 @@ namespace Current
         public void Wander(GameTime gameTime) {
             TotalElapsedSeconds += gameTime.ElapsedGameTime.TotalSeconds;
 
-            if (TotalElapsedSeconds >= MoveChangeTime) {
+            if (TotalElapsedSeconds >= MoveChangeTime || !CollBelow.CollidingWith<Platform>() || (Speed > 0 && CollRight.CollidingWith<Platform>()) || (Speed < 0 && CollLeft.CollidingWith<Platform>())) {
                 TotalElapsedSeconds -= MoveChangeTime;
                 ChangeDirection();
                 SetSpeed();
             }
-
             this.Location.X += (int)Speed;
             if (Speed <= 0)
                 SpriteFX = SpriteEffects.FlipHorizontally;
@@ -228,6 +227,10 @@ namespace Current
         /// Once player exits range method ends
         /// </summary>
         public void ChasePlayer() {
+
+            if (!CollBelow.CollidingWith<Platform>())
+                return;
+
             GameObject player = GameManager.Get("Current");
 
             //store the distance between
@@ -238,13 +241,18 @@ namespace Current
             //This checks to see if player is within a 200x200 square around the enemy
             if (Math.Abs(distX) <= MAX_DETECTION || Math.Abs(distY) <= MAX_DETECTION) {
                 //Check if to the left or right of the player, set speed to player direction and move
-                if (distX < 0) {
+                if (distX < 0 && !CollLeft.CollidingWith<Platform>()) {
                     direction = Direction.Left;
                     SetSpeed();
+
                 }
-                if (distX > 0) {
+                else if (distX > 0 && !CollRight.CollidingWith<Platform>()) {
                     direction = Direction.Right;
                     SetSpeed();
+                }
+                else
+                {
+                    return;
                 }
                 Location.X += (int)Speed;
 

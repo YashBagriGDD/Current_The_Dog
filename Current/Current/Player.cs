@@ -85,8 +85,6 @@ namespace Current
             LaserReference.AddAnimation(new Animate(laserTex, 25, 1, Animate.ONESIXTIETHSECPERFRAME, LaserReference));
             LaserReference.ChangeAnimation("Laser");
 
-
-
             //For the sake of physics
             Acceleration = airAcceleration;
             Velocity = new Vector2(0, 0);
@@ -95,6 +93,8 @@ namespace Current
             AddAnimation(new Animate(Game1.Textures["CurrentIdle"], 1, 1, Animate.ONESIXTIETHSECPERFRAME, this));
             AddAnimation(new Animate(Game1.Textures["CurrentSwim"], 4, 3, Animate.ONESIXTIETHSECPERFRAME * 5, this));
             AddAnimation(new Animate(Game1.Textures["CurrentWalk"], 4, 3, Animate.ONESIXTIETHSECPERFRAME, this));
+            AddAnimation(new Animate(Game1.Textures["CurrentJump"], 1, 1, Animate.ONESIXTIETHSECPERFRAME, this));
+
 
 
         }
@@ -136,7 +136,7 @@ namespace Current
                     Move(3 * MoveSpeed / 4);
                     CheckForWaterWhenNotSwimming();
                     CheckIfDead();
-                    ChangeAnimation("CurrentWalk");//Temporary
+                    ChangeAnimation("CurrentJump");
                     LaserUpdate();
                     break;
                 case PlayerState.InWater:
@@ -348,7 +348,7 @@ namespace Current
         /// <param name="other">Collider to check with</param>
         private void CheckForWaterWhenNotSwimming()
         {
-            if (Coll.CollidingWith<Water>())
+            if (CollCenter.CollidingWith<Water>())
             {
                 state = PlayerState.InWater;
                 Acceleration = .05f * airAcceleration;
@@ -467,7 +467,7 @@ namespace Current
                     //If you walk off a platform, you should fall if you're no longer colliding below with anything
                     if (other.Host is Platform)
                     {
-                        if (!CollBelow.CollidingWith<Platform>() && !Coll.CollidingWith<Water>())
+                        if (!CollBelow.CollidingWith<Platform>())
                         {
                             Acceleration = airAcceleration;
                             state = PlayerState.InAir;

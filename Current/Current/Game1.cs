@@ -21,7 +21,7 @@ namespace Current
         SpriteBatch spriteBatchBG;
 
 
-        SpriteFont font, titleFont, hudFont;
+        SpriteFont font, titleFont, hudFont, teamFont;
 
         //Target Window resolution
         public static int TargetWidth = 1280, TargetHeight = 720;
@@ -134,6 +134,7 @@ namespace Current
                 {"CurrentSwim", Content.Load<Texture2D>("Textures/Current/CurrentSwim")},
                 {"CurrentWalk", Content.Load<Texture2D>("Textures/Current/CurrentWalk") },
                 {"CurrentIdle", Content.Load<Texture2D>("Textures/Current/CurrentIdle") },
+                {"CurrentJump", Content.Load<Texture2D>("Textures/Current/CurrentJump") },
                 {"WhiteBlock",  Content.Load<Texture2D>("Textures/WhiteBlock")},
                 {"Background", Content.Load<Texture2D>("Textures/Backgrounds/Sunset") },
                 {"Crossbone", Content.Load<Texture2D>("Textures/HUD/Crossbone") },
@@ -182,7 +183,7 @@ namespace Current
             font = Content.Load<SpriteFont>("Fonts/Font");
             titleFont = Content.Load<SpriteFont>("Fonts/TitleFont");
             hudFont = Content.Load<SpriteFont>("Fonts/HudFont");
-
+            teamFont = Content.Load<SpriteFont>("Fonts/TeamFont");
 
 
             //Construct audio holders so we can reference soundeffects through GameManager
@@ -209,6 +210,8 @@ namespace Current
             UIButton play = new UIButton("PlayB", "Play", font, Textures["Button"], Anchor.CenterMiddle, SortingMode.Below, GameState.MainMenu, Point.Zero, Color.Black, Color.White, bWidth, bHeight);
             UIButton quit = new UIButton("QuitB", "Quit", font, Textures["Button"], Anchor.CenterMiddle, SortingMode.Below, GameState.MainMenu, new Point(0, 50), Color.Black, Color.White, bWidth, bHeight);
 
+            //Tean
+            UIText team = new UIText("Team", "A Guppy Puppy Studios Creation", teamFont, Anchor.LowerLeft, SortingMode.None, GameState.MainMenu, Point.Zero, Color.Gray);
             //Setup button delegates
             play.Click += LoadCurrentLevel;
 
@@ -460,8 +463,6 @@ namespace Current
                 switch (type)
                 {
                     case "Water":
-                        if (tile.TextureName == "upper water tile")
-                            loc.Width = 3 * loc.Width / 2;
                         Water w = new Water("Water" + numWater, tex, loc, Vector2.Zero);
                         //Weed out duplicates
                         if (tileDirectory.ContainsKey(check))
@@ -602,12 +603,7 @@ namespace Current
                 {
                     ui.Draw(gameTime, spriteBatchUI);
                 }
-
-            //Player p = GameManager.Get("Current") as Player;
-            //if (p != null)
-            //    spriteBatchUI.DrawString(font, p.Location.X + ", " + p.Location.Y, new Vector2(0, 50), Color.White);
-
-
+           
             spriteBatchUI.End();
 
 
