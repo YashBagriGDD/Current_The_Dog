@@ -604,8 +604,12 @@ namespace Current
                     ui.Draw(gameTime, spriteBatchUI);
                 }
            
-            spriteBatchUI.End();
 
+            Player p = (Player)(GameManager.Get("Current"));
+            if (p != null)
+                spriteBatchUI.DrawString(hudFont, "(" + p.Location.X + "," + p.Location.Y + ")", new Vector2(0, 100), Color.White);
+
+            spriteBatchUI.End();
 
             base.Draw(gameTime);
         }
