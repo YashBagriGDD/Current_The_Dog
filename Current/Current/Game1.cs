@@ -467,7 +467,7 @@ namespace Current
                         //Weed out duplicates
                         if (tileDirectory.ContainsKey(check))
                         {
-                            tileDirectory[check].Delete();
+                            tileDirectory[check].Deactivate();
                             tileDirectory[check] = w;
                         }
                         else
@@ -483,7 +483,7 @@ namespace Current
                         //Weed out duplicates
                         if (tileDirectory.ContainsKey(check))
                         {
-                            tileDirectory[check].Delete();
+                            tileDirectory[check].Deactivate();
                             tileDirectory[check] = p;
                         }
                         else

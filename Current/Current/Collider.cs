@@ -181,7 +181,7 @@ namespace Current
             if (!ChecksCollisions)
                 return;
 
-            foreach (CollidableObject c in GameManager.CollidableObjectsInView)
+            foreach (CollidableObject c in GameManager.CollidableObjects)
             {
                 if (!c.Active)
                     continue;
