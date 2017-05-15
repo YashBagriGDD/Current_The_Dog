@@ -12,8 +12,11 @@ namespace Current
     {
         public int Health { get; set; }
         public float Speed { get; set; }
-        public int Strength { get; set; }
+        public int Strength { get; set; } = 10;
         public Vector2 HomePoint { get; set; }
+
+        protected bool collActive; //For disabling and enabling collisions in certain states
+
 
         public Enemy(string name, Texture2D tex, Rectangle location) : base(name, tex, location)
         {

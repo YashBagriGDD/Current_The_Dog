@@ -166,6 +166,15 @@ namespace Current
         }
 
         /// <summary>
+        /// Clear everything that we're colliding with 
+        /// </summary>
+        public void ResetCollider()
+        {
+            CurrentCollisions.Clear();
+
+        }
+
+        /// <summary>
         /// Called every frame by the CollidableObject, which is called every frame by the Game1 class.
         /// Updates a Rectangle at the location of the Host GameObject each frame. 
         /// </summary>
@@ -181,7 +190,7 @@ namespace Current
             if (!ChecksCollisions)
                 return;
 
-            foreach (CollidableObject c in GameManager.CollidableObjects)
+            foreach (CollidableObject c in GameManager.CollidableObjectsInView)
             {
                 if (!c.Active)
                     continue;

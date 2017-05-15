@@ -23,6 +23,7 @@ namespace Current
 
         protected override void HandleCollisionExit(object sender, EventArgs e)
         {
+
         }
     }
 }

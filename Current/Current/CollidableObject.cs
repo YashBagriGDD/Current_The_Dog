@@ -62,6 +62,14 @@ namespace Current
         /// <param name="e"></param>
         protected abstract void HandleCollisionExit(object sender, EventArgs e);
 
+        /// <summary>
+        /// Clear all collision data
+        /// </summary>
+        protected virtual void ClearCollisions()
+        {
+            Coll.ResetCollider();
+        }
+
 
     }
 }

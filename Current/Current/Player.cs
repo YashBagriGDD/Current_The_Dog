@@ -149,6 +149,7 @@ namespace Current
                     //Respawn
                     if (InputManager.GetButtonDown("Jump"))
                     {
+
                         GameManager.RespawnAllNonUIObjects();
                         //Let everyone else resume updating.
                         GameManager.ResumeNonUIUpdates();
@@ -389,6 +390,9 @@ namespace Current
 
             //Stop ambient swim noise if we die in the water
             GameManager.StopSFX("WaterLoop");
+
+            //Reset collider
+            ClearCollisions();
 
             Health = startHealth;
             base.Respawn();

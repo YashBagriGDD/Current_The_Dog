@@ -82,6 +82,19 @@ namespace Current
             base.Update(gameTime);
         }
 
+        /// <summary>
+        /// Clear all the collisions for each collider
+        /// </summary>
+        protected override void ClearCollisions()
+        {
+            base.ClearCollisions();
+            CollAbove.ResetCollider();
+            CollBelow.ResetCollider();
+            CollLeft.ResetCollider();
+            CollRight.ResetCollider();
+            CollCenter.ResetCollider();
+        }
+
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             base.Draw(gameTime, spriteBatch);

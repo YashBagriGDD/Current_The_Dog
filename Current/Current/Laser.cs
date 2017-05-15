@@ -60,6 +60,7 @@ namespace Current
                 Enemy enemy = (Enemy)(other.Host);
                 if (enemy.Active)
                     enemy.Deactivate();
+                GameManager.Score += enemy.Strength;
             }
         }
 

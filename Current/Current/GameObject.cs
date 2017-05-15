@@ -269,7 +269,6 @@ namespace Current
             if (!Active || !CanUpdate)
                 return;
 
-
             //Change the velocity by acceleration
             Velocity.X += Acceleration.X;
             Velocity.Y += Acceleration.Y;

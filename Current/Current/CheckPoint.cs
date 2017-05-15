@@ -25,7 +25,6 @@ namespace Current
         public CheckPoint(string name, Texture2D tex, Rectangle location) : base(name, tex, location, 0)
         {
             Passed = false;
-            //Add 
             AddAnimation(new Animate(Game1.Textures["Checkpoint"], 1, 1, 1, this));
             AddAnimation(new Animate(Game1.Textures["CheckpointHit"], 1, 1, 1, this));
             ChangeAnimation("Checkpoint");
@@ -38,7 +37,6 @@ namespace Current
 
         protected override void HandleCollisionEnter(object sender, EventArgs e)
         {
-            //Include sfx logic
             if (!Passed)
                 base.HandleCollisionEnter(sender, e);
 

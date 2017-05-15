@@ -29,7 +29,6 @@ namespace Current
         public double TotalElapsedSeconds { get; set; } = 0;
 
         private double delayTimer = 0;
-        private bool collActive; //For disabling and enabling collisions in certain states
         private GameTime gameTime;
 
 
@@ -64,6 +63,17 @@ namespace Current
 
         public override void Update(GameTime gameTime)
         {
+
+            //Don't update if outside camera's bounds
+            Camera cam = GameManager.Get("MainCamera") as Camera;
+            if (cam != null && !AlwaysDraw)
+            {
+                if (!cam.Bounds.Intersects(Location))
+                    return;
+            }
+
+
+
             this.gameTime = gameTime;
             //add update logic here
             GameObject player = GameManager.Get("Current");
