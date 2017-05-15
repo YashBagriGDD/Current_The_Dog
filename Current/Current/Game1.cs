@@ -366,16 +366,18 @@ namespace Current
                 //Enemies
                 Catfish c1 = new Catfish("Catfish1", Textures["Catfish"], new Rectangle(1997, 1000, 100, 50));
                 Catfish c2 = new Catfish("Catfish2", Textures["Catfish"], new Rectangle(2500, 1000, 100, 50));
-
+                Catfish c3 = new Catfish("Catfish3", Textures["Catfish"], new Rectangle(8039, 1400, 100, 50));
+                Catfish c4 = new Catfish("Catfish4", Textures["Catfish"], new Rectangle(8039, 1000, 100, 50));
 
 
 
                 //Drop in a goal
-                Goal goal = new Goal("Goal1", Textures["Crossbone"], new Rectangle(5400, -244, 200, 100));
+                Goal goal = new Goal("Goal1", Textures["Crossbone"], new Rectangle(7024, -994, 200, 100));
 
                 //Add pickups
-                ScorePickup scorePickup = new ScorePickup("ScorePickup1", Textures["ScorePickup"], new Rectangle(1063, 505, 100, 100), 10);
-                HealthPickup healthPickup = new HealthPickup("HealthPickup1", Textures["HealthPickup"], new Rectangle(1391, 55, 100, 100), 1);
+                ScorePickup scorePickup = new ScorePickup("ScorePickup1", Textures["ScorePickup"], new Rectangle(1301, 504, 100, 100), 10);
+                ScorePickup scorePickup1 = new ScorePickup("ScorePickup2", Textures["ScorePickup"], new Rectangle(6895, -120, 100, 100), 100);
+                HealthPickup healthPickup = new HealthPickup("HealthPickup1", Textures["HealthPickup"], new Rectangle(1326, 10, 100, 100), 1);
                 healthPickup.DrawColor = Color.Red;
 
                 //Add a checkpoint
@@ -385,7 +387,7 @@ namespace Current
                 WorldText tut1 = new WorldText("Tutorial1", "W,A,S,D = Move", font, new Vector2(200, 200));
                 WorldText tut2 = new WorldText("Tutorial2", "Space = Jump", font, new Vector2(200, 300));
                 
-                player = new Player("Current", Textures["CurrentIdle"], Textures["Laser"], new Rectangle(100, 0, 100, 100));
+                player = new Player("Current", Textures["CurrentIdle"], Textures["Laser"], new Rectangle(209, 505, 100, 100));
             }
             else if (level == 1)
             {
