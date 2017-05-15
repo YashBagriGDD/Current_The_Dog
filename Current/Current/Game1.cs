@@ -392,7 +392,8 @@ namespace Current
             else if (level == 1)
             {
                 player = new Player("Current", Textures["CurrentIdle"], Textures["Laser"], new Rectangle(368, 355, 100, 100));
-                ScorePickup scorePickup = new ScorePickup("ScorePickup", Textures["ScorePickup"], new Rectangle(-4688, -1144, 100, 100), 10);
+                ScorePickup scorePickup = new ScorePickup("ScorePickup", Textures["ScorePickup"], new Rectangle(4688, -1144, 100, 100), 10);
+                
 
                 WorldText laserInstr = new WorldText("LaserInstruction", "Shift=Laser", font, new Vector2(550, 200));
                 LaserPickup laser = new LaserPickup("LaserPickup", Textures["LaserPickup"], new Rectangle(550,300, 100, 100), 0);
